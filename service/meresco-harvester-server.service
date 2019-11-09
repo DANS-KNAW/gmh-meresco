@@ -1,0 +1,10 @@
+[Unit]
+Description=Meresco Harvester Server
+
+[Service]
+User=harvester
+ExecStart=/usr/bin/meresco-harvester-server --port=8888 --dataPath=/home/harvester/data --logPath=/home/harvester/log --statePath=/home/harvester/state --externalUrl=http://tmeresco31.dans.knaw.nl:8888  --customerLogoUrl=https://www.narcis.nl/images/logos/logo_dans.png
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
