@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://gh.kb-dans.nl/combined/v0.9/" xmlns:gh="http://gh.kb-dans.nl/combined/v0.9/">
+
+  <xs:element name="nl_didl_combined">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="gh:nl_didl"/>
+        <xs:element ref="gh:nl_didl_norm"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="nl_didl">
+    <xs:complexType mixed="true">
+      <xs:sequence>
+        <xs:any processContents="skip"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="nl_didl_norm">
+    <xs:complexType mixed="true">
+      <xs:sequence>
+        <xs:any processContents="skip"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  
+</xs:schema>

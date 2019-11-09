@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+xmlns:xs="http://www.w3.org/2001/XMLSchema"
+xmlns:dc="http://purl.org/dc/elements/1.1/"
+targetNamespace="http://www.surfgroepen.nl/werkgroepmetadataplus"
+elementFormDefault="qualified">
+<xs:import
+namespace="http://purl.org/dc/elements/1.1/"
+schemaLocation="simpledc20021212.xsd"/>
+<xs:element name="rights">
+<xs:annotation>
+<xs:documentation xml:lang="nl">
+Het rights element kent 2 subelementen:
+dc:description en
+dc:rights
+Gebruik de eerste om een beschrijvend
+(copy)rights statement te maken en de
+tweede voor een URI.
+Beide elementen zijn optioneel
+</xs:documentation>
+<xs:documentation xml:lang="nl">
+Voorbeeld:
+<dc:description>© 2008 Royal Tropical Institute.
+This work is licensed under a Creative
+Commons Attribution-Noncommercial-No Derivative
+Works 3.0 Unported License.
+</dc:description> <dc:rights>
+[http://creativecommons.org/licenses/by-nc-nd/3.0/]
+</dc:rights>
+</xs:documentation>
+</xs:annotation>
+
+<xs:complexType>
+<xs:sequence>
+<xs:element ref="dc:description" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="dc:rights" minOccurs="0" maxOccurs="1"/>
+</xs:sequence>
+</xs:complexType>
+
+</xs:element>
+</xs:schema>
