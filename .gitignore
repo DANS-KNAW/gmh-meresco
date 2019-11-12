@@ -77,3 +77,4 @@ target/
 .Spotlight-V100
 .Trashes
  
+service/meresco-gateway-server.service
