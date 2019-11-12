@@ -1,0 +1,11 @@
+[Unit]
+Description=Meresco Harvester EduStandaard Domain
+
+[Service]
+User=harvester
+ExecStart=/usr/bin/meresco-harvester --url=<harvester server url> --set-process-timeout=3600 --concurrency=2 --domain=<harvester domain name> --runOnce
+Restart=always
+RestartSec=300
+
+[Install]
+WantedBy=multi-user.target
