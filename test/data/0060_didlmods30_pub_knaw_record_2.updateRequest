@@ -1,0 +1,304 @@
+<ucp:updateRequest xmlns:srw="http://www.loc.gov/zing/srw/" xmlns:ucp="info:lc/xmlns/update-v1">
+    <srw:version>1.0</srw:version>
+    <ucp:action>info:srw/action/1/replace</ucp:action>
+    <ucp:recordIdentifier>knaw:record:2</ucp:recordIdentifier>
+    <srw:record xmlns:srw="http://www.loc.gov/zing/srw/">
+        <srw:recordPacking>xml</srw:recordPacking>
+        <srw:recordSchema>metadata</srw:recordSchema>
+        <srw:recordData>
+            <document xmlns="http://meresco.org/namespace/harvester/document">
+                <part name="record">&lt;record xmlns="http://www.openarchives.org/OAI/2.0/"
+                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt; &lt;header
+                    xmlns="http://www.openarchives.org/OAI/2.0/"&gt;&lt;identifier&gt;record:2&lt;/identifier&gt;&lt;datestamp&gt;2008-08-15T14:08:34Z&lt;/datestamp&gt;&lt;/header&gt;
+                    &lt;metadata xmlns="http://www.openarchives.org/OAI/2.0/"&gt;
+                    &lt;nl_didl:DIDL xmlns:dcterms=&quot;http://purl.org/dc/terms/&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:dii=&quot;urn:mpeg:mpeg21:2002:01-DII-NS&quot; xmlns:nl_didl=&quot;urn:mpeg:mpeg21:2002:02-DIDL-NS&quot; xmlns:didl=&quot;urn:mpeg:mpeg21:2002:02-DIDL-NS&quot; xmlns:xlink=&quot;http://www.w3.org/1999/xlink&quot; xmlns:rdf=&quot;http://www.w3.org/1999/02/22-rdf-syntax-ns#&quot; xmlns:dip=&quot;urn:mpeg:mpeg21:2005:01-DIP-NS&quot; xsi:schemaLocation=&quot;urn:mpeg:mpeg21:2002:02-DIDL-NS http://standards.iso.org/ittf/PubliclyAvailableStandards/MPEG-21_schema_files/did/didl.xsd urn:mpeg:mpeg21:2002:01-DII-NS http://standards.iso.org/ittf/PubliclyAvailableStandards/MPEG-21_schema_files/dii/dii.xsd urn:mpeg:mpeg21:2005:01-DIP-NS http://standards.iso.org/ittf/PubliclyAvailableStandards/MPEG-21_schema_files/dip/dip.xsd&quot;&gt;
+                        &lt;nl_didl:Item&gt;
+                            &lt;nl_didl:Descriptor&gt;
+                                &lt;nl_didl:Statement mimeType=&quot;application/xml&quot;&gt;
+                                    &lt;dii:Identifier&gt;urn:NBN:nl:ui:18-2271&lt;/dii:Identifier&gt;
+                                &lt;/nl_didl:Statement&gt;
+                            &lt;/nl_didl:Descriptor&gt;
+                            &lt;nl_didl:Descriptor&gt;
+                                &lt;nl_didl:Statement mimeType=&quot;application/xml&quot;&gt;
+                                    &lt;dcterms:modified&gt;2005-03-17T00:00:00&lt;/dcterms:modified&gt;
+                                &lt;/nl_didl:Statement&gt;
+                            &lt;/nl_didl:Descriptor&gt;
+                            &lt;nl_didl:Component&gt;
+                                &lt;nl_didl:Resource mimeType=&quot;application/xml&quot; ref=&quot;http://oai.cwi.nl/oai?verb=GetRecord&amp;amp;metadataPrefix=nl_didl&amp;amp;identifier=oai:cwi.nl:2271&quot;/&gt;
+                            &lt;/nl_didl:Component&gt;
+                            &lt;nl_didl:Item&gt;
+                                &lt;nl_didl:Descriptor&gt;
+                                    &lt;nl_didl:Statement mimeType=&quot;application/xml&quot;&gt;
+                                        &lt;rdf:type rdf:resource=&quot;info:eu-repo/semantics/descriptiveMetadata&quot;/&gt;
+                                    &lt;/nl_didl:Statement&gt;
+                                &lt;/nl_didl:Descriptor&gt;
+                                &lt;nl_didl:Component&gt;
+                                    &lt;nl_didl:Resource mimeType=&quot;application/xml&quot;&gt;
+                                        &lt;mods:mods xmlns:mods=&quot;http://www.loc.gov/mods/v3&quot; version=&quot;3.6&quot;
+    xsi:schemaLocation=&quot;http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-6.xsd&quot;&gt;
+                                            &lt;mods:location&gt;
+                                                &lt;mods:url&gt;http://repository.cwi.nl/search/fullrecord.php?publnr=2271&lt;/mods:url&gt;
+                                            &lt;/mods:location&gt;
+
+                                            &lt;mods:titleInfo xml:lang=&quot;en&quot;&gt;
+                                                &lt;mods:title&gt;Paths and flows---a historical survey&lt;/mods:title&gt;
+                                            &lt;/mods:titleInfo&gt;
+                                            &lt;mods:titleInfo&gt;
+                                                &lt;mods:title&gt;Paden en stromingen---a historical survey&lt;/mods:title&gt;
+                                            &lt;/mods:titleInfo&gt;
+
+                                            &lt;mods:name type=&quot;personal&quot; ID=&quot;_2271_10&quot;&gt;
+                                                &lt;mods:displayForm&gt;Schrijver, A.&lt;/mods:displayForm&gt;
+                                                &lt;mods:namePart type=&quot;family&quot;&gt;Schrijver&lt;/mods:namePart&gt;
+                                                &lt;mods:namePart type=&quot;given&quot;&gt;A.&lt;/mods:namePart&gt;
+                                                &lt;mods:role&gt;
+                                                    &lt;mods:roleTerm type=&quot;code&quot; authority=&quot;marcrelator&quot;&gt;aut&lt;/mods:roleTerm&gt;
+                                                &lt;/mods:role&gt;
+                                            &lt;/mods:name&gt;
+
+                                            &lt;mods:name type=&quot;personal&quot; ID=&quot;_2271_11&quot;&gt;
+                                                &lt;mods:displayForm&gt;prof.dr. Bennis, H. (Hans)&lt;/mods:displayForm&gt;
+                                                &lt;mods:namePart type=&quot;given&quot;&gt;prof.dr. H.J. (Hans)&lt;/mods:namePart&gt;
+                                                &lt;mods:namePart type=&quot;family&quot;&gt;Bennis&lt;/mods:namePart&gt;
+                                                &lt;mods:role&gt;
+                                                    &lt;mods:roleTerm type=&quot;code&quot; authority=&quot;marcrelator&quot;&gt;dgg&lt;/mods:roleTerm&gt;
+                                                &lt;/mods:role&gt;
+                                                &lt;mods:nameIdentifier type=&quot;orcid&quot; typeURI=&quot;http://id.loc.gov/vocabulary/identifiers/orcid&quot;&gt;http://orcid.org/0000-0002-1825-0097&lt;/mods:nameIdentifier&gt;
+                                            &lt;/mods:name&gt;
+
+                                            &lt;mods:abstract&gt; Samenvatting &lt;/mods:abstract&gt;
+
+                                            &lt;mods:accessCondition type=&quot;info:eu-repo/semantics/embargoedAccess&quot;&gt;info:eu-repo/semantics/embargoedAccess&lt;/mods:accessCondition&gt;
+
+                                            &lt;mods:accessCondition/&gt;
+
+                                            &lt;mods:name ID=&quot;FND_1&quot; type=&quot;corporate&quot;&gt;
+                                                &lt;mods:namePart&gt;European Commission CORDIS&lt;/mods:namePart&gt;
+                                                &lt;mods:role&gt;
+                                                    &lt;mods:roleTerm authority=&quot;marcrelator&quot; type=&quot;code&quot;&gt;fnd&lt;/mods:roleTerm&gt;
+                                                &lt;/mods:role&gt;
+                                            &lt;/mods:name&gt;
+
+                                            &lt;mods:extension&gt;
+                                                &lt;dai:daiList xmlns:dai=&quot;info:eu-repo/dai&quot;
+                                                    xsi:schemalocation=&quot;info:eu-repo/dai http://www.surfgroepen.nl/sites/oai/metadata/Shared%20Documents/dai-extension.xsd&quot;&gt;
+                                                    &lt;dai:identifier IDref=&quot;_2271_10&quot; authority=&quot;info:eu-repo/dai/nl&quot;&gt;29806278&lt;/dai:identifier&gt;
+                                                    &lt;dai:identifier IDref=&quot;_2271_11&quot; authority=&quot;info:eu-repo/dai/nl&quot;&gt;071792279&lt;/dai:identifier&gt;
+                                                &lt;/dai:daiList&gt;
+                                            &lt;/mods:extension&gt;
+
+                                            &lt;mods:extension&gt;
+                                                &lt;wmp:rights xmlns:wmp=&quot;http://www.surfgroepen.nl/werkgroepmetadataplus&quot;
+                                                    xmlns:dc=&quot;http://purl.org/dc/elements/1.1/&quot;
+                                                    xsi:schemaLocation=&quot;http://www.surfgroepen.nl/werkgroepmetadataplus rights.xsd&quot;&gt;
+                                                    &lt;dc:description&gt;Copyright (c) Aiki, T (Toyohiko)&lt;/dc:description&gt;
+                                                &lt;/wmp:rights&gt;
+                                                &lt;wmp:rights xmlns:wmp=&quot;http://www.surfgroepen.nl/werkgroepmetadataplus&quot;
+                                                    xmlns:dc=&quot;http://purl.org/dc/elements/1.1/&quot;
+                                                    xsi:schemaLocation=&quot;http://www.surfgroepen.nl/werkgroepmetadataplus rights.xsd&quot;&gt;
+                                                    &lt;dc:description&gt;Copyright (c) Hilhorst, D&lt;/dc:description&gt;
+                                                &lt;/wmp:rights&gt;
+                                                &lt;wmp:rights xmlns:wmp=&quot;http://www.surfgroepen.nl/werkgroepmetadataplus&quot;
+                                                    xmlns:dc=&quot;http://purl.org/dc/elements/1.1/&quot;
+                                                    xsi:schemaLocation=&quot;http://www.surfgroepen.nl/werkgroepmetadataplus rights.xsd&quot;&gt;
+                                                    &lt;dc:description&gt;Copyright (c) Mimura, M&lt;/dc:description&gt;
+                                                &lt;/wmp:rights&gt;
+                                                &lt;wmp:rights xmlns:wmp=&quot;http://www.surfgroepen.nl/werkgroepmetadataplus&quot;
+                                                    xmlns:dc=&quot;http://purl.org/dc/elements/1.1/&quot;
+                                                    xsi:schemaLocation=&quot;http://www.surfgroepen.nl/werkgroepmetadataplus rights.xsd&quot;&gt;
+                                                    &lt;dc:description&gt;Copyright (c) Muntean, A (Adrian)&lt;/dc:description&gt;
+                                                &lt;/wmp:rights&gt;
+                                            &lt;/mods:extension&gt;
+
+                                            &lt;mods:extension&gt;
+                                                &lt;gal:grantAgreementList xmlns:gal=&quot;info:eu-repo/grantAgreement&quot;
+                                                    xsi:schemaLocation=&quot;info:eu-repo/grantAgreement http://purl.org/REP/standards/gal-extension.xsd&quot;&gt;
+                                                    &lt;gal:grantAgreement code=&quot;info:eu-repo/grantAgreement/EC/FP7/282797&quot;&gt;
+                                                        &lt;gal:funder IDref=&quot;FND_1&quot;/&gt;
+                                                        &lt;gal:title&gt;EERA Design Tools for Offshore Wind Farm Cluster (EERA-DTOC)&lt;/gal:title&gt;
+                                                        &lt;gal:description&gt;The European Energy Research Alliance (EERA) together with some
+                                                            high-impact industry partners addresses the call proposing an integrated and
+                                                            validated design tool combining the state-of-the-art wake, yield and electrical
+                                                            models available in the consortium, as a plug-in architecture with possibility
+                                                            for third party models.&lt;/gal:description&gt;
+                                                    &lt;/gal:grantAgreement&gt;
+                                                    &lt;gal:grantAgreement code=&quot;info:eu-repo/grantAgreement/EC/FP7/23456&quot;&gt;
+                                                        &lt;gal:funder IDref=&quot;_2271_10&quot;/&gt;
+                                                    &lt;/gal:grantAgreement&gt;
+                                                    &lt;gal:grantAgreement code=&quot;info:eu-repo/grantAgreement/EC/FP7/34567&quot;/&gt;
+                                                &lt;/gal:grantAgreementList&gt;
+                                            &lt;/mods:extension&gt;
+
+                                            &lt;mods:language&gt;
+                                                &lt;mods:languageTerm type=&quot;code&quot; authority=&quot;rfc3066&quot;&gt;en&lt;/mods:languageTerm&gt;
+                                            &lt;/mods:language&gt;
+
+                                            &lt;mods:relatedItem type=&quot;isReferencedBy&quot; xlink:href=&quot;http://repository-acc.ubn.ru.nl/handle/123456789/126651&quot;/&gt;
+
+                                            &lt;mods:relatedItem type=&quot;succeeding&quot;&gt;
+                                                &lt;mods:titleInfo&gt;
+                                                    &lt;mods:title&gt;Computing in musicology&lt;/mods:title&gt;
+                                                &lt;/mods:titleInfo&gt;
+                                                &lt;mods:identifier type=&quot;issn&quot;&gt;1057-9478&lt;/mods:identifier&gt;
+                                                &lt;mods:identifier type=&quot;lccn&quot;&gt;(DLC) 91656596&lt;/mods:identifier&gt;
+                                                &lt;mods:identifier type=&quot;local&quot;&gt;(OCoLC)21202412&lt;/mods:identifier&gt;                                                
+                                                &lt;mods:genre&gt;info:eu-repo/semantics/book&lt;/mods:genre&gt;
+                                            &lt;/mods:relatedItem&gt;
+
+
+                        &lt;mods:relatedItem type=&quot;isReferencedBy&quot; xlink:href=&quot;http://repository-acc.ubn.ru.nl/handle/123456789/169092&quot;&gt;
+                            &lt;mods:titleInfo&gt;
+                                &lt;mods:title&gt;“Wij zijn eigenlijk altijd multicultureel geweest”. Een analyse van het discours over het ‘multiculturele drama’ in Nederland en de mediatorrol van Indonesische en Surinaamse migranten&lt;/mods:title&gt;
+                            &lt;/mods:titleInfo&gt;
+                            &lt;mods:genre&gt;Dissertation&lt;/mods:genre&gt;
+                        &lt;/mods:relatedItem&gt;
+                        &lt;mods:relatedItem type=&quot;isReferencedBy&quot; xlink:href=&quot;http://repository-acc.ubn.ru.nl/handle/123456789/155610&quot;&gt;
+                            &lt;mods:titleInfo&gt;
+                                &lt;mods:title&gt;Indonesian Muslim or World Citizen? Religious Identity in the Dutch Integration Discourse&lt;/mods:title&gt;
+                            &lt;/mods:titleInfo&gt;
+                            &lt;mods:genre&gt;Part of book or chapter of book&lt;/mods:genre&gt;
+                        &lt;/mods:relatedItem&gt;
+                        &lt;mods:relatedItem type=&quot;isReferencedBy&quot; xlink:href=&quot;http://repository-acc.ubn.ru.nl/handle/123456789/143585&quot;&gt;
+                            &lt;mods:titleInfo&gt;
+                                &lt;mods:title&gt;&apos;Rice and Rice with Sambal&apos;. Indonesians and Moluccans in The Netherlands&lt;/mods:title&gt;
+                            &lt;/mods:titleInfo&gt;
+                            &lt;mods:genre&gt;Article in monograph or in proceedings&lt;/mods:genre&gt;
+                        &lt;/mods:relatedItem&gt;
+                        &lt;mods:relatedItem type=&quot;isReferencedBy&quot; xlink:href=&quot;http://repository-acc.ubn.ru.nl/handle/123456789/126651&quot;&gt;
+                            &lt;mods:titleInfo&gt;
+                                &lt;mods:title&gt;&apos;This is how we are at home&apos;. Indonesian Muslims in The Hague&lt;/mods:title&gt;
+                            &lt;/mods:titleInfo&gt;
+                            &lt;mods:genre&gt;Article in monograph or in proceedings&lt;/mods:genre&gt;
+                        &lt;/mods:relatedItem&gt;
+
+                                            &lt;mods:originInfo&gt;
+                                                &lt;mods:publisher&gt;cwi&lt;/mods:publisher&gt;
+                                                &lt;mods:dateIssued encoding=&quot;iso8601&quot;&gt;1993-1-01&lt;/mods:dateIssued&gt;
+                                            &lt;/mods:originInfo&gt;
+
+                                            &lt;mods:physicalDescription&gt;
+                                                &lt;mods:extent&gt;144&lt;/mods:extent&gt;
+                                            &lt;/mods:physicalDescription&gt;
+
+                                            &lt;mods:subject&gt;
+                                                &lt;mods:topic&gt;freight&lt;/mods:topic&gt;
+                                                &lt;mods:topic&gt;intermodal&lt;/mods:topic&gt;
+                                                &lt;mods:topic&gt;rail&lt;/mods:topic&gt;
+                                                &lt;mods:topic&gt;terminals&lt;/mods:topic&gt;
+                                                &lt;mods:topic&gt;shunting&lt;/mods:topic&gt;
+                                                &lt;mods:topic&gt;hub-and-spoke&lt;/mods:topic&gt;
+                                            &lt;/mods:subject&gt;
+
+                                            &lt;mods:subject xml:lang=&quot;en&quot;&gt;
+                                                &lt;mods:topic&gt;In english please.&lt;/mods:topic&gt;
+                                            &lt;/mods:subject&gt;
+
+                                            &lt;mods:typeOfResource&gt;text&lt;/mods:typeOfResource&gt;
+                                            &lt;mods:genre&gt;info:eu-repo/semantics/book&lt;/mods:genre&gt;
+                                            &lt;mods:classification authority=&quot;msc&quot;&gt;05C38&lt;/mods:classification&gt;
+                                            &lt;mods:classification authority=&quot;msc&quot;&gt;05C90&lt;/mods:classification&gt;
+                                            &lt;mods:classification authority=&quot;msc&quot;&gt;90B10&lt;/mods:classification&gt;
+                                            &lt;mods:classification authority=&quot;msc&quot;&gt;90C35&lt;/mods:classification&gt;
+                                            &lt;mods:identifier type=&quot;uri&quot;&gt;URN:ISSN:0010-440X&lt;/mods:identifier&gt;
+                                            &lt;mods:identifier type=&quot;uri&quot;&gt;urn:isbn:9002233389&lt;/mods:identifier&gt;
+                                            &lt;mods:identifier type=&quot;local&quot;&gt;PURE UUID: fb0e4e21-442c-414f-86e1-ed0a0ed42e4a&lt;/mods:identifier&gt;
+                                            &lt;mods:identifier type=&quot;local&quot;&gt;handle.net: http://hdl.handle.net/1871.1/6faea2a1-a4d5-4806-9b3c-08d7cc1ea84e&lt;/mods:identifier&gt;
+
+                                        &lt;/mods:mods&gt;
+                                    &lt;/nl_didl:Resource&gt;
+                                &lt;/nl_didl:Component&gt;
+                            &lt;/nl_didl:Item&gt;
+                            
+                            &lt;nl_didl:Item&gt;
+                                &lt;nl_didl:Descriptor&gt;
+                                    &lt;nl_didl:Statement mimeType=&quot;application/xml&quot;&gt;
+                                        &lt;rdf:type rdf:resource=&quot;info:eu-repo/semantics/objectFile&quot;/&gt;
+                                    &lt;/nl_didl:Statement&gt;
+                                &lt;/nl_didl:Descriptor&gt;
+                                &lt;nl_didl:Descriptor&gt;
+                                    &lt;nl_didl:Statement mimeType=&quot;application/xml&quot;&gt;
+                                        &lt;dcterms:accessRights&gt;http://purl.org/eprint/accessRights/ClosedAccess&lt;/dcterms:accessRights&gt;
+                                    &lt;/nl_didl:Statement&gt;
+                                &lt;/nl_didl:Descriptor&gt;
+                                &lt;nl_didl:Component&gt;
+                                    &lt;nl_didl:Resource mimeType=&quot;application/pdf&quot; ref=&quot;http://oai.cwi.nl/oai/asset/2271/2271OA.pdf&quot;/&gt;
+                                &lt;/nl_didl:Component&gt;
+                            &lt;/nl_didl:Item&gt;
+
+                            &lt;nl_didl:Item&gt;
+                                &lt;nl_didl:Descriptor&gt;
+                                    &lt;nl_didl:Statement mimeType=&quot;application/xml&quot;&gt;
+                                        &lt;rdf:type rdf:resource=&quot;info:eu-repo/semantics/objectFile&quot;/&gt;
+                                    &lt;/nl_didl:Statement&gt;
+                                &lt;/nl_didl:Descriptor&gt;
+                                &lt;nl_didl:Descriptor&gt;
+                                    &lt;nl_didl:Statement mimeType=&quot;application/xml&quot;&gt;
+                                        &lt;dcterms:accessRights&gt;info:eu-repo/semantics/closedAccess&lt;/dcterms:accessRights&gt;
+                                    &lt;/nl_didl:Statement&gt;
+                                &lt;/nl_didl:Descriptor&gt;
+                                &lt;nl_didl:Component&gt;
+                                    &lt;nl_didl:Resource mimeType=&quot;application/pdf&quot; ref=&quot;http://oai.cwi.nl/oai/asset/2271/2371OA.pdf&quot;/&gt;
+                                &lt;/nl_didl:Component&gt;
+                            &lt;/nl_didl:Item&gt;
+                            
+                            &lt;nl_didl:Item&gt;
+                                &lt;nl_didl:Descriptor&gt;
+                                    &lt;nl_didl:Statement mimeType=&quot;application/xml&quot;&gt;
+                                        &lt;rdf:type rdf:resource=&quot;info:eu-repo/semantics/objectFile&quot; /&gt;
+                                    &lt;/nl_didl:Statement&gt;
+                                &lt;/nl_didl:Descriptor&gt;
+                                &lt;nl_didl:Descriptor&gt;
+                                    &lt;nl_didl:Statement mimeType=&quot;application/xml&quot;&gt;
+                                        &lt;dii:Identifier&gt;urn:NBN:nl:ui:18-2271-OF&lt;/dii:Identifier&gt;
+                                    &lt;/nl_didl:Statement&gt;
+                                &lt;/nl_didl:Descriptor&gt;
+                                &lt;nl_didl:Descriptor&gt;
+                                    &lt;nl_didl:Statement mimeType=&quot;application/xml&quot;&gt;
+                                        &lt;dcterms:available&gt;2012-01-01&lt;/dcterms:available&gt;
+                                    &lt;/nl_didl:Statement&gt;
+                                &lt;/nl_didl:Descriptor&gt;
+                                &lt;nl_didl:Component&gt;
+                                    &lt;nl_didl:Resource mimeType=&quot;application/pdf&quot; ref=&quot;http://oai.cwi.nl/oai/asset/2271/2271EAcc.pdf&quot; /&gt;
+                                &lt;/nl_didl:Component&gt;
+                            &lt;/nl_didl:Item&gt;
+
+                            &lt;nl_didl:Item&gt;
+                                &lt;nl_didl:Descriptor&gt;
+                                    &lt;nl_didl:Statement mimeType=&quot;application/xml&quot;&gt;
+                                        &lt;rdf:type rdf:resource=&quot;info:eu-repo/semantics/humanStartPage&quot;/&gt;
+                                    &lt;/nl_didl:Statement&gt;
+                                &lt;/nl_didl:Descriptor&gt;
+                                &lt;nl_didl:Component&gt;
+                                    &lt;nl_didl:Resource mimeType=&quot;text/html&quot; ref=&quot;http://repository.cwi.nl/search/fullrecord.php?publnr=2271&quot;/&gt;
+                                &lt;/nl_didl:Component&gt;
+                            &lt;/nl_didl:Item&gt;
+                        &lt;/nl_didl:Item&gt;
+                    &lt;/nl_didl:DIDL&gt;
+                    &lt;/metadata&gt;&lt;about&gt;
+        &lt;provenance xmlns=&quot;http://www.openarchives.org/OAI/2.0/provenance&quot;
+            xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+            xsi:schemaLocation=&quot;http://www.openarchives.org/OAI/2.0/provenance http://www.openarchives.org/OAI/2.0/provenance.xsd&quot;&gt;
+            &lt;originDescription altered=&quot;true&quot; harvestDate=&quot;2015-10-30T14:03:05Z&quot;&gt;
+                &lt;baseURL&gt;https://dataverse.nl/dvn/OAIHandler&lt;/baseURL&gt;
+                &lt;identifier&gt;tiu//hdl:10411/20418&lt;/identifier&gt;
+                &lt;datestamp&gt;2015-07-04T01:00:04Z&lt;/datestamp&gt;
+                &lt;metadataNamespace&gt;http://www.openarchives.org/OAI/2.0/oai_dc/&lt;/metadataNamespace&gt;
+            &lt;/originDescription&gt;
+        &lt;/provenance&gt;
+    &lt;/about&gt;&lt;/record&gt;</part>
+                <part name="meta">&lt;meta
+                    xmlns=&quot;http://meresco.org/namespace/harvester/meta&quot;&gt; &lt;upload&gt;
+                    &lt;id&gt;knaw:record:2&lt;/id&gt; &lt;/upload&gt; &lt;record&gt;
+                    &lt;id&gt;record:2&lt;/id&gt;&lt;harvestdate&gt;2016-12-21T13:46:09Z&lt;/harvestdate&gt;
+                    &lt;metadataNamespace&gt;http://www.loc.gov/mods/v3&lt;/metadataNamespace&gt;
+                    &lt;/record&gt; &lt;repository&gt;
+                    &lt;id&gt;knaw&lt;/id&gt; &lt;set&gt;oa_publications&lt;/set&gt;
+                    &lt;baseurl&gt;http://depot.knaw.nl/cgi/oai2&lt;/baseurl&gt;
+                    &lt;repositoryGroupId&gt;knaw&lt;/repositoryGroupId&gt;
+                    &lt;metadataPrefix&gt;nl_didl&lt;/metadataPrefix&gt;
+                    &lt;collection&gt;publication&lt;/collection&gt; &lt;/repository&gt;
+                    &lt;/meta&gt;</part>
+            </document>
+        </srw:recordData>
+    </srw:record>
+</ucp:updateRequest>

@@ -1,0 +1,109 @@
+<ucp:updateRequest xmlns:srw="http://www.loc.gov/zing/srw/" xmlns:ucp="info:lc/xmlns/update-v1">
+    <srw:version>1.0</srw:version>
+    <ucp:action>info:srw/action/1/replace</ucp:action>
+    <ucp:recordIdentifier>organisation:ORG1236141</ucp:recordIdentifier>
+    <srw:record xmlns:srw="http://www.loc.gov/zing/srw/">
+        <srw:recordPacking>xml</srw:recordPacking>
+        <srw:recordSchema>metadata</srw:recordSchema>
+        <srw:recordData><document xmlns="http://meresco.org/namespace/harvester/document"><part name="record">&lt;record xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;            
+            &lt;header xmlns="http://www.openarchives.org/OAI/2.0/"&gt;&lt;identifier&gt;ORG1236141&lt;/identifier&gt;&lt;datestamp&gt;2001-03-27&lt;/datestamp&gt;&lt;setSpec&gt;organisaties&lt;/setSpec&gt;&lt;/header&gt;
+            &lt;metadata xmlns="http://www.openarchives.org/OAI/2.0/"&gt;
+            &lt;organisatie xmlns=&quot;http://www.onderzoekinformatie.nl/nod/org&quot;
+    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+    xsi:schemaLocation=&quot;http://www.onderzoekinformatie.nl/nod/org https://www.narcis.nl/content/schemas/nod/nod-organisation-1-1.xsd&quot; code=&quot;A.Asd.Al.KNAW&quot;&gt;
+    &lt;identifier&gt;ORG1236141&lt;/identifier&gt;
+    &lt;naam_nl&gt;Wetenschapswinkel&lt;/naam_nl&gt;
+    &lt;taak_nl&gt;De KNAW vervult drie (wettelijke) taken: genootschap van excellente wetenschappers uit
+        alle disciplines; bestuurder van wetenschappelijke onderzoeksinstituten; adviseur van de
+        regering op het gebied van wetenschapsbeoefening. Zijne Majesteit de Koning is beschermheer
+        van de KNAW. Om inhoud te geven aan haar wettelijke taken:&amp;lt;br&amp;gt; &amp;#183; fungeert de KNAW
+        als forum voor het wetenschappelijk debat en voor de uitwisseling van wetenschappelijke
+        informatie;&amp;lt;br&amp;gt; &amp;#183; voert zij beleid en beheer voor wetenschappelijke
+        instituten;&amp;lt;br&amp;gt; &amp;#183; brengt zij adviezen en verkenningen uit;&amp;lt;br&amp;gt; &amp;#183;
+        onderhoudt zij internationale wetenschappelijke betrekkingen;&amp;lt;br&amp;gt; &amp;#183; kent zij
+        wetenschappelijke prijzen toe en voert zij enkele subsidieprogramma s uit, al dan niet
+        namens aan haar toevertrouwde stichtingen en fondsen.&amp;lt;br&amp;gt; Visie&amp;lt;br&amp;gt; De KNAW is
+        het forum, de stem en het geweten van de wetenschap in Nederland. Haar instituten behoren
+        met hun onderzoek en hun collecties tot de (inter)nationale top. Aan de basis van al haar
+        activiteiten ligt de overtuiging dat kennis en creativiteit de belangrijkste grondstoffen
+        zijn voor welzijn en welvaart.&amp;lt;br&amp;gt; Missie&amp;lt;br&amp;gt; Vanuit haar onafhankelijke positie
+        brengt de KNAW mensen en middelen bij elkaar om met kennis en creativiteit bij te dragen aan
+        de ontwikkeling van onze samenleving. Ze wil de bron zijn van inspirerende, vernieuwende
+        inzichten, vergezichten en samenwerkingsverbanden. Ze bevordert de kwaliteit en de
+        integriteit van de wetenschapsbeoefening. Haar instituten moeten staan voor excellente
+        kwaliteit en dienen te fungeren als magneten voor onderzoekstalent&lt;/taak_nl&gt;
+    &lt;taak_en&gt;The Academy&amp;apos;s role is defined by law. Briefly: 1) to serve as a learned society
+        representing the full spectrum of scientific and scholarly disciplines; 2) to act as a
+        management body for national research institutes; 3) to advise the Dutch Government on
+        matters related to scientific pursuit. In accordance with these statutory duties, the
+        Academy: - serves as a forum for debate and a platform for knowledge-sharing; - manages and
+        sets policy for the national research institutes; - issues advisory reports and foresight
+        studies; - cooperates with foreign and international organisations on matters related to
+        science and scholarship; - awards prizes and runs a number of funding programmes, either in
+        its own name or on behalf of a foundation or fund that has been entrusted to it. Mission As
+        the forum, conscience, and voice of the arts and sciences in the Netherlands, the Academy
+        promotes quality in science and scholarship and strives to ensure that Dutch scholars and
+        scientists contribute to cultural, social and economic progress. As a research organisation,
+        the Academy is responsible for a group of outstanding national research institutes. It
+        promotes innovation and knowledge valorisation within these institutes and encourages them
+        to cooperate with one another and with university research groups.&lt;/taak_en&gt;
+    &lt;acroniem&gt;KNAW&lt;/acroniem&gt;
+    &lt;locatie&gt;Rotterdam&lt;/locatie&gt;
+    &lt;org_telefoon&gt;+31-20-5510700&lt;/org_telefoon&gt;
+    &lt;org_email&gt;knaw@knaw.nl&lt;/org_email&gt;
+    &lt;org_url&gt;http://www.knaw.nl&lt;/org_url&gt;
+    &lt;invoer_datum&gt;1987-10-07&lt;/invoer_datum&gt;
+    &lt;url&gt;https://www.narcis.nl/organisation/RecordID/ORG1236141&lt;/url&gt;
+    &lt;categories&gt;
+        &lt;category code=&quot;D10000&quot;&gt;
+            &lt;term xml:lang=&quot;nl&quot;&gt;Natuurwetenschappen en Techniek&lt;/term&gt;
+            &lt;term xml:lang=&quot;en&quot;&gt;Science and technology&lt;/term&gt;
+        &lt;/category&gt;
+        &lt;category code=&quot;D20000&quot;&gt;
+            &lt;term xml:lang=&quot;nl&quot;&gt;Levenswetenschappen, geneeskunde en gezondheidszorg &lt;/term&gt;
+            &lt;term xml:lang=&quot;en&quot;&gt;Life sciences, medicine and health care &lt;/term&gt;
+        &lt;/category&gt;
+        &lt;category code=&quot;D30000&quot;&gt;
+            &lt;term xml:lang=&quot;nl&quot;&gt;Geesteswetenschappen&lt;/term&gt;
+            &lt;term xml:lang=&quot;en&quot;&gt;Humanities&lt;/term&gt;
+        &lt;/category&gt;
+        &lt;category code=&quot;D40000&quot;&gt;
+            &lt;term xml:lang=&quot;nl&quot;&gt;Recht en bestuur&lt;/term&gt;
+            &lt;term xml:lang=&quot;en&quot;&gt;Law and public administration &lt;/term&gt;
+        &lt;/category&gt;
+        &lt;category code=&quot;D50000&quot;&gt;
+            &lt;term xml:lang=&quot;nl&quot;&gt;Gedragswetenschappen en onderwijskunde&lt;/term&gt;
+            &lt;term xml:lang=&quot;en&quot;&gt;Behavioural and educational sciences&lt;/term&gt;
+        &lt;/category&gt;
+        &lt;category code=&quot;D60000&quot;&gt;
+            &lt;term xml:lang=&quot;nl&quot;&gt;Sociale wetenschappen &lt;/term&gt;
+            &lt;term xml:lang=&quot;en&quot;&gt;Social sciences&lt;/term&gt;
+        &lt;/category&gt;
+    &lt;/categories&gt;
+    &lt;nameIdentifier type=&quot;isni&quot;&gt;0000000121536865&lt;/nameIdentifier&gt;
+    &lt;nameIdentifier type=&quot;ror&quot;&gt;008pnp284&lt;/nameIdentifier&gt;
+&lt;/organisatie&gt;
+&lt;/metadata&gt;
+            &lt;/record&gt;</part>
+            <part name="meta">&lt;meta xmlns=&quot;http://meresco.org/namespace/harvester/meta&quot;&gt;
+                &lt;upload&gt;
+                &lt;id&gt;organisation:ORG1236141&lt;/id&gt;                
+                &lt;/upload&gt;
+                &lt;record&gt;
+                &lt;id&gt;ORG1236141&lt;/id&gt;
+                &lt;harvestdate&gt;2016-12-21T13:46:09Z&lt;/harvestdate&gt;
+                &lt;metadataNamespace&gt;http://www.onderzoekinformatie.nl/nod/org&lt;/metadataNamespace&gt;
+                &lt;/record&gt;
+                &lt;repository&gt;
+                &lt;id&gt;organisation&lt;/id&gt;
+                &lt;set&gt;organisaties&lt;/set&gt;
+                &lt;baseurl&gt;http://narcis01.bureau.knaw.nl:8181/nodserver-0.0.1/nodbrug&lt;/baseurl&gt;
+                &lt;repositoryGroupId&gt;nod&lt;/repositoryGroupId&gt;
+                &lt;metadataPrefix&gt;nodorganisatie&lt;/metadataPrefix&gt;
+                &lt;collection&gt;organisation&lt;/collection&gt;
+                &lt;/repository&gt;
+                &lt;/meta&gt;</part>
+        </document>
+        </srw:recordData>
+    </srw:record>
+</ucp:updateRequest>

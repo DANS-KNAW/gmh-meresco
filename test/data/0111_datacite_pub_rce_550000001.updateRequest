@@ -1,0 +1,143 @@
+<ucp:updateRequest xmlns:srw="http://www.loc.gov/zing/srw/" xmlns:ucp="info:lc/xmlns/update-v1">
+    <srw:version>1.0</srw:version>
+    <ucp:action>info:srw/action/1/replace</ucp:action>
+    <ucp:recordIdentifier>rce:rapporten:550000001</ucp:recordIdentifier>
+    <srw:record xmlns:srw="http://www.loc.gov/zing/srw/">
+        <srw:recordPacking>xml</srw:recordPacking>
+        <srw:recordSchema>metadata</srw:recordSchema>
+        <srw:recordData><document xmlns="http://meresco.org/namespace/harvester/document"><part name="record">&lt;record xmlns=&quot;http://www.openarchives.org/OAI/2.0/&quot;
+    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&gt;
+    &lt;header xmlns=&quot;http://www.openarchives.org/OAI/2.0/&quot;&gt;
+                &lt;identifier&gt;rapporten:550000001&lt;/identifier&gt;
+                &lt;datestamp&gt;2017-12-22T15:59:02Z&lt;/datestamp&gt;
+                &lt;setSpec&gt;archrep&lt;/setSpec&gt;
+            &lt;/header&gt;
+    &lt;metadata xmlns=&quot;http://www.openarchives.org/OAI/2.0/&quot;&gt;
+            &lt;resource xmlns=&quot;http://datacite.org/schema/kernel-4&quot; xmlns:xlink=&quot;http://www.w3.org/1999/xlink&quot;
+    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&gt;
+    &lt;identifier identifierType=&quot;URL&quot;
+        &gt;http://cultureelerfgoed.adlibsoft.com/dispatcher.aspx?action=search&amp;amp;database=ChoiceBooks&amp;amp;search=priref=550000002&lt;/identifier&gt;
+    &lt;creators&gt;
+        &lt;creator&gt;
+            &lt;creatorName&gt;Franssen, T.P.&lt;/creatorName&gt;
+            &lt;givenName&gt;Thomas&lt;/givenName&gt;
+            &lt;familyName&gt;Franssen&lt;/familyName&gt;
+            &lt;nameIdentifier nameIdentifierScheme=&quot;ORCID&quot;&gt;0000-0002-4852-8862&lt;/nameIdentifier&gt;
+            &lt;nameIdentifier nameIdentifierScheme=&quot;ISNI&quot;&gt;0000000395301174&lt;/nameIdentifier&gt;
+            &lt;nameIdentifier nameIdentifierScheme=&quot;DAI-NL&quot;&gt;304357006&lt;/nameIdentifier&gt;
+            &lt;affiliation&gt;Rijksdienst&lt;/affiliation&gt;
+        &lt;/creator&gt;
+        &lt;creator&gt;
+            &lt;creatorName&gt;Werkgroep havens IJsselmeergbied&lt;/creatorName&gt;
+        &lt;/creator&gt;
+        &lt;creator&gt;
+            &lt;creatorName&gt;Rijksdienst voor de IJsselmeerpolders, Lelystad&lt;/creatorName&gt;
+        &lt;/creator&gt;
+        &lt;creator&gt;
+            &lt;creatorName&gt;door werkgroep havens IJsselmeergebied&lt;/creatorName&gt;
+        &lt;/creator&gt;
+    &lt;/creators&gt;
+    &lt;titles&gt;
+        &lt;title&gt;Havens van het IJsselmeergebied&lt;/title&gt;
+        &lt;title titleType=&quot;AlternativeTitle&quot;&gt;Rijp rapport 1985 - 56 abw/bco/cdw&lt;/title&gt;
+        &lt;title xml:lang=&quot;en-US&quot; titleType=&quot;Subtitle&quot;&gt;Zo is het begonnen.&lt;/title&gt;
+    &lt;/titles&gt;
+    &lt;publisher&gt;Rijksdienst voor de IJsselmeerpolders&lt;/publisher&gt;
+    &lt;publicationYear&gt;2013&lt;/publicationYear&gt;
+    &lt;subjects&gt;
+        &lt;subject xml:lang=&quot;nl&quot;&gt;archeologie&lt;/subject&gt;
+        &lt;subject xml:lang=&quot;en&quot;&gt;Archaeology&lt;/subject&gt;
+        &lt;subject subjectScheme=&quot;&quot;&gt;Scheepsarcheologie&lt;/subject&gt;
+        &lt;subject subjectScheme=&quot;&quot;&gt;Scheepswrakken&lt;/subject&gt;
+        &lt;subject subjectScheme=&quot;&quot;&gt;Scheepvaart&lt;/subject&gt;
+        &lt;subject subjectScheme=&quot;NARCIS-classification&quot; schemeURI=&quot;http://www.narcis.nl/classification&quot; valueURI=&quot;http://www.narcis.nl/classfication/D37000&quot; xml:lang=&quot;en&quot;&gt;Archaeology&lt;/subject&gt;
+        &lt;subject subjectScheme=&quot;ABR-complex&quot; schemeURI=&quot;http://cultureelerfgoed.nl/&quot; xml:lang=&quot;nl&quot;&gt;Nederzetting, onbepaald (NX)&lt;/subject&gt;
+        &lt;subject subjectScheme=&quot;ABR-periode&quot; schemeURI=&quot;http://data.cultureelerfgoed.nl/&quot; xml:lang=&quot;nl&quot;&gt;Nieuwe Tijd (NT)&lt;/subject&gt;
+        &lt;subject subjectScheme=&quot;ABR-complex&quot; schemeURI=&quot;http://data.cultureelerfgoed.nl/&quot; xml:lang=&quot;nl&quot;&gt;Loopgraaf (BEWV.LG)&lt;/subject&gt;
+        &lt;subject subjectScheme=&quot;ABR-complex&quot; schemeURI=&quot;http://data.cultureelerfgoed.nl/&quot; xml:lang=&quot;nl&quot;&gt;Begraving, onbepaald (BGV.X)&lt;/subject&gt;
+    &lt;/subjects&gt;
+    &lt;contributors&gt;
+        &lt;contributor contributorType=&quot;Other&quot;&gt;
+            &lt;contributorName&gt;Hageraats, C.&lt;/contributorName&gt;
+            &lt;affiliation&gt;Rijksdienst&lt;/affiliation&gt;
+        &lt;/contributor&gt;
+        &lt;contributor contributorType=&quot;Other&quot;&gt;
+            &lt;contributorName&gt;Kramer, J. de&lt;/contributorName&gt;
+            &lt;affiliation&gt;Rijksdienst&lt;/affiliation&gt;
+        &lt;/contributor&gt;
+        &lt;contributor contributorType=&quot;RightsHolder&quot;&gt;
+            &lt;contributorName nameType=&quot;Organizational&quot;&gt;Rijksdienst voor de IJsselmeerpolders&lt;/contributorName&gt;
+        &lt;/contributor&gt;
+    &lt;/contributors&gt;
+    &lt;dates&gt;
+        &lt;date dateType=&quot;Submitted&quot;&gt;2012-03-06&lt;/date&gt;
+        &lt;date dateType=&quot;Created&quot;&gt;2017-06-15&lt;/date&gt;
+        &lt;date dateType=&quot;Available&quot;&gt;2019-11-06&lt;/date&gt;
+    &lt;/dates&gt;
+    &lt;language&gt;nl&lt;/language&gt;
+    &lt;resourceType resourceTypeGeneral=&quot;Text&quot;&gt;info:eu-repo/semantics/report&lt;/resourceType&gt;
+    &lt;alternateIdentifiers&gt;
+        &lt;alternateIdentifier alternateIdentifierType=&quot;URN&quot;&gt;urn:nbn:nl:ui:13-0q1n-dp&lt;/alternateIdentifier&gt;
+        &lt;alternateIdentifier alternateIdentifierType=&quot;DOI&quot;&gt;10.17026/dans-x38-rkke&lt;/alternateIdentifier&gt;
+    &lt;/alternateIdentifiers&gt;
+    &lt;relatedIdentifiers&gt;
+        &lt;relatedIdentifier relatedIdentifierType=&quot;URL&quot; resourceTypeGeneral=&quot;Audiovisual&quot; relationType=&quot;IsSupplementedBy&quot;&gt;https://archisarchief.cultureelerfgoed.nl\bibliotheek\InterneRapportenROB8.pdf&lt;/relatedIdentifier&gt;
+    &lt;/relatedIdentifiers&gt;
+    &lt;formats&gt;
+        &lt;format&gt;application/pdf&lt;/format&gt;
+    &lt;/formats&gt;
+    &lt;rightsList&gt;
+        &lt;rights&gt;info:eu-repo/semantics/openAccess&lt;/rights&gt;
+    &lt;/rightsList&gt;
+    &lt;sizes&gt;
+        &lt;size&gt;114 p.&lt;/size&gt;
+    &lt;/sizes&gt;
+    &lt;descriptions&gt;
+        &lt;description descriptionType=&quot;Abstract&quot;&gt;Verslag van een (literatuur-) onderzoek naar de
+            havens in het IJselmeergebied, dat tot doel heeft na te gaan hoe de havens functioneren
+            ten aanzien van de visserij, beroepsscheepvaart en recreatie, alsmede de economische
+            betekenis van de functies en relaties. - Dit verslag is de inventariefase van het
+            onderzoekproject &quot;Havenstudie IJsselmeergebied&quot;.&lt;/description&gt;
+        &lt;description descriptionType=&quot;Other&quot;&gt;Met lit. opg.&lt;/description&gt;
+    &lt;/descriptions&gt;
+    &lt;geoLocations&gt;
+        &lt;geoLocation&gt;
+            &lt;geoLocationPlace&gt;IJsselmeergebied&lt;/geoLocationPlace&gt;
+        &lt;/geoLocation&gt;
+        &lt;geoLocation&gt;
+            &lt;geoLocationPlace&gt;Gruttersdijk 18-20&lt;/geoLocationPlace&gt;
+        &lt;/geoLocation&gt;
+        &lt;geoLocation&gt;
+            &lt;geoLocationPlace&gt;Provincie Overijssel&lt;/geoLocationPlace&gt;
+        &lt;/geoLocation&gt;
+        &lt;geoLocation&gt;
+            &lt;geoLocationPoint&gt;
+                &lt;pointLatitude&gt;52.09791597&lt;/pointLatitude&gt;
+                &lt;pointLongitude&gt;5.11644567&lt;/pointLongitude&gt;
+            &lt;/geoLocationPoint&gt;
+        &lt;/geoLocation&gt;
+    &lt;/geoLocations&gt;
+&lt;/resource&gt;
+    &lt;/metadata&gt;
+&lt;/record&gt;</part>
+            <part name="meta">&lt;meta xmlns=&quot;http://meresco.org/namespace/harvester/meta&quot;&gt;
+    &lt;upload&gt;
+    &lt;id&gt;rce:rapporten:550000001&lt;/id&gt;
+    &lt;/upload&gt;
+    &lt;record&gt;
+    &lt;id&gt;rapporten:550000001&lt;/id&gt;
+        &lt;harvestdate&gt;2018-01-05T13:46:09Z&lt;/harvestdate&gt;
+        &lt;metadataNamespace&gt;http://datacite.org/schema/kernel-4&lt;/metadataNamespace&gt;
+    &lt;/record&gt;
+    &lt;repository&gt;
+        &lt;id&gt;rce&lt;/id&gt;
+        &lt;baseurl&gt;http://cultureelerfgoed.adlibsoft.com/oaiapi/oai.ashx&lt;/baseurl&gt;
+        &lt;repositoryGroupId&gt;rce&lt;/repositoryGroupId&gt;
+        &lt;metadataPrefix&gt;oai_datacite&lt;/metadataPrefix&gt;
+        &lt;collection&gt;publication&lt;/collection&gt;
+    &lt;/repository&gt;
+&lt;/meta&gt;</part>
+        </document>
+        </srw:recordData>
+    </srw:record>
+</ucp:updateRequest>

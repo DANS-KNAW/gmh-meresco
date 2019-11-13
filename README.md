@@ -26,7 +26,7 @@ In this version, the national 'URN:NBN' resolver (Basic Resolver Infrastructuure
  * python2-meresco-harvester.noarch               9.0.11.4-0.rhel8    
  * python2-meresco-html.noarch                    1.5.31-0.rhel8      
  * python2-meresco-lucene.x86_64                  1.4.3.1-0.rhel8     
- * python2-meresco-oai.x86_64                     6.1.3-0.rhel8       
+ * python2-meresco-oai.x86_64                     6.1.3-2.rhel8       
  * python2-meresco-oai-common.x86_64              5.0.2.1-1.rhel8     
  * python2-meresco-pylucene.noarch                6.5.0-0.rhel8       
  * python2-meresco-xml.noarch                     4.3.2.1-0.rhel8     

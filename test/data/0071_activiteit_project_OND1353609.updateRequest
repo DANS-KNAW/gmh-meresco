@@ -1,0 +1,72 @@
+<ucp:updateRequest xmlns:srw="http://www.loc.gov/zing/srw/" xmlns:ucp="info:lc/xmlns/update-v1">
+    <srw:version>1.0</srw:version>
+    <ucp:action>info:srw/action/1/replace</ucp:action>
+    <ucp:recordIdentifier>research:OND1353609</ucp:recordIdentifier>
+    <srw:record xmlns:srw="http://www.loc.gov/zing/srw/">
+        <srw:recordPacking>xml</srw:recordPacking>
+        <srw:recordSchema>metadata</srw:recordSchema>
+        <srw:recordData><document xmlns="http://meresco.org/namespace/harvester/document"><part name="record">&lt;record xmlns=&quot;http://www.openarchives.org/OAI/2.0/&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&gt;            
+            &lt;header xmlns=&quot;http://www.openarchives.org/OAI/2.0/&quot;&gt;&lt;identifier&gt;OND1353609&lt;/identifier&gt;&lt;datestamp&gt;2018-12-13&lt;/datestamp&gt;&lt;setSpec&gt;activiteiten&lt;/setSpec&gt;&lt;/header&gt;
+            &lt;metadata xmlns=&quot;http://www.openarchives.org/OAI/2.0/&quot;&gt;
+            &lt;activiteit xmlns=&quot;http://www.onderzoekinformatie.nl/nod/act&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:schemaLocation=&quot;http://www.onderzoekinformatie.nl/nod/act https://www.narcis.nl/content/schemas/nod/nod-research-1-1.xsd&quot;&gt;
+            &lt;identifier&gt;OND1353609&lt;/identifier&gt;
+            &lt;title_nl&gt;The Language Designer&apos;s Workbench: Automating Verification of Language Definitions&lt;/title_nl&gt;
+            &lt;title_en&gt;The Language Designer&apos;s Workbench: Automating Verification of Language Definitions&lt;/title_en&gt;
+            &lt;summary_en&gt;Software systems are the engines of modern information society. Our ability to cope with the increasing complexity of software systems is limited by the programming languages we use to build them. Bridging the gap between domain concepts and the implementation of these concepts in a programming language is one of the core challenges of software engineering. Modern programming languages have considerably reduced this gap, but still require low-level programmatic encodings of domain concepts. Domain-specific software languages (DSLs) address this problem through linguistic abstraction by providing notation, analysis, verification, and optimization that are specialized to an application domain. Language workbenches assist language designers with the implementation of languages. However, DSL implementations rarely formally guarantee semantic correctness properties such as type soundness and behaviour preservation of transformations, since current language workbenches provide no support for such verification, which leads to intricate errors in language designs that are discovered late. In this project, I will work towards new methods and techniques for automating verification of language definitions. The key innovations are: (1) High-level formalisms for the declarative specification of software languages that are declarative, multi-purpose, and generative as well as reductive; (2) Efficient and scalable language parametric algorithms for name resolution, type checking, and program execution; (3) Language parametric test generators that attempt to generate counter examples to type soundness and semantics preservation based on language definitions; (4) Language parametric proof engineering techniques to support automated verification of type soundness and semantics preservation. The techniques will be integrated in the innovative Spoofax Language Workbench and should enable DSL designers to detect semantic errors at low cost in the early stages of the design process. I will evaluate the techniques by verifying and testing a representative set of language definitions.&lt;/summary_en&gt;
+            &lt;type_nl&gt;Project&lt;/type_nl&gt;
+            &lt;type_en&gt;Project&lt;/type_en&gt;
+            &lt;status&gt;C&lt;/status&gt;
+            &lt;startdate&gt;2013-07-01&lt;/startdate&gt; &lt;!-- NEW --&gt;
+            &lt;!-- enddate not available in this example --&gt;
+            &lt;extern-identifier type=&quot;NWO-Dossier&quot;&gt;639.023.206&lt;/extern-identifier&gt; &lt;!-- NEW --&gt;
+            &lt;penvoerder code=&quot;ORG1239209&quot; instituut_code=&quot;U.TUD.WI.St&quot;&gt;
+            &lt;naam xml:lang=&quot;nl&quot;&gt;Afdeling Software Technology - SCT&lt;/naam&gt;
+            &lt;naam xml:lang=&quot;en&quot;&gt;Department of Software Technology - SCT&lt;/naam&gt;
+            &lt;/penvoerder&gt;
+            &lt;financier code=&quot;ORG1235000&quot; instituut_code=&quot;W.Gvh.Ex.EW&quot;&gt;
+            &lt;naam xml:lang=&quot;nl&quot;&gt;NWO Exacte Wetenschappen - EW&lt;/naam&gt;
+            &lt;naam xml:lang=&quot;en&quot;&gt;NWO Council for Physical Sciences&lt;/naam&gt;
+            &lt;/financier&gt;
+            &lt;!-- samenwerking not available in this example --&gt;
+            &lt;!-- opdrachtgever not available in this example --&gt;
+            &lt;person&gt;
+            &lt;fullName&gt;E. (Eelco) Visser&lt;/fullName&gt;
+            &lt;nameIdentifier type=&quot;dai-nl&quot;&gt;294300929&lt;/nameIdentifier&gt;
+            &lt;nameIdentifier type=&quot;isni&quot;&gt;0000000387648477&lt;/nameIdentifier&gt;
+            &lt;nameIdentifier type=&quot;orcid&quot;&gt;0000000273843370&lt;/nameIdentifier&gt;
+            &lt;nameIdentifier type=&quot;nod-prs&quot;&gt;PRS1295003&lt;/nameIdentifier&gt;
+            &lt;role&gt;PRL&lt;/role&gt;
+            &lt;werkzaamheid&gt;ORG1239209&lt;/werkzaamheid&gt; &lt;!-- NEW --&gt;
+            &lt;/person&gt;
+            &lt;invoer_datum&gt;2013-07-23&lt;/invoer_datum&gt;
+            &lt;url&gt;http://www.narcis.nl/research/RecordID/OND1353609&lt;/url&gt;
+            &lt;categories&gt;
+            &lt;category code=&quot;D34200&quot;&gt;
+            &lt;term xml:lang=&quot;nl&quot;&gt;Middeleeuwen&lt;/term&gt;
+            &lt;term xml:lang=&quot;en&quot;&gt;Middle Ages&lt;/term&gt;
+            &lt;/category&gt;
+            &lt;/categories&gt;
+            &lt;/activiteit&gt;&lt;/metadata&gt;
+            &lt;/record&gt;</part>
+            <part name="meta">&lt;meta xmlns=&quot;http://meresco.org/namespace/harvester/meta&quot;&gt;
+                &lt;upload&gt;
+                &lt;id&gt;research:OND1353609&lt;/id&gt;
+                &lt;/upload&gt;
+                &lt;record&gt;
+                &lt;id&gt;OND1353609&lt;/id&gt;
+                &lt;harvestdate&gt;2018-07-19T13:46:09Z&lt;/harvestdate&gt;
+                &lt;metadataNamespace&gt;http://www.onderzoekinformatie.nl/nod/act&lt;/metadataNamespace&gt;
+                &lt;/record&gt;
+                &lt;repository&gt;
+                &lt;id&gt;research&lt;/id&gt;
+                &lt;set&gt;activiteiten&lt;/set&gt;
+                &lt;baseurl&gt;http://services.nod.dans.knaw.nl/nod&lt;/baseurl&gt;
+                &lt;repositoryGroupId&gt;nod&lt;/repositoryGroupId&gt;
+                &lt;metadataPrefix&gt;nodactiviteit&lt;/metadataPrefix&gt;
+                &lt;collection&gt;research&lt;/collection&gt;
+                &lt;/repository&gt;
+                &lt;/meta&gt;</part>
+        </document>
+        </srw:recordData>
+    </srw:record>
+</ucp:updateRequest>

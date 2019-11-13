@@ -1,0 +1,105 @@
+<ucp:updateRequest xmlns:srw="http://www.loc.gov/zing/srw/" xmlns:ucp="info:lc/xmlns/update-v1">
+    <srw:version>1.0</srw:version>
+    <ucp:action>info:srw/action/1/replace</ucp:action>
+    <ucp:recordIdentifier>4tu:record:1</ucp:recordIdentifier>
+    <srw:record xmlns:srw="http://www.loc.gov/zing/srw/">
+        <srw:recordPacking>xml</srw:recordPacking>
+        <srw:recordSchema>metadata</srw:recordSchema>
+        <srw:recordData><document xmlns="http://meresco.org/namespace/harvester/document"><part name="record">&lt;record xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;            
+            &lt;header xmlns="http://www.openarchives.org/OAI/2.0/"&gt;&lt;identifier&gt;record:1&lt;/identifier&gt;&lt;datestamp&gt;2016-03-21&lt;/datestamp&gt;&lt;setSpec&gt;doi&lt;/setSpec&gt;&lt;/header&gt;
+            &lt;metadata xmlns="http://www.openarchives.org/OAI/2.0/"&gt;
+            &lt;didl:DIDL xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+                xmlns:didl=&quot;urn:mpeg:mpeg21:2002:02-DIDL-NS&quot;
+                xsi:schemaLocation=&quot;      urn:mpeg:mpeg21:2002:02-DIDL-NS http://standards.iso.org/ittf/PubliclyAvailableStandards/MPEG-21_schema_files/did/didl.xsd       urn:mpeg:mpeg21:2002:01-DII-NS http://standards.iso.org/ittf/PubliclyAvailableStandards/MPEG-21_schema_files/dii/dii.xsd&quot;&gt;
+                &lt;didl:Item&gt;
+                    &lt;didl:Descriptor&gt;
+                        &lt;didl:Statement mimeType=&quot;application/xml&quot;&gt;
+                            &lt;dii:Identifier xmlns:dii=&quot;urn:mpeg:mpeg21:2002:01-DII-NS&quot;&gt;doi:10.4121/collection:ab70dbf9-ac4f-40a7-9859-9552d38fdccd&lt;/dii:Identifier&gt;
+                        &lt;/didl:Statement&gt;
+                    &lt;/didl:Descriptor&gt;
+                    &lt;didl:Descriptor&gt;
+                        &lt;didl:Statement mimeType=&quot;application/xml&quot;&gt;
+                            &lt;dcterms:modified xmlns:dcterms=&quot;http://purl.org/dc/terms/&quot;&gt;2016-05-02T18:20:13.329Z&lt;/dcterms:modified&gt;
+                        &lt;/didl:Statement&gt;
+                    &lt;/didl:Descriptor&gt;
+                    &lt;didl:Item&gt;
+                        &lt;didl:Descriptor&gt;
+                            &lt;didl:Statement mimeType=&quot;application/xml&quot;&gt;
+                                &lt;rdf:type xmlns:rdf=&quot;http://www.w3.org/1999/02/22-rdf-syntax-ns#&quot;
+                                    rdf:resource=&quot;info:eu-repo/semantics/descriptiveMetadata&quot;/&gt;
+                            &lt;/didl:Statement&gt;
+                        &lt;/didl:Descriptor&gt;
+                        &lt;didl:Component&gt;
+                            &lt;didl:Resource mimeType=&quot;application/xml&quot;&gt;
+                                &lt;oai_dc:dc xmlns:dc=&quot;http://purl.org/dc/elements/1.1/&quot;
+                                    xmlns:oai_dc=&quot;http://www.openarchives.org/OAI/2.0/oai_dc/&quot;&gt;
+                                    &lt;dc:coverage&gt;years 1971-2100&lt;/dc:coverage&gt;
+                                    &lt;dc:coverage&gt;Europe&lt;/dc:coverage&gt;
+						            &lt;dc:language&gt;en-us&lt;/dc:language&gt;
+                                    &lt;dc:format&gt;application/pdf&lt;/dc:format&gt;
+                                    &lt;dc:format&gt;application/pdf&lt;/dc:format&gt;
+                                    &lt;dc:format&gt;image/jpeg&lt;/dc:format&gt;
+                                    &lt;dc:format&gt;image/pdf&lt;/dc:format&gt;
+                                    &lt;dc:creator&gt;European Severe Storms Laboratory&lt;/dc:creator&gt;
+                                    &lt;dc:creator&gt;TU Delft, Faculty of Civil Engineering and Geosciences, Department of Hydraulic Engineering&lt;/dc:creator&gt;
+                                    &lt;dc:creator&gt;Freie Universität Berlin, Institute of Meteorology&lt;/dc:creator&gt;
+                                    &lt;dc:creator&gt;Finnish Meteorological Institute&lt;/dc:creator&gt;
+                                    &lt;dc:date&gt;2016/1/31&lt;/dc:date&gt;
+                                    &lt;dc:date&gt;2014 through 2016 (created)&lt;/dc:date&gt;
+                                    &lt;dc:date&gt;2016 (issued)&lt;/dc:date&gt;
+                                    &lt;dc:description&gt;This collection contains results  of Work Package 2 &quot;Hazard Identification&quot; of project RAIN (&quot; Risk Analysis of Infrastructure Networks in response to extreme weather&quot;). Pan-European gridded data sets of the probability of occurrence of river floods, coastal floods, heavy precipitation, windstorms, heavy snowfall, blizzards, crown snow load, freezing rain, forest fires, thunderstorms, hailstorms, tornadoes and convective wind gusts under present and future climate.&lt;/dc:description&gt;
+                                    &lt;dc:identifier&gt;doi:10.4121/collection:ab70dbf9-ac4f-40a7-9859-9552d38fdccd&lt;/dc:identifier&gt;
+                                    &lt;dc:identifier&gt;collection:ab70dbf9-ac4f-40a7-9859-9552d38fdccd&lt;/dc:identifier&gt;
+                                    &lt;dc:subject&gt;Precipitation&lt;/dc:subject&gt;
+                                    &lt;dc:subject&gt;Hail&lt;/dc:subject&gt;
+                                    &lt;dc:subject&gt;Storms&lt;/dc:subject&gt;
+                                    &lt;dc:subject&gt;Floods&lt;/dc:subject&gt;
+                                    &lt;dc:subject&gt;Earth system modelling&lt;/dc:subject&gt;
+                                    &lt;dc:subject&gt;Winter weather&lt;/dc:subject&gt;
+                                    &lt;dc:subject&gt;Climate&lt;/dc:subject&gt;
+                                    &lt;dc:subject&gt;Thunderstorms&lt;/dc:subject&gt;
+                                    &lt;dc:subject&gt;Climate change&lt;/dc:subject&gt;
+                                    &lt;dc:subject&gt;Forest Fires&lt;/dc:subject&gt;
+                                    &lt;dc:title&gt;RAIN: Pan-European gridded data sets of extreme weather probability of occurrence under present and future climate&lt;/dc:title&gt;
+                                    &lt;dc:type&gt;http://purl.org/dc/dcmitype/Collection&lt;/dc:type&gt;
+                                    &lt;dc:publisher&gt;TU Delft&lt;/dc:publisher&gt;
+                                &lt;/oai_dc:dc&gt;
+                            &lt;/didl:Resource&gt;
+                        &lt;/didl:Component&gt;
+                    &lt;/didl:Item&gt;
+                    &lt;didl:Item&gt;
+                        &lt;didl:Descriptor&gt;
+                            &lt;didl:Statement mimeType=&quot;application/xml&quot;&gt;
+                                &lt;rdf:type xmlns:rdf=&quot;http://www.w3.org/1999/02/22-rdf-syntax-ns#&quot;
+                                    rdf:resource=&quot;info:eu-repo/semantics/humanStartPage&quot;/&gt;
+                            &lt;/didl:Statement&gt;
+                        &lt;/didl:Descriptor&gt;
+                        &lt;didl:Component&gt;
+                            &lt;didl:Resource mimeType=&quot;text/html&quot; ref=&quot;http://data.4tu.nl/repository/collection:ab70dbf9-ac4f-40a7-9859-9552d38fdccd&quot;/&gt;
+                        &lt;/didl:Component&gt;
+                    &lt;/didl:Item&gt;
+                &lt;/didl:Item&gt;
+            &lt;/didl:DIDL&gt;&lt;/metadata&gt;
+            &lt;/record&gt;</part>
+            <part name="meta">&lt;meta xmlns=&quot;http://meresco.org/namespace/harvester/meta&quot;&gt;
+                &lt;upload&gt;
+                &lt;id&gt;4tu:record:1&lt;/id&gt;
+                &lt;/upload&gt;
+                &lt;record&gt;
+                &lt;id&gt;record:1&lt;/id&gt;
+                &lt;harvestdate&gt;2016-12-21T13:46:09Z&lt;/harvestdate&gt;
+                &lt;metadataNamespace&gt;http://www.openarchives.org/OAI/2.0/oai_dc/&lt;/metadataNamespace&gt;
+                &lt;/record&gt;
+                &lt;repository&gt;
+                &lt;id&gt;4tu&lt;/id&gt;
+                &lt;set&gt;doi&lt;/set&gt;
+                &lt;baseurl&gt;http://data.4tu.nl/oai&lt;/baseurl&gt;
+                &lt;repositoryGroupId&gt;4tu&lt;/repositoryGroupId&gt;
+                &lt;metadataPrefix&gt;didl&lt;/metadataPrefix&gt;
+                &lt;collection&gt;dataset&lt;/collection&gt;
+                &lt;/repository&gt;
+                &lt;/meta&gt;</part>
+        </document>
+        </srw:recordData>
+    </srw:record>
+</ucp:updateRequest>

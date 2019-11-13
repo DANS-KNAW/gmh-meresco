@@ -1,0 +1,63 @@
+<ucp:updateRequest xmlns:srw="http://www.loc.gov/zing/srw/" xmlns:ucp="info:lc/xmlns/update-v1">
+    <srw:version>1.0</srw:version>
+    <ucp:action>info:srw/action/1/replace</ucp:action>
+    <ucp:recordIdentifier>datacite:oai:oai.datacite.org:4119334</ucp:recordIdentifier>
+    <srw:record xmlns:srw="http://www.loc.gov/zing/srw/">
+        <srw:recordPacking>xml</srw:recordPacking>
+        <srw:recordSchema>metadata</srw:recordSchema>
+        <srw:recordData><document xmlns="http://meresco.org/namespace/harvester/document"><part name="record">&lt;record xmlns=&quot;http://www.openarchives.org/OAI/2.0/&quot;
+    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&gt;
+    &lt;header xmlns=&quot;http://www.openarchives.org/OAI/2.0/&quot;&gt;
+                &lt;identifier&gt;oai:oai.datacite.org:4119334&lt;/identifier&gt;
+                &lt;datestamp&gt;2014-11-02T15:52:56Z&lt;/datestamp&gt;
+                &lt;setSpec&gt;DELFT&lt;/setSpec&gt;
+                &lt;setSpec&gt;DELFT.TUDARCH&lt;/setSpec&gt;
+            &lt;/header&gt;
+    &lt;metadata xmlns=&quot;http://www.openarchives.org/OAI/2.0/&quot;&gt;
+            &lt;oai_dc:dc xmlns:dc=&quot;http://purl.org/dc/elements/1.1/&quot;
+                xmlns:oai_dc=&quot;http://www.openarchives.org/OAI/2.0/oai_dc/&quot;
+                xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+                xsi:schemaLocation=&quot;http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd&quot;&gt;
+                &lt;dc:title&gt;Эколого-рекреационный коридор в горном заповеднике Боготы&lt;/dc:title&gt;
+                &lt;dc:title&gt;Ecological and Recreational Corridor Bogotá Mountain Reserve&lt;/dc:title&gt;
+                &lt;dc:creator&gt;Wiesner, Diana&lt;/dc:creator&gt;
+                &lt;dc:publisher&gt;проект байкал&lt;/dc:publisher&gt;
+                &lt;dc:date&gt;2013&lt;/dc:date&gt;
+                &lt;dc:identifier&gt;doi:10.7480/projectbaikal.35.21&lt;/dc:identifier&gt;
+                &lt;dc:identifier&gt;publisherid:1-1-21&lt;/dc:identifier&gt;
+                &lt;dc:relation&gt;doi:10.7480/projectbaikal.35&lt;/dc:relation&gt;
+                &lt;dc:subject&gt;городские районы; экологические сети; зеленая инфраструктура; экологическая структура; экология ландшафта; научный проект; городское биоразнообразие; городские экосистемы; ландшафтная архитектура; Богота, Колумбия&lt;/dc:subject&gt;
+                &lt;dc:description&gt;Abstract&lt;/dc:description&gt;
+                &lt;dc:description&gt;&amp;lt;p&amp;gt;Богота, столица Республики Колумбия, – тропический город, расположенный в высокогорье в 2 650 м над уровнем моря. Этот 25-ый по величине город в мире считается также одним из самых высокогорных. Предложен проект интеграции компонентов экологических сетей в Восточных холмах Боготы, связанный с плавным переходом от дикой природы к застроенной среде. Проект «Эколого-рекреационный коридор Боготы» (ЭРК) основан на трех стратегиях. Первая – социальная, подразумевающая соглашение о большой границе вдоль восточных пределов городской черты протяженностью 53 км. Вторая – биофизическая – связана с восстановлением экосистемы. Третья – социально-пространственная, она касается инфраструктуры, необходимой для создания музея под открытым небом. Данный подход должен внести свой вклад в управление биоразнообразием и культурной трансформацией, принося пользу экологии и местным жителям.&amp;lt;/p&amp;gt;&lt;/dc:description&gt;
+                &lt;dc:description&gt;SeriesInformation&lt;/dc:description&gt;
+                &lt;dc:description&gt;проект байкал, No 35 (2013): public spaces&lt;/dc:description&gt;
+                &lt;dc:date&gt;2013-01-21&lt;/dc:date&gt;
+                &lt;dc:language&gt;rus&lt;/dc:language&gt;
+                &lt;dc:type&gt;Text&lt;/dc:type&gt;
+                &lt;dc:type&gt;Article&lt;/dc:type&gt;
+                &lt;dc:format&gt;84-87 Pages&lt;/dc:format&gt;
+                &lt;dc:rights&gt;&amp;lt;p&amp;gt;Creative Commons Attribution 4.0 Unported&amp;lt;/p&amp;gt;&lt;/dc:rights&gt;
+            &lt;/oai_dc:dc&gt;
+    &lt;/metadata&gt;
+&lt;/record&gt;</part>
+            <part name="meta">&lt;meta xmlns=&quot;http://meresco.org/namespace/harvester/meta&quot;&gt;
+    &lt;upload&gt;
+    &lt;id&gt;datacite:oai:oai.datacite.org:4119334&lt;/id&gt;
+    &lt;/upload&gt;
+    &lt;record&gt;
+    &lt;id&gt;oai:oai.datacite.org:4119334&lt;/id&gt;
+        &lt;harvestdate&gt;2017-07-05T13:46:09Z&lt;/harvestdate&gt;
+        &lt;metadataNamespace&gt;http://datacite.org/schema/kernel-4&lt;/metadataNamespace&gt;
+    &lt;/record&gt;
+    &lt;repository&gt;
+        &lt;id&gt;datacite&lt;/id&gt;
+        &lt;baseurl&gt;http://oai.datacite.org/oai&lt;/baseurl&gt;
+        &lt;repositoryGroupId&gt;datacite&lt;/repositoryGroupId&gt;
+        &lt;metadataPrefix&gt;oai_dc&lt;/metadataPrefix&gt;
+        &lt;collection&gt;dataset&lt;/collection&gt;
+    &lt;/repository&gt;
+&lt;/meta&gt;</part>
+        </document>
+        </srw:recordData>
+    </srw:record>
+</ucp:updateRequest>

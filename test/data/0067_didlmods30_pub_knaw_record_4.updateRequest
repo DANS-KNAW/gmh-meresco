@@ -1,0 +1,230 @@
+<ucp:updateRequest xmlns:srw="http://www.loc.gov/zing/srw/" xmlns:ucp="info:lc/xmlns/update-v1">
+    <srw:version>1.0</srw:version>
+    <ucp:action>info:srw/action/1/replace</ucp:action>
+    <ucp:recordIdentifier>knaw:record:4</ucp:recordIdentifier>
+    <srw:record xmlns:srw="http://www.loc.gov/zing/srw/">
+        <srw:recordPacking>xml</srw:recordPacking>
+        <srw:recordSchema>metadata</srw:recordSchema>
+        <srw:recordData>
+            <document xmlns="http://meresco.org/namespace/harvester/document">
+                <part name="record">&lt;record xmlns="http://www.openarchives.org/OAI/2.0/"
+                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt; &lt;header
+                    xmlns="http://www.openarchives.org/OAI/2.0/"&gt;&lt;identifier&gt;record:4&lt;/identifier&gt;&lt;datestamp&gt;2007-03-18T11:02:39Z&lt;/datestamp&gt;&lt;/header&gt;
+                    &lt;metadata xmlns="http://www.openarchives.org/OAI/2.0/"&gt;                    
+                    &lt;didl:DIDL xmlns:dcterms=&quot;http://purl.org/dc/terms/&quot; xmlns:dip=&quot;urn:mpeg:mpeg21:2002:01-DIP-NS&quot;
+                    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+                    xmlns:didl=&quot;urn:mpeg:mpeg21:2002:02-DIDL-NS&quot; xmlns:dii=&quot;urn:mpeg:mpeg21:2002:01-DII-NS&quot;
+                    xmlns:rdf=&quot;http://www.w3.org/1999/02/22-rdf-syntax-ns#&quot;
+                    xsi:schemaLocation=&quot;urn:mpeg:mpeg21:2002:02-DIDL-NS http://standards.iso.org/ittf/PubliclyAvailableStandards/MPEG-21_schema_files/did/didl.xsd
+                    urn:mpeg:mpeg21:2002:01-DII-NS http://standards.iso.org/ittf/PubliclyAvailableStandards/MPEG-21_schema_files/dii/dii.xsd
+                    urn:mpeg:mpeg21:2005:01-DIP-NS http://standards.iso.org/ittf/PubliclyAvailableStandards/MPEG-21_schema_files/dip/dip.xsd&quot;&gt;
+                    &lt;didl:Item&gt;
+                    &lt;didl:Descriptor&gt;
+                    &lt;didl:Statement mimeType=&quot;application/xml&quot;&gt;
+                    &lt;dii:Identifier&gt;URN:NBN:NL:UI:25-711504&lt;/dii:Identifier&gt;
+                    &lt;/didl:Statement&gt;
+                    &lt;/didl:Descriptor&gt;
+                    &lt;didl:Descriptor&gt;
+                    &lt;didl:Statement mimeType=&quot;application/xml&quot;&gt;
+                    &lt;dcterms:modified&gt;2014-04-05&lt;/dcterms:modified&gt;
+                    &lt;/didl:Statement&gt;
+                    &lt;/didl:Descriptor&gt;
+                    &lt;didl:Component&gt;
+                    &lt;didl:Resource mimeType=&quot;text/html&quot; ref=&quot;http://repository.tue.nl/711504&quot;/&gt;
+                    &lt;/didl:Component&gt;
+                    &lt;didl:Item&gt;
+                    &lt;didl:Descriptor&gt;
+                    &lt;didl:Statement mimeType=&quot;application/xml&quot;&gt;
+                    &lt;rdf:type rdf:resource=&quot;info:eu-repo/semantics/descriptiveMetadata&quot;/&gt;
+                    &lt;/didl:Statement&gt;
+                    &lt;/didl:Descriptor&gt;
+                    &lt;didl:Descriptor&gt;
+                    &lt;didl:Statement mimeType=&quot;application/xml&quot;&gt;
+                    &lt;dii:Identifier&gt;URN:NBN:NL:UI:25-711504-mods&lt;/dii:Identifier&gt;
+                    &lt;/didl:Statement&gt;
+                    &lt;/didl:Descriptor&gt;
+                    &lt;didl:Component&gt;
+                    &lt;didl:Resource mimeType=&quot;application/xml&quot;&gt;
+                    &lt;mods version=&quot;3.2&quot; xmlns=&quot;http://www.loc.gov/mods/v3&quot;
+                    xsi:schemaLocation=&quot;http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-2.xsd&quot;&gt;
+                    &lt;titleInfo xml:lang=&quot;en&quot;&gt;
+                    &lt;title&gt;Preface to special issue (Fast reaction - slow diffusion scenarios: PDE approximations and free boundaries)&lt;/title&gt;
+                    &lt;/titleInfo&gt;
+                    &lt;name type=&quot;personal&quot; ID=&quot;n711504-1&quot;&gt;
+                    &lt;namePart type=&quot;family&quot;&gt;Aiki&lt;/namePart&gt;
+                    &lt;namePart type=&quot;given&quot;&gt;T (Toyohiko)&lt;/namePart&gt;
+                    &lt;role&gt;
+                    &lt;roleTerm authority=&quot;marcrelator&quot; type=&quot;code&quot;&gt;aut&lt;/roleTerm&gt;
+                    &lt;/role&gt;
+                    &lt;/name&gt;
+                    &lt;name type=&quot;personal&quot; ID=&quot;n711504-2&quot;&gt;
+                    &lt;namePart type=&quot;family&quot;&gt;Hilhorst&lt;/namePart&gt;
+                    &lt;namePart type=&quot;given&quot;&gt;D&lt;/namePart&gt;
+                    &lt;role&gt;
+                    &lt;roleTerm authority=&quot;marcrelator&quot; type=&quot;code&quot;&gt;aut&lt;/roleTerm&gt;
+                    &lt;/role&gt;
+                    &lt;/name&gt;
+                    &lt;name type=&quot;personal&quot; ID=&quot;n711504-3&quot;&gt;
+                    &lt;namePart type=&quot;family&quot;&gt;Mimura&lt;/namePart&gt;
+                    &lt;namePart type=&quot;given&quot;&gt;M&lt;/namePart&gt;
+                    &lt;role&gt;
+                    &lt;roleTerm authority=&quot;marcrelator&quot; type=&quot;code&quot;&gt;aut&lt;/roleTerm&gt;
+                    &lt;/role&gt;
+                    &lt;/name&gt;
+                    &lt;name type=&quot;personal&quot; ID=&quot;n711504-4&quot;&gt;
+                    &lt;namePart type=&quot;family&quot;&gt;Funder&lt;/namePart&gt;
+                    &lt;namePart type=&quot;given&quot;&gt;$ (Adrian)&lt;/namePart&gt;
+                    &lt;role&gt;
+                    &lt;roleTerm authority=&quot;marcrelator&quot; type=&quot;code&quot;&gt;fnd&lt;/roleTerm&gt;
+                    &lt;/role&gt;
+                    &lt;/name&gt;
+                    &lt;extension&gt;
+                    &lt;dai:daiList xmlns:dai=&quot;info:eu-repo/dai&quot; xsi:schemaLocation=&quot;info:eu-repo/dai http://www.surfgroepen.nl/sites/oai/metadata/Shared%20Documents/dai-extension.xsd&quot;/&gt;
+                    &lt;/extension&gt;
+                    &lt;extension&gt;
+                    &lt;gal:grantAgreementList xmlns:gal=&quot;info:eu-repo/grantAgreement&quot;
+                    xsi:schemaLocation=&quot;info:eu-repo/grantAgreement http://purl.org/REP/standards/gal-extension.xsd&quot;&gt;
+                    &lt;gal:grantAgreement code=&quot;info:eu-repo/grantAgreement/EC/FP5/654321&quot;&gt;
+                    &lt;gal:funder IDref=&quot;n711504-4&quot;/&gt;
+                    &lt;gal:title&gt;EERA Design Tools for Offshore Wind Farm Cluster
+                    (EERA-DTOC)&lt;/gal:title&gt;
+                    &lt;gal:description&gt;The European Energy Research Alliance (EERA)
+                    together with some high-impact industry partners addresses
+                    the call proposing an integrated and validated design tool
+                    combining the state-of-the-art wake, yield and electrical
+                    models available in the consortium, as a plug-in
+                    architecture with possibility for third party
+                    models.&lt;/gal:description&gt;
+                    &lt;/gal:grantAgreement&gt;
+                    &lt;gal:grantAgreement code=&quot;info:eu-repo/grantAgreement/EC/FP7/282797&quot;/&gt;
+                    &lt;/gal:grantAgreementList&gt;
+                    &lt;/extension&gt;
+                    &lt;extension&gt;
+                    &lt;wmp:rights xmlns:wmp=&quot;http://www.surfgroepen.nl/werkgroepmetadataplus&quot;
+                    xmlns:dc=&quot;http://purl.org/dc/elements/1.1/&quot;
+                    xsi:schemaLocation=&quot;http://www.surfgroepen.nl/werkgroepmetadataplus rights.xsd&quot;&gt;
+                    &lt;dc:description&gt;Copyright (c) Aiki, T (Toyohiko)&lt;/dc:description&gt;
+                    &lt;/wmp:rights&gt;
+                    &lt;wmp:rights xmlns:wmp=&quot;http://www.surfgroepen.nl/werkgroepmetadataplus&quot;
+                    xmlns:dc=&quot;http://purl.org/dc/elements/1.1/&quot;
+                    xsi:schemaLocation=&quot;http://www.surfgroepen.nl/werkgroepmetadataplus rights.xsd&quot;&gt;
+                    &lt;dc:description&gt;Copyright (c) Hilhorst, D&lt;/dc:description&gt;
+                    &lt;/wmp:rights&gt;
+                    &lt;wmp:rights xmlns:wmp=&quot;http://www.surfgroepen.nl/werkgroepmetadataplus&quot;
+                    xmlns:dc=&quot;http://purl.org/dc/elements/1.1/&quot;
+                    xsi:schemaLocation=&quot;http://www.surfgroepen.nl/werkgroepmetadataplus rights.xsd&quot;&gt;
+                    &lt;dc:description&gt;Copyright (c) Mimura, M&lt;/dc:description&gt;
+                    &lt;/wmp:rights&gt;
+                    &lt;wmp:rights xmlns:wmp=&quot;http://www.surfgroepen.nl/werkgroepmetadataplus&quot; xmlns:dc=&quot;http://purl.org/dc/elements/1.1/&quot; xsi:schemaLocation=&quot;http://www.surfgroepen.nl/werkgroepmetadataplus rights.xsd&quot;&gt;
+                    &lt;dc:description&gt;Copyright (c) Muntean, A (Adrian)&lt;/dc:description&gt;
+                    &lt;/wmp:rights&gt;
+                    &lt;/extension&gt;
+                    &lt;typeOfResource&gt;text&lt;/typeOfResource&gt;
+                    &lt;genre&gt;info:eu-repo/semantics/article&lt;/genre&gt;
+                    &lt;identifier type=&quot;patent_number&quot;&gt;EP3343951&lt;/identifier&gt;
+                    &lt;originInfo&gt;
+                    &lt;dateIssued encoding=&quot;iso8601&quot;&gt;2014&lt;/dateIssued&gt;
+                    &lt;/originInfo&gt;
+                    &lt;subject xml:lang=&quot;en&quot;&gt; &lt;/subject&gt;
+                    &lt;language&gt;
+                    &lt;languageTerm authority=&quot;rfc3066&quot;&gt;en&lt;/languageTerm&gt;
+                    &lt;/language&gt;
+                    &lt;identifier type=&quot;uri&quot;&gt; info:doi/10.3934/dcdss.2012.5.1i &lt;/identifier&gt;
+                    &lt;relatedItem type=&quot;host&quot;&gt;
+                    &lt;identifier type=&quot;uri&quot;&gt;URN:ISSN:1937-1632&lt;/identifier&gt;
+                    &lt;titleInfo&gt;
+                    &lt;title&gt;Discrete and Continuous Dynamical Systems - Series S&lt;/title&gt;
+                    &lt;/titleInfo&gt;
+                    &lt;part&gt;
+                    &lt;detail type=&quot;volume&quot;&gt;
+                    &lt;number&gt;5&lt;/number&gt;
+                    &lt;/detail&gt;
+                    &lt;detail type=&quot;issue&quot;&gt;
+                    &lt;number&gt;1&lt;/number&gt;
+                    &lt;/detail&gt;
+                    &lt;extent unit=&quot;page&quot;&gt;
+                    &lt;start&gt;i&lt;/start&gt;
+                    &lt;/extent&gt;
+                    &lt;/part&gt;
+                    &lt;originInfo&gt;
+                    &lt;dateIssued&gt;1994&lt;/dateIssued&gt;
+                    &lt;publisher&gt;Springer&lt;/publisher&gt;
+                    &lt;place&gt;
+                    &lt;placeTerm type=&quot;text&quot;&gt;Veenendaal&lt;/placeTerm&gt;
+                    &lt;/place&gt;
+                    &lt;/originInfo&gt;
+                    &lt;/relatedItem&gt;
+                    &lt;/mods&gt;
+                    &lt;/didl:Resource&gt;
+                    &lt;/didl:Component&gt;
+                    &lt;/didl:Item&gt;
+                    &lt;didl:Item&gt;
+                    &lt;didl:Descriptor&gt;
+                    &lt;didl:Statement mimeType=&quot;application/xml&quot;&gt;
+                    &lt;rdf:type rdf:resource=&quot;info:eu-repo/semantics/objectFile&quot;/&gt;
+                    &lt;/didl:Statement&gt;
+                    &lt;/didl:Descriptor&gt;
+                    &lt;didl:Descriptor&gt;
+                    &lt;didl:Statement mimeType=&quot;application/xml&quot;&gt;
+                    &lt;dii:Identifier&gt;URN:NBN:NL:UI:25-711504-of&lt;/dii:Identifier&gt;
+                    &lt;/didl:Statement&gt;
+                    &lt;/didl:Descriptor&gt;
+                    &lt;didl:Descriptor&gt;
+                    &lt;didl:Statement mimeType=&quot;application/xml&quot;&gt;
+                    &lt;dcterms:modified&gt;2011-04-05&lt;/dcterms:modified&gt;
+                    &lt;/didl:Statement&gt;
+                    &lt;/didl:Descriptor&gt;
+                    &lt;didl:Descriptor&gt;
+                    &lt;didl:Statement mimeType=&quot;application/xml&quot;&gt;
+                    &lt;dcterms:accessRights&gt;http://purl.org/eprint/accessRights/RestrictedAccess&lt;/dcterms:accessRights&gt;
+                    &lt;/didl:Statement&gt;
+                    &lt;/didl:Descriptor&gt;
+                    &lt;didl:Component&gt;
+                    &lt;didl:Resource mimeType=&quot;application/pdf&quot; ref=&quot; http://alexandria.tue.nl/openaccess/Metis249902.pdf&quot;/&gt;
+                    &lt;/didl:Component&gt;
+                    &lt;/didl:Item&gt;
+                    &lt;didl:Item&gt;
+                    &lt;didl:Descriptor&gt;
+                    &lt;didl:Statement mimeType=&quot;application/xml&quot;&gt;
+                    &lt;rdf:type rdf:resource=&quot;info:eu-repo/semantics/humanStartPage&quot;/&gt;
+                    &lt;/didl:Statement&gt;
+                    &lt;/didl:Descriptor&gt;
+                    &lt;didl:Descriptor&gt;
+                    &lt;didl:Statement mimeType=&quot;application/xml&quot;&gt;
+                    &lt;dcterms:modified&gt;2011-04-05&lt;/dcterms:modified&gt;
+                    &lt;/didl:Statement&gt;
+                    &lt;/didl:Descriptor&gt;
+                    &lt;didl:Component&gt;
+                    &lt;didl:Resource mimeType=&quot;text/html&quot; ref=&quot;http://repository.tue.nl/711504&quot;/&gt;
+                    &lt;/didl:Component&gt;
+                    &lt;/didl:Item&gt;
+                    &lt;/didl:Item&gt;
+                    &lt;/didl:DIDL&gt;                    
+                    &lt;/metadata&gt;&lt;about&gt;
+                    &lt;provenance xmlns=&quot;http://www.openarchives.org/OAI/2.0/provenance&quot;
+                    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+                    xsi:schemaLocation=&quot;http://www.openarchives.org/OAI/2.0/provenance http://www.openarchives.org/OAI/2.0/provenance.xsd&quot;&gt;
+                    &lt;originDescription altered=&quot;true&quot; harvestDate=&quot;2015-10-30T14:03:05Z&quot;&gt;
+                    &lt;baseURL&gt;https://dataverse.nl/dvn/OAIHandler&lt;/baseURL&gt;
+                    &lt;identifier&gt;tiu//hdl:10411/20418&lt;/identifier&gt;
+                    &lt;datestamp&gt;2015-07-04T01:00:04Z&lt;/datestamp&gt;
+                    &lt;metadataNamespace&gt;http://www.openarchives.org/OAI/2.0/oai_dc/&lt;/metadataNamespace&gt;
+                    &lt;/originDescription&gt;
+                    &lt;/provenance&gt;
+                    &lt;/about&gt;&lt;/record&gt;</part>
+                <part name="meta">&lt;meta
+                    xmlns=&quot;http://meresco.org/namespace/harvester/meta&quot;&gt; &lt;upload&gt;
+                    &lt;id&gt;knaw:record:4&lt;/id&gt; &lt;/upload&gt; &lt;record&gt;
+                    &lt;id&gt;record:4&lt;/id&gt;&lt;harvestdate&gt;2016-12-21T13:46:09Z&lt;/harvestdate&gt;
+                    &lt;metadataNamespace&gt;http://www.loc.gov/mods/v3&lt;/metadataNamespace&gt;
+                    &lt;/record&gt; &lt;repository&gt;
+                    &lt;id&gt;knaw&lt;/id&gt; &lt;set&gt;oa_publications&lt;/set&gt;
+                    &lt;baseurl&gt;http://depot.knaw.nl/cgi/oai2&lt;/baseurl&gt;
+                    &lt;repositoryGroupId&gt;knaw&lt;/repositoryGroupId&gt;
+                    &lt;metadataPrefix&gt;nl_didl&lt;/metadataPrefix&gt;
+                    &lt;collection&gt;publication&lt;/collection&gt; &lt;/repository&gt;
+                    &lt;/meta&gt;</part>
+            </document>
+        </srw:recordData>
+    </srw:record>
+</ucp:updateRequest>
