@@ -3,7 +3,6 @@
 
 # Directories #
 /build/
-/bin/
 target/
 log/
 wcptarget/
@@ -40,7 +39,6 @@ Desktop.ini
 *.pydevproject
 .project
 .metadata
-bin/**
 tmp/**
 tmp/**/*
 *.tmp
@@ -64,11 +62,6 @@ local.properties
 # PDT-specific
 .buildpath
 /.DS_Store
-#/scripts
-# Directories #
-/build/
-/bin/
-target/
  
 # Thumbnails
 ._*
