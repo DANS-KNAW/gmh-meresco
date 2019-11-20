@@ -1,0 +1,10 @@
+[Unit]
+Description=Meresco BRIGMH Gateway Server
+
+[Service]
+User=meresco
+ExecStart=<path to:> start-gateway --port=<portnumber> --stateDir=<path to gateway statedir>
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

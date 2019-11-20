@@ -52,6 +52,20 @@ mydir = dirname(abspath(__file__))
 notWordCharRE = compile('\W+')
 
 
+# RESPONSE_XML = """<?xml version="1.0" encoding="UTF-8"?>
+# <srw:updateResponse xmlns:srw="http://www.loc.gov/zing/srw/" xmlns:ucp="info:lc/xmlns/update-v1">
+#     <srw:version>1.0</srw:version>
+#     <ucp:operationStatus>%(operationStatus)s</ucp:operationStatus>%(diagnostics)s
+# </srw:updateResponse>"""
+
+
+# DIAGNOSTIC_XML = """<srw:diagnostics>
+#     <diag:diagnostic xmlns:diag="http://www.loc.gov/zing/srw/diagnostic/">
+#         <diag:uri>%(uri)s</diag:uri>
+#         <diag:details>%(details)s</diag:details>
+#         <diag:message>%(message)s</diag:message>
+#     </diag:diagnostic>
+# </srw:diagnostics>"""
 
 
 class Dump(object):
@@ -79,10 +93,10 @@ class Dump(object):
                     "diagnostics": ""}
             else:
                 self._maxCountNumber = self._number + self._maxCount
-                print 'Reached maxCount'
+                print 'Reached maxCount of records:', self._maxCount
                 answer = RESPONSE_XML % {
                     "operationStatus": "fail",
-                    "diagnostics": DIAGNOSTIC_XML % {'uri': '', 'message': '', 'details': escapeXml("Enough is enough")}}
+                    "diagnostics": DIAGNOSTIC_XML % {'uri': escapeXml("http://www.enough.is.enough.com"), 'message': escapeXml("Enough is enough! Reached max. count: " + str(self._maxCount)), 'details': escapeXml("Enough is more than enough! Reached max. count: " + str(self._maxCount))}}
         except Exception, e:
             answer = RESPONSE_XML % {
                 "operationStatus": "fail",
@@ -94,12 +108,12 @@ class Dump(object):
         return max([int(basename(f)[:5]) for f in glob(join(self._dumpdir, '*.updateRequest'))]+[0])
 
 
-def main(reactor, portNumber, dumpdir):
+def main(reactor, portNumber, dumpdir, maxCount):
     isdir(dumpdir) or makedirs(dumpdir)
     server = be(
         (Observable(),
             (ObservableHttpServer(reactor, portNumber),
-                (Dump(dumpdir),)
+                (Dump(dumpdir, maxCount),)
             )
         )
     )
@@ -107,14 +121,16 @@ def main(reactor, portNumber, dumpdir):
 
 if __name__== '__main__':
     args = argv[1:]
-    if len(args) != 2:
-        print "Usage %s <portnumber> <dumpdir>" % argv[0]
+    if len(args) != 3:
+        print "Usage %s <portnumber> <dumpdir> <maxRecordCount>" % argv[0]
         exit(1)
     portNumber = int(args[0])
     dumpdir = args[1]
+    maxCount = int(args[2])
     reactor = Reactor()
-    main(reactor, portNumber, dumpdir)
+    main(reactor, portNumber, dumpdir, maxCount)
     print 'Ready to rumble the dumpserver at', portNumber
     print '  - dumps are written to', dumpdir
+    print '  - Max. record count:', maxCount
     stdout.flush()
     reactor.loop()

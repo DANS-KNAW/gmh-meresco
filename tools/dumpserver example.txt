@@ -1,1 +1,1 @@
-python ~/meresco/narcisindex/util/dumpserver.py 8066 ~/meresco/dumpserver/
+python /home/meresco/meresco/gmh-meresco/tools/dumpserver.py 8066 /data/meresco/dumpserver 20
