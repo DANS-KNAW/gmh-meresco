@@ -1,0 +1,1 @@
+python ~/meresco/narcisindex/util/dumpserver.py 8066 ~/meresco/dumpserver/
