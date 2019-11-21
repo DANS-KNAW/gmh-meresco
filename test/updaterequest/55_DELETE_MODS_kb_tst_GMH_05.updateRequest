@@ -1,0 +1,10 @@
+<ucp:updateRequest xmlns:ucp="info:lc/xmlns/update-v1">
+    <srw:version xmlns:srw="http://www.loc.gov/zing/srw/">1.0</srw:version>
+    <ucp:action>info:srw/action/1/delete</ucp:action>
+    <ucp:recordIdentifier>kb_tst:GMH:05</ucp:recordIdentifier>
+    <srw:record xmlns:srw="http://www.loc.gov/zing/srw/">
+        <srw:recordPacking>xml</srw:recordPacking>
+        <srw:recordSchema>ignored</srw:recordSchema>
+        <srw:recordData><ignored/></srw:recordData>
+    </srw:record>
+</ucp:updateRequest>

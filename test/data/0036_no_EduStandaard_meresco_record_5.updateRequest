@@ -2,9 +2,9 @@
     <srw:version>1.0</srw:version>
     <ucp:action>info:srw/action/1/replace</ucp:action>
     <ucp:recordIdentifier>meresco:record:5</ucp:recordIdentifier>
-    <srw:record xmlns:srw="http://www.loc.gov/zing/srw/">
+    <srw:record>
         <srw:recordPacking>xml</srw:recordPacking>
-        <srw:recordSchema>metadata</srw:recordSchema>
+        <srw:recordSchema>meta</srw:recordSchema>
         <srw:recordData><document xmlns="http://meresco.org/namespace/harvester/document"><part name="record">&lt;record xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;
             &lt;header xmlns="http://www.openarchives.org/OAI/2.0/"&gt;&lt;identifier&gt;record:5&lt;/identifier&gt;&lt;datestamp&gt;2008-11-15T14:08:34Z&lt;/datestamp&gt;&lt;/header&gt;
             &lt;metadata xmlns=&quot;http://www.openarchives.org/OAI/2.0/&quot;&gt;Could not serialize record oai:pure.knaw.nl:publications/0a624485-ba73-4c5e-b1b4-88b3fc5bf14e : null. Error logged at 2015-09-17T11:56:09.042+02:00&lt;/metadata&gt;

@@ -1,0 +1,124 @@
+<ucp:updateRequest xmlns:ucp="info:lc/xmlns/update-v1">
+    <srw:version xmlns:srw="http://www.loc.gov/zing/srw/">1.0</srw:version>
+    <ucp:action>info:srw/action/1/replace</ucp:action>
+    <ucp:recordIdentifier>kb_tst:GMH:04</ucp:recordIdentifier>
+    <srw:record xmlns:srw="http://www.loc.gov/zing/srw/">
+        <srw:recordPacking>xml</srw:recordPacking>
+        <srw:recordSchema>metadata</srw:recordSchema>
+        <srw:recordData><document xmlns="http://meresco.org/namespace/harvester/document"><part name="header">&lt;header xmlns="http://www.openarchives.org/OAI/2.0/"&gt;
+            &lt;identifier&gt;GMH:04&lt;/identifier&gt;
+            &lt;datestamp&gt;2011-08-28T13:51:55Z&lt;/datestamp&gt;
+            &lt;setSpec&gt;KB&lt;/setSpec&gt;
+            &lt;setSpec&gt;KB:GMH&lt;/setSpec&gt;&lt;/header&gt;</part><part name="meta">&lt;meta xmlns="http://meresco.org/namespace/harvester/meta"&gt;
+                &lt;upload&gt;&lt;id&gt;kb_tst:GMH:04&lt;/id&gt;&lt;/upload&gt;
+                &lt;record&gt;
+                &lt;id&gt;GMH:04&lt;/id&gt;
+                &lt;/record&gt;
+                &lt;repository&gt;
+                &lt;id&gt;kb_tst&lt;/id&gt;
+                &lt;set&gt;KB:GMH&lt;/set&gt;
+                &lt;baseurl&gt;http://kb.utwente.nl/cgi/oai2&lt;/baseurl&gt;
+                &lt;repositoryGroupId&gt;kb&lt;/repositoryGroupId&gt;
+                &lt;metadataPrefix&gt;nl_didl&lt;/metadataPrefix&gt;
+                &lt;collection&gt;&lt;/collection&gt;
+                &lt;/repository&gt;
+                &lt;/meta&gt;</part><part name="metadata">&lt;metadata xmlns=&quot;http://www.openarchives.org/OAI/2.0/&quot;&gt;
+                    &lt;didl:DIDL xmlns:didl=&quot;urn:mpeg:mpeg21:2002:02-DIDL-NS&quot; xmlns:dii=&quot;urn:mpeg:mpeg21:2002:01-DII-NS&quot; xmlns:dip=&quot;urn:mpeg:mpeg21:2005:01-DIP-NS&quot; xmlns:dcterms=&quot;http://purl.org/dc/terms/&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; DIDLDocumentId=&quot;urn:nbn:nl:ui:11-dbi/509105ab6e3b0&quot; xsi:schemaLocation=&quot;urn:mpeg:mpeg21:2002:02-DIDL-NS   http://standards.iso.org/ittf/PubliclyAvailableStandards/MPEG-21_schema_files/did/didl.xsd   urn:mpeg:mpeg21:2002:01-DII-NS   http://standards.iso.org/ittf/PubliclyAvailableStandards/MPEG-21_schema_files/dii/dii.xsd   urn:mpeg:mpeg21:2005:01-DIP-NS   http://standards.iso.org/ittf/PubliclyAvailableStandards/MPEG-21_schema_files/dip/dip.xsd&quot;&gt;
+                        &lt;didl:Item&gt;
+                            &lt;didl:Descriptor&gt;
+                                &lt;didl:Statement mimeType=&quot;application/xml&quot;&gt;
+                                    &lt;dii:Identifier&gt;urn:nbn:nl:ui:11-dbi/509105ab6e3b0&lt;/dii:Identifier&gt;
+                                &lt;/didl:Statement&gt;
+                            &lt;/didl:Descriptor&gt;
+                            &lt;didl:Descriptor&gt;
+                                &lt;didl:Statement mimeType=&quot;text/xml&quot;&gt;
+                                    &lt;dcterms:modified&gt;2012-11-01T01:08:48Z&lt;/dcterms:modified&gt;
+                                &lt;/didl:Statement&gt;
+                            &lt;/didl:Descriptor&gt;
+                            
+                            &lt;didl:Component&gt;
+                                &lt;didl:Resource mimeType=&quot;application/xml&quot; ref=&quot;http://irs.ub.rug.nl/dbi/509105ab6e3b0&quot;&gt;&lt;/didl:Resource&gt;
+                            &lt;/didl:Component&gt;
+                            
+                            &lt;didl:Item&gt;
+                                &lt;didl:Descriptor&gt;
+                                    &lt;didl:Statement mimeType=&quot;application/xml&quot;&gt;
+                                        &lt;dip:ObjectType&gt;info:eu-repo/semantics/descriptiveMetadata&lt;/dip:ObjectType&gt;
+                                    &lt;/didl:Statement&gt;
+                                &lt;/didl:Descriptor&gt;
+                                &lt;didl:Descriptor&gt;
+                                    &lt;didl:Statement mimeType=&quot;text/xml&quot;&gt;
+                                        &lt;dcterms:modified&gt;2012-11-01T01:08:48Z&lt;/dcterms:modified&gt;
+                                    &lt;/didl:Statement&gt;
+                                &lt;/didl:Descriptor&gt;
+                                &lt;didl:Component&gt;
+                                    &lt;didl:Resource mimeType=&quot;text/xml&quot;&gt;
+                                        &lt;mods xmlns=&quot;http://www.loc.gov/mods/v3&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; version=&quot;3.2&quot; xsi:schemaLocation=&quot;http://www.loc.gov/mods/v3     http://www.loc.gov/standards/mods/v3/mods-3-2.xsd&quot;&gt;
+                                            &lt;identifier type=&quot;local&quot; displayLabel=&quot;dbi&quot;&gt;509105ab6e3b0&lt;/identifier&gt;
+                                            &lt;recordInfo&gt;
+                                                &lt;recordIdentifier&gt;oai:ub.rug.nl:dbi/509105ab6e3b0&lt;/recordIdentifier&gt;
+                                                &lt;recordChangeDate encoding=&quot;iso8601&quot;&gt;2012-11-01 01:08:48&lt;/recordChangeDate&gt;
+                                            &lt;/recordInfo&gt;
+                                            &lt;name type=&quot;personal&quot;&gt;
+                                                &lt;namePart&gt;Swaaij, Wim P.M. van; Versteeg, Geert F.; Littel, Rob J.&lt;/namePart&gt;
+                                                &lt;role&gt;&lt;roleTerm authority=&quot;marcrelator&quot; type=&quot;code&quot;&gt;aut&lt;/roleTerm&gt;&lt;/role&gt;
+                                            &lt;/name&gt;
+                                            &lt;originInfo&gt;
+                                                &lt;dateIssued encoding=&quot;iso8601&quot;&gt;1992&lt;/dateIssued&gt;
+                                                &lt;publisher&gt;University of Groningen, Research Institute of Technology and Management&lt;/publisher&gt;
+                                            &lt;/originInfo&gt;
+                                            &lt;language&gt;&lt;languageTerm authority=&quot;rfc3066&quot; type=&quot;code&quot;&gt;en&lt;/languageTerm&gt;&lt;/language&gt;
+                                            &lt;titleInfo&gt;
+                                                &lt;title&gt;Kinetic Study of COS with Tertiary Alkanolamine Solutions. 1. Experiments in an Intensely Stirred Batch Reactor&lt;/title&gt;
+                                            &lt;/titleInfo&gt;
+                                            &lt;typeOfResource&gt;text&lt;/typeOfResource&gt;
+                                            &lt;genre&gt;info:eu-repo/semantics/article&lt;/genre&gt;
+                                            &lt;physicalDescription&gt;
+                                                &lt;extent&gt;8&lt;/extent&gt;
+                                            &lt;/physicalDescription&gt;
+                                            
+                                        &lt;/mods&gt;
+                                    &lt;/didl:Resource&gt;
+                                &lt;/didl:Component&gt;
+                            &lt;/didl:Item&gt;			&lt;didl:Item&gt;
+                                &lt;didl:Descriptor&gt;
+                                    &lt;didl:Statement mimeType=&quot;application/xml&quot;&gt;
+                                        &lt;dip:ObjectType&gt;info:eu-repo/semantics/objectFile&lt;/dip:ObjectType&gt;
+                                    &lt;/didl:Statement&gt;
+                                &lt;/didl:Descriptor&gt;
+                                &lt;didl:Descriptor&gt;
+                                    &lt;didl:Statement mimeType=&quot;text/xml&quot;&gt;
+                                        &lt;dii:Identifier&gt;urn:nbn:nl:ui:11-dbi/50910693bd9b7&lt;/dii:Identifier&gt;
+                                    &lt;/didl:Statement&gt;
+                                &lt;/didl:Descriptor&gt;
+                                &lt;didl:Descriptor&gt;
+                                    &lt;didl:Statement mimeType=&quot;application/xml&quot;&gt;
+                                        &lt;dcterms:accessRights&gt;http://purl.org/eprint/accessRights/OpenAccess&lt;/dcterms:accessRights&gt;
+                                    &lt;/didl:Statement&gt;
+                                &lt;/didl:Descriptor&gt;
+                                &lt;didl:Descriptor&gt;
+                                    &lt;didl:Statement mimeType=&quot;text/xml&quot;&gt;
+                                        &lt;dcterms:modified&gt;2012-10-31T11:08:04Z&lt;/dcterms:modified&gt;
+                                    &lt;/didl:Statement&gt;
+                                &lt;/didl:Descriptor&gt;
+                                &lt;didl:Component&gt;
+                                    &lt;didl:Resource mimeType=&quot;application/pdf&quot; ref=&quot;http://itm.eldoc.ub.rug.nl/FILES/rootTBK/1992/IndEngChemResLittel1/1992IndEngChemResLittel1.pdf&quot;&gt;&lt;/didl:Resource&gt;
+                                &lt;/didl:Component&gt;
+                            &lt;/didl:Item&gt;
+                            &lt;didl:Item&gt;
+                                &lt;didl:Descriptor&gt;
+                                    &lt;didl:Statement mimeType=&quot;application/xml&quot;&gt;
+                                        &lt;dip:ObjectType&gt;info:eu-repo/semantics/humanStartPage&lt;/dip:ObjectType&gt;
+                                    &lt;/didl:Statement&gt;
+                                &lt;/didl:Descriptor&gt;
+                                &lt;didl:Component&gt;
+                                    &lt;didl:Resource mimeType=&quot;text/html&quot; ref=&quot;http://irs.ub.rug.nl/dbi/509105ab6e3b0&quot;&gt;&lt;/didl:Resource&gt;
+                                &lt;/didl:Component&gt;
+                            &lt;/didl:Item&gt;
+                            
+                        &lt;/didl:Item&gt;
+                    &lt;/didl:DIDL&gt;
+                    &lt;/metadata&gt;
+                </part></document></srw:recordData>
+    </srw:record>
+</ucp:updateRequest>

@@ -2,9 +2,9 @@
     <srw:version>1.0</srw:version>
     <ucp:action>info:srw/action/1/replace</ucp:action>
     <ucp:recordIdentifier>rce:rapporten:550000001</ucp:recordIdentifier>
-    <srw:record xmlns:srw="http://www.loc.gov/zing/srw/">
+    <srw:record>
         <srw:recordPacking>xml</srw:recordPacking>
-        <srw:recordSchema>metadata</srw:recordSchema>
+        <srw:recordSchema>meta</srw:recordSchema>
         <srw:recordData><document xmlns="http://meresco.org/namespace/harvester/document"><part name="record">&lt;record xmlns=&quot;http://www.openarchives.org/OAI/2.0/&quot;
     xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&gt;
     &lt;header xmlns=&quot;http://www.openarchives.org/OAI/2.0/&quot;&gt;
@@ -131,6 +131,7 @@
     &lt;/record&gt;
     &lt;repository&gt;
         &lt;id&gt;rce&lt;/id&gt;
+        &lt;set&gt;&lt;/set&gt;
         &lt;baseurl&gt;http://cultureelerfgoed.adlibsoft.com/oaiapi/oai.ashx&lt;/baseurl&gt;
         &lt;repositoryGroupId&gt;rce&lt;/repositoryGroupId&gt;
         &lt;metadataPrefix&gt;oai_datacite&lt;/metadataPrefix&gt;

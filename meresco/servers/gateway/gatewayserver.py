@@ -23,7 +23,7 @@
 #
 ## end license ##
 
-from meresco.components import XmlPrintLxml, RewritePartname, XmlXPath, FilterMessages, PeriodicCall, Schedule, FilterPartByName
+from meresco.components import XmlPrintLxml, RewritePartname, XmlXPath, FilterMessages, PeriodicCall, Schedule
 from meresco.components.http import BasicHttpHandler, ObservableHttpServer, PathFilter, Deproxy, IpFilter
 from meresco.components.log import ApacheLogWriter, HandleRequestLog, LogCollector, LogComponent
 from meresco.components.sru import SruRecordUpdate
@@ -127,9 +127,9 @@ def main(reactor, port, statePath, **ignored):
                             # (AddMetadataFormat(fromKwarg="lxmlNode", name='md_format'),
                             #     (LogComponent("AddMetadataFormat"),),
                             # ),
-                            (FilterPartByName(included=['meta']),
-                                (LogComponent("FOUND meta part"),),
-                            ),
+                            # (FilterPartByName(included=['meta']),
+                                (LogComponent("ADD message"),),
+                            # ),
 
                             (XmlXPath(['srw:recordData/*'], fromKwarg='lxmlNode'), # Stuurt IEDERE matching node in een nieuw bericht door. In dit geval: 1x <meresco:document>, met daarin een namePart "record" en namePart "meta".
                                 # (Validate([('DIDL container','//didl:DIDL', 'didl.xsd'), ('MODS metadata', '//mods:mods', 'mods-3-6.xsd')], nsMap=namespacesMap), #Verwacht een <metadata> record met daarin didl & mods
@@ -146,7 +146,7 @@ def main(reactor, port, statePath, **ignored):
                                         (oaiJazz,),
                                     )
                                 # )
-                                 )
+                                 # )
                             )
                         )
                     )

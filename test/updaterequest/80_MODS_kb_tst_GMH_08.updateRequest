@@ -1,0 +1,123 @@
+<updateRequest>
+    <srw:version xmlns:srw="http://www.loc.gov/zing/srw/">1.0</srw:version>
+    <ucp:action xmlns:ucp="http://www.loc.gov/ucp">info:srw/action/1/replace</ucp:action>
+    <ucp:recordIdentifier xmlns:ucp="http://www.loc.gov/ucp">tud:GMH:08</ucp:recordIdentifier>
+    <srw:record xmlns:srw="http://www.loc.gov/zing/srw/">
+        <srw:recordPacking>xml</srw:recordPacking>
+        <srw:recordSchema>metadata</srw:recordSchema>
+        <srw:recordData><document xmlns="http://meresco.org/namespace/harvester/document"><part name="header">&lt;header xmlns="http://www.openarchives.org/OAI/2.0/"&gt;
+      &lt;identifier&gt;GMH:08&lt;/identifier&gt;
+        &lt;datestamp&gt;2009-04-24T08:38:36Z&lt;/datestamp&gt;
+        &lt;setSpec&gt;&lt;/setSpec&gt;&lt;/header&gt;</part><part name="meta">&lt;meta xmlns="http://meresco.org/namespace/harvester/meta"&gt;
+  &lt;upload&gt;&lt;id&gt;kb_tst:GMH:08&lt;/id&gt;&lt;/upload&gt;
+  &lt;record&gt;
+    &lt;id&gt;GMH:08&lt;/id&gt;
+    &lt;harvestdate&gt;2012-12-15T07:54:04Z&lt;/harvestdate&gt;    
+  &lt;/record&gt;
+  &lt;repository&gt;
+    &lt;id&gt;kb_tst&lt;/id&gt;
+    &lt;set&gt;&lt;/set&gt;
+    &lt;baseurl&gt;http://oai.tudelft.nl/ir&lt;/baseurl&gt;
+    &lt;repositoryGroupId&gt;kb&lt;/repositoryGroupId&gt;
+    &lt;metadataPrefix&gt;nl_didl&lt;/metadataPrefix&gt;
+    &lt;collection&gt;&lt;/collection&gt;
+  &lt;/repository&gt;
+&lt;/meta&gt;</part><part name="metadata">&lt;metadata xmlns="http://www.openarchives.org/OAI/2.0/"&gt;
+  &lt;didl:DIDL xmlns:didl=&quot;urn:mpeg:mpeg21:2002:02-DIDL-NS&quot; xmlns:dii=&quot;urn:mpeg:mpeg21:2002:01-DII-NS&quot;
+    xmlns:dc=&quot;http://purl.org/dc/elements/1.1/&quot; xmlns:dcterms=&quot;http://purl.org/dc/terms/&quot;
+    xmlns:rdf=&quot;http://www.w3.org/1999/02/22-rdf-syntax-ns#&quot;
+    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+    xsi:schemaLocation=&quot;urn:mpeg:mpeg21:2002:02-DIDL-NS 
+    http://standards.iso.org/ittf/PubliclyAvailableStandards/MPEG-21_schema_files/did/didl.xsd
+    urn:mpeg:mpeg21:2002:01-DII-NS 
+    http://standards.iso.org/ittf/PubliclyAvailableStandards/MPEG-21_schema_files/dii/dii.xsd&quot;&gt;
+    &lt;didl:Item&gt;
+      &lt;didl:Descriptor&gt;
+        &lt;didl:Statement mimeType=&quot;application/xml&quot;&gt;&lt;dii:Identifier&gt;urn:nbn:nl:ui:13-9qz-2ce&lt;/dii:Identifier&gt;&lt;/didl:Statement&gt;
+      &lt;/didl:Descriptor&gt;
+      &lt;didl:Descriptor&gt;
+        &lt;didl:Statement mimeType=&quot;application/xml&quot;&gt;&lt;dcterms:modified&gt;2010-03-26T00:00:00Z&lt;/dcterms:modified&gt;&lt;/didl:Statement&gt;
+      &lt;/didl:Descriptor&gt;
+      &lt;didl:Component&gt;
+        &lt;didl:Resource mimeType=&quot;application/html&quot; ref=&quot;https://easy.dans.knaw.nl/dms?command=AIP_info&amp;amp;aipId=twips.dans.knaw.nl-833486382286886219-1174311206456&amp;amp;windowStyle=default&amp;amp;windowContext=default&quot;/&gt;
+      &lt;/didl:Component&gt;
+      &lt;didl:Item&gt;
+        &lt;didl:Descriptor&gt;
+          &lt;didl:Statement mimeType=&quot;application/xml&quot;&gt;
+            &lt;rdf:type rdf:resource=&quot;info:eu-repo/semantics/descriptiveMetadata&quot;/&gt;
+          &lt;/didl:Statement&gt;
+        &lt;/didl:Descriptor&gt;
+        &lt;didl:Component&gt;
+          &lt;didl:Resource mimeType=&quot;application/xml&quot;&gt;
+            &lt;mods xmlns=&quot;http://www.loc.gov/mods/v3&quot;
+              xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+              xmlns:didl=&quot;urn:mpeg:mpeg21:2002:02-DIDL-NS&quot;
+              xmlns:dcterms=&quot;http://purl.org/dc/terms/&quot; version=&quot;3.2&quot;
+              xsi:schemaLocation=&quot;http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-2.xsd&quot;&gt;
+              &lt;titleInfo&gt;
+                &lt;title&gt;Leefstijlen in de provincie Utrecht 1988-1989&lt;/title&gt;
+              &lt;/titleInfo&gt;
+              &lt;name type=&quot;personal&quot; ID=&quot;twips.dans.knaw.nl-833486382286886219-1174311206456-070016992&quot;&gt;
+                &lt;namePart type=&quot;family&quot;&gt;H.B.G. Ganzeboom&lt;/namePart&gt;
+                &lt;role&gt;
+                  &lt;roleTerm type=&quot;code&quot; authority=&quot;marcrelator&quot;&gt;aut&lt;/roleTerm&gt;
+                &lt;/role&gt;
+              &lt;/name&gt;
+              &lt;extension&gt;
+                &lt;daiList xmlns=&quot;info:eu-repo/dai&quot; xsi:schemaLocation=&quot;info:eu-repo/dai http://www.surfgroepen.nl/sites/oai/metadata/Shared%20Documents/dai-extension.xsd&quot;&gt;
+                  &lt;identifier IDref=&quot;twips.dans.knaw.nl-833486382286886219-1174311206456-070016992&quot; authority=&quot;info:eu-repo/dai/nl&quot;&gt;070016992&lt;/identifier&gt;
+                &lt;/daiList&gt;
+              &lt;/extension&gt;
+              &lt;extension&gt;
+                  &lt;wmp:rights xmlns:wmp=&quot;http://www.surfgroepen.nl/werkgroepmetadataplus&quot; xmlns:dc=&quot;http://purl.org/dc/elements/1.1/&quot;&gt;
+                      &lt;dc:description&gt;© 2008 Royal Tropical Institute. This work is licensed under a
+                          Creative Commons Attribution-Noncommercial-No Derivative Works 3.0 Unported
+                          License.&lt;/dc:description&gt;
+                      &lt;dc:rights&gt;http://creativecommons.org/licenses/by-nc-nd/3.0/&lt;/dc:rights&gt;
+                  &lt;/wmp:rights&gt;
+              &lt;/extension&gt;
+              &lt;relatedItem type=&quot;host&quot;&gt;
+                  &lt;identifier type=&quot;uri&quot;&gt;URN:ISSN:2212-1676&lt;/identifier&gt;
+                  &lt;titleInfo&gt;
+                      &lt;title&gt;Blumea - Biodiversity, Evolution and Biogeography of Plants&lt;/title&gt;
+                  &lt;/titleInfo&gt;
+                  &lt;part&gt;
+                      &lt;detail type=&quot;volume&quot;&gt;
+                        &lt;number&gt;64&lt;/number&gt;
+                      &lt;/detail&gt;
+                      &lt;extent unit=&quot;page&quot;&gt;
+                        &lt;start&gt;i&lt;/start&gt;
+                        &lt;end&gt;ii&lt;/end&gt;
+                      &lt;/extent&gt;
+                  &lt;/part&gt;
+                  &lt;!--some useless comments --&gt;
+              &lt;/relatedItem&gt;
+              &lt;genre&gt;info:eu-repo/semantics/report&lt;/genre&gt;
+              &lt;originInfo&gt;
+                  &lt;dateIssued encoding=&quot;iso8601&quot;&gt;2009&lt;/dateIssued&gt;
+              &lt;/originInfo&gt;
+            &lt;/mods&gt;
+          &lt;/didl:Resource&gt;
+        &lt;/didl:Component&gt;
+      &lt;/didl:Item&gt;
+      &lt;didl:Item&gt;
+        &lt;didl:Descriptor&gt;
+          &lt;didl:Statement mimeType=&quot;application/xml&quot;&gt;
+            &lt;rdf:type rdf:resource=&quot;info:eu-repo/semantics/humanStartPage&quot;/&gt;
+          &lt;/didl:Statement&gt;
+        &lt;/didl:Descriptor&gt;
+        &lt;didl:Descriptor&gt;
+          &lt;didl:Statement mimeType=&quot;application/xml&quot;&gt;
+            &lt;dcterms:accessRights&gt;closedAccess&lt;/dcterms:accessRights&gt;
+          &lt;/didl:Statement&gt;
+        &lt;/didl:Descriptor&gt;
+        &lt;didl:Component&gt;
+        &lt;didl:Resource ref=&quot;https://easy.dans.knaw.nl/dms?command=AIP_info&amp;amp;aipId=twips.dans.knaw.nl-833486382286886219-1174311206456&amp;amp;windowStyle=default/windowContext=default&quot; mimeType=&quot;application/html&quot;/&gt;
+        &lt;/didl:Component&gt;
+      &lt;/didl:Item&gt;
+    &lt;/didl:Item&gt;
+  &lt;/didl:DIDL&gt;
+&lt;/metadata&gt;
+</part></document></srw:recordData>
+    </srw:record>
+</updateRequest>
