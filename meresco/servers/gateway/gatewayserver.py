@@ -23,7 +23,7 @@
 #
 ## end license ##
 
-from meresco.components import XmlPrintLxml, RewritePartname, XmlXPath, FilterMessages, PeriodicCall, Schedule
+from meresco.components import XmlPrintLxml, RewritePartname, XmlXPath, FilterMessages, PeriodicCall, Schedule, FilterPartByName
 from meresco.components.http import BasicHttpHandler, ObservableHttpServer, PathFilter, Deproxy, IpFilter
 from meresco.components.log import ApacheLogWriter, HandleRequestLog, LogCollector, LogComponent
 from meresco.components.sru import SruRecordUpdate
@@ -53,9 +53,26 @@ from storage.storageadapter import StorageAdapter
 
 from storage.storagecomponent import HashDistributeStrategy, DefaultStrategy
 from meresco.dans.storagesplit import Md5HashDistributeStrategy
+from meresco.dans.xmlvalidator import Validate
+
 # from meresco.dans.metapartconverter import AddMetadataNamespace
 # from meresco.dans.longconverter import NormaliseOaiRecord
 
+namespacesMap = {
+    'dip'     : 'urn:mpeg:mpeg21:2005:01-DIP-NS',
+    'dii'     : 'urn:mpeg:mpeg21:2002:01-DII-NS',
+    'document': 'http://meresco.org/namespace/harvester/document',
+    'oai'     : 'http://www.openarchives.org/OAI/2.0/',
+    'meta'    : 'http://meresco.org/namespace/harvester/meta',
+    'oai_dc'  : 'http://www.openarchives.org/OAI/2.0/oai_dc/',
+    'dc'      : 'http://purl.org/dc/elements/1.1/',
+    'mods'    : 'http://www.loc.gov/mods/v3',
+    'didl'    : 'urn:mpeg:mpeg21:2002:02-DIDL-NS',
+    'rdf'     : 'http://www.w3.org/1999/02/22-rdf-syntax-ns#',
+    'ucp'     : 'info:lc/xmlns/update-v1',
+    'dcterms' : 'http://purl.org/dc/terms/',
+    'xsi' : 'http://www.w3.org/2001/XMLSchema-instance'
+}
 
 NORMALISED_DOC_NAME = 'normdoc'
 
@@ -110,8 +127,13 @@ def main(reactor, port, statePath, **ignored):
                             # (AddMetadataFormat(fromKwarg="lxmlNode", name='md_format'),
                             #     (LogComponent("AddMetadataFormat"),),
                             # ),
-                            (XmlXPath(['srw:recordData/*'], fromKwarg='lxmlNode'), # Stuurt IEDERE matching node in een nieuw bericht door.
-                                # (LogComponent("TO LONG CONVERTER:"),),
+                            (FilterPartByName(included=['meta']),
+                                (LogComponent("FOUND meta part"),),
+                            ),
+
+                            (XmlXPath(['srw:recordData/*'], fromKwarg='lxmlNode'), # Stuurt IEDERE matching node in een nieuw bericht door. In dit geval: 1x <meresco:document>, met daarin een namePart "record" en namePart "meta".
+                                # (Validate([('DIDL container','//didl:DIDL', 'didl.xsd'), ('MODS metadata', '//mods:mods', 'mods-3-6.xsd')], nsMap=namespacesMap), #Verwacht een <metadata> record met daarin didl & mods
+                                (LogComponent("DOCUMENT:"),),
                                 # (AddMetadataNamespace(dateformat="%Y-%m-%dT%H:%M:%SZ", fromKwarg='lxmlNode'), # Adds metadataNamespace to meta part in the message.
                                     # (NormaliseOaiRecord(fromKwarg='lxmlNode'), # Normalises record to: long & original parts. Raises ValidationException if no 'known' metadataformat 
                                         (XmlPrintLxml(fromKwarg='lxmlNode', toKwarg='data', pretty_print=True),
@@ -124,6 +146,7 @@ def main(reactor, port, statePath, **ignored):
                                         (oaiJazz,),
                                     )
                                 # )
+                                 )
                             )
                         )
                     )
