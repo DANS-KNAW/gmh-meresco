@@ -37,7 +37,7 @@ class GatewayTest(IntegrationTestCase):
         self.assertEqual('HTTP/1.0 200 OK\r\nContent-Type: text/xml; charset=utf-8', header)
         # print "OAIX body:", etree.tostring(body)
         records = xpath(body, '//oai:record')
-        self.assertEqual(17, len(records))
+        self.assertEqual(9, len(records))
 
         deletes = xpath(body, '//oai:record[oai:header/@status = "deleted"]')
         self.assertEqual(1, len(deletes))

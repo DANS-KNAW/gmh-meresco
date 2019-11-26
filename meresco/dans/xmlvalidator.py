@@ -28,7 +28,9 @@
 # 
 ## end license ##
 
-from lxml.etree import parse, XMLSchema, XMLSchemaParseError, _ElementTree, tostring
+# from lxml import etree
+
+from lxml.etree import parse, XMLSchema, XMLSchemaParseError, _ElementTree, tostring, fromstring
 from StringIO import StringIO
 
 from weightless.core import NoneOfTheObserversRespond, DeclineMessage
@@ -97,18 +99,23 @@ class Validate(Observable):
                 
                 for strName, strXPath, schema in self._xmlSchemas:
                     ## Doe xpath op betreffende XML/argument:
-                    # Wij laten hier het volledige upload-record voorbijkomen. Echter is de metadata die wij moeten valideren beschikbaar als text en NIET als LXM-object.
-                    # Wij gaan deze dus nu eerst opzopeken en converteren naar een LXML node.
-                    xml = arg.xpath(strXPath, namespaces=self._namespacesMap)
+                    # Wij laten hier het volledige upload-record voorbijkomen, want die is later nodig. Echter is de metadata die wij moeten valideren beschikbaar als text en NIET als LXM-object.
+                    # Wij gaan deze dus nu eerst opzoeken en converteren naar een LXML node.
+                    record_part = arg.xpath("//document:document/document:part[@name='record']/text()", namespaces=self._namespacesMap)
+                    record_lxml = fromstring(record_part[0])
+                    xml = record_lxml.xpath(strXPath, namespaces=self._namespacesMap)
+
+                    #################
+                    # xml = arg.xpath(strXPath, namespaces=self._namespacesMap)
                     if len(xml) > 0:
                         schema.validate(xml[0])
                         if schema.error_log:
                             exception = ValidateException(formatXSDException(strName + " is NOT valid.", None, schema)) #, arg
-                            self.do.logException(exception)
+                            self.do.logException(exception) # Sends ValidateException back to the Harvester, stops processing this record.
                             raise exception
                     else:
                         exception = ValidateException(formatExceptionLine("Mandatory " + strName + " NOT found."))
-                        self.do.logException(exception)
+                        self.do.logException(exception) # Sends ValidateException back to the Harvester, stops processing this record.
                         raise exception
 
 def assertValid(xmlString, schemaPath):

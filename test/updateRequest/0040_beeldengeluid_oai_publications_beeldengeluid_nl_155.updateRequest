@@ -149,7 +149,7 @@
     &lt;baseurl&gt;http://publications.beeldengeluid.nl/oai&lt;/baseurl&gt;
     &lt;repositoryGroupId&gt;beeldengeluid&lt;/repositoryGroupId&gt;
     &lt;metadataPrefix&gt;nl_didl&lt;/metadataPrefix&gt;
-    &lt;collection&gt;publication&lt;/collection&gt;
+    &lt;collection&gt;&lt;/collection&gt;
   &lt;/repository&gt;
 &lt;/meta&gt;</part></document></srw:recordData>
     </srw:record>

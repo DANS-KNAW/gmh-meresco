@@ -131,10 +131,9 @@ def main(reactor, port, statePath, **ignored):
                                 # (LogComponent("ADD message"),),
                             # ),
 
-                            (XmlXPath(["srw:recordData/document:document/document:part[@name='record']/text()"], fromKwarg='lxmlNode'),  # Stuurt IEDERE matching node in een nieuw bericht door. In dit geval: 1x <meresco:document>, met daarin een namePart "record" en namePart "meta".
-                                # (Validate([('DIDL container','//didl:DIDL', 'didl.xsd'), ('MODS metadata', '//mods:mods', 'mods-3-6.xsd')], nsMap=namespacesMap), #Verwacht een <metadata> record met daarin didl & mods
-                                # (LogComponent("RECORD:"),),
-                                (XmlParseLxml(fromKwarg='lxmlNode'), #, parseOptions=dict(huge_tree=True, remove_blank_text=True
+                            # (XmlXPath(["srw:recordData/document:document/document:part[@name='record']/text()"], fromKwarg='lxmlNode'),  # Stuurt IEDERE matching node in een nieuw bericht door. In dit geval: 1x <meresco:document>, met daarin een namePart "record" en namePart "meta".
+                            #     # (LogComponent("RECORD:"),),
+                            #     (XmlParseLxml(fromKwarg='lxmlNode'), #, parseOptions=dict(huge_tree=True, remove_blank_text=True
                                     # (LogComponent("LXML:"),),
                                     (Validate([('DIDL container','//didl:DIDL', 'didl.xsd'), ('MODS metadata', '//mods:mods', 'mods-3-6.xsd')], nsMap=namespacesMap), #Verwacht een <metadata> record met daarin didl & mods
                                         # (XmlXPath(["//oai:metadata"], fromKwarg='lxmlNode', toKwarg='metadata'),
@@ -155,8 +154,8 @@ def main(reactor, port, statePath, **ignored):
                                     # (NormaliseOaiRecord(fromKwarg='lxmlNode'), # Normalises record to: long & original parts. Raises ValidationException if no 'known' metadataformat 
 
                                 # )
-                                )
-                            )
+                            #     )
+                            # )
                         )
                     )
                 )
