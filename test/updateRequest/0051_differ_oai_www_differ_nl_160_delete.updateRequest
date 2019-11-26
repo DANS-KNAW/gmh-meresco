@@ -1,0 +1,10 @@
+<ucp:updateRequest xmlns:srw="http://www.loc.gov/zing/srw/" xmlns:ucp="info:lc/xmlns/update-v1">
+    <srw:version>1.0</srw:version>
+    <ucp:action>info:srw/action/1/delete</ucp:action>
+    <ucp:recordIdentifier>differ:oai:www.differ.nl:160</ucp:recordIdentifier>
+    <srw:record>
+        <srw:recordPacking>xml</srw:recordPacking>
+        <srw:recordSchema>ignored</srw:recordSchema>
+        <srw:recordData><ignored/></srw:recordData>
+    </srw:record>
+</ucp:updateRequest>

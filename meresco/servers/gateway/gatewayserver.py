@@ -23,7 +23,7 @@
 #
 ## end license ##
 
-from meresco.components import XmlPrintLxml, RewritePartname, XmlXPath, FilterMessages, PeriodicCall, Schedule
+from meresco.components import XmlPrintLxml, RewritePartname, XmlXPath, FilterMessages, PeriodicCall, Schedule, XmlParseLxml
 from meresco.components.http import BasicHttpHandler, ObservableHttpServer, PathFilter, Deproxy, IpFilter
 from meresco.components.log import ApacheLogWriter, HandleRequestLog, LogCollector, LogComponent
 from meresco.components.sru import SruRecordUpdate
@@ -128,25 +128,34 @@ def main(reactor, port, statePath, **ignored):
                             #     (LogComponent("AddMetadataFormat"),),
                             # ),
                             # (FilterPartByName(included=['meta']),
-                                (LogComponent("ADD message"),),
+                                # (LogComponent("ADD message"),),
                             # ),
 
-                            (XmlXPath(['srw:recordData/*'], fromKwarg='lxmlNode'), # Stuurt IEDERE matching node in een nieuw bericht door. In dit geval: 1x <meresco:document>, met daarin een namePart "record" en namePart "meta".
+                            (XmlXPath(["srw:recordData/document:document/document:part[@name='record']/text()"], fromKwarg='lxmlNode'),  # Stuurt IEDERE matching node in een nieuw bericht door. In dit geval: 1x <meresco:document>, met daarin een namePart "record" en namePart "meta".
                                 # (Validate([('DIDL container','//didl:DIDL', 'didl.xsd'), ('MODS metadata', '//mods:mods', 'mods-3-6.xsd')], nsMap=namespacesMap), #Verwacht een <metadata> record met daarin didl & mods
-                                (LogComponent("DOCUMENT:"),),
-                                # (AddMetadataNamespace(dateformat="%Y-%m-%dT%H:%M:%SZ", fromKwarg='lxmlNode'), # Adds metadataNamespace to meta part in the message.
-                                    # (NormaliseOaiRecord(fromKwarg='lxmlNode'), # Normalises record to: long & original parts. Raises ValidationException if no 'known' metadataformat 
+                                # (LogComponent("RECORD:"),),
+                                (XmlParseLxml(fromKwarg='lxmlNode'), #, parseOptions=dict(huge_tree=True, remove_blank_text=True
+                                    # (LogComponent("LXML:"),),
+                                    (Validate([('DIDL container','//didl:DIDL', 'didl.xsd'), ('MODS metadata', '//mods:mods', 'mods-3-6.xsd')], nsMap=namespacesMap), #Verwacht een <metadata> record met daarin didl & mods
+                                        # (XmlXPath(["//oai:metadata"], fromKwarg='lxmlNode', toKwarg='metadata'),
+                                        (LogComponent("VALIDATED:"),),
+                                        # ),
+
                                         (XmlPrintLxml(fromKwarg='lxmlNode', toKwarg='data', pretty_print=True),
                                             (RewritePartname(NORMALISED_DOC_NAME), # Rename converted part.
                                                 (storeComponent,), # Store converted/renamed part.
                                             )
                                         ),
-                                    # ),
-                                    (OaiAddDeleteRecordWithPrefixesAndSetSpecs(metadataPrefixes=[NORMALISED_DOC_NAME]),
-                                        (oaiJazz,),
-                                    )
+                                        (OaiAddDeleteRecordWithPrefixesAndSetSpecs(metadataPrefixes=[NORMALISED_DOC_NAME]),
+                                            (oaiJazz,),
+                                        ),
+                                    ),
+                                
+                                # (AddMetadataNamespace(dateformat="%Y-%m-%dT%H:%M:%SZ", fromKwarg='lxmlNode'), # Adds metadataNamespace to meta part in the message.
+                                    # (NormaliseOaiRecord(fromKwarg='lxmlNode'), # Normalises record to: long & original parts. Raises ValidationException if no 'known' metadataformat 
+
                                 # )
-                                 # )
+                                )
                             )
                         )
                     )

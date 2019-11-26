@@ -97,15 +97,17 @@ class Validate(Observable):
                 
                 for strName, strXPath, schema in self._xmlSchemas:
                     ## Doe xpath op betreffende XML/argument:
-                    xml = arg.xpath(strXPath, namespaces=self._namespacesMap)        
+                    # Wij laten hier het volledige upload-record voorbijkomen. Echter is de metadata die wij moeten valideren beschikbaar als text en NIET als LXM-object.
+                    # Wij gaan deze dus nu eerst opzopeken en converteren naar een LXML node.
+                    xml = arg.xpath(strXPath, namespaces=self._namespacesMap)
                     if len(xml) > 0:
-                        schema.validate(xml[0])                
+                        schema.validate(xml[0])
                         if schema.error_log:
-                            exception = ValidateException(formatXSDException(strName + " is NOT valid.", None, schema)) #, arg                     
+                            exception = ValidateException(formatXSDException(strName + " is NOT valid.", None, schema)) #, arg
                             self.do.logException(exception)
                             raise exception
                     else:
-                        exception = ValidateException(formatExceptionLine("Mandatory " + strName + " NOT found."))                    
+                        exception = ValidateException(formatExceptionLine("Mandatory " + strName + " NOT found."))
                         self.do.logException(exception)
                         raise exception
 

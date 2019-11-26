@@ -1,0 +1,62 @@
+<ucp:updateRequest xmlns:srw="http://www.loc.gov/zing/srw/" xmlns:ucp="info:lc/xmlns/update-v1">
+    <srw:version>1.0</srw:version>
+    <ucp:action>info:srw/action/1/replace</ucp:action>
+    <ucp:recordIdentifier>differ:oai:www.differ.nl:160</ucp:recordIdentifier>
+    <srw:record>
+        <srw:recordPacking>xml</srw:recordPacking>
+        <srw:recordSchema>meta</srw:recordSchema>
+        <srw:recordData><document xmlns="http://meresco.org/namespace/harvester/document"><part name="record">&lt;record xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;
+ &lt;header&gt; &lt;identifier&gt;oai:www.differ.nl:160&lt;/identifier&gt;
+ &lt;datestamp&gt;2016-06-24T12:43:42Z&lt;/datestamp&gt;
+&lt;/header&gt;
+   &lt;metadata&gt;
+&lt;didl:DIDL xmlns:didl="urn:mpeg:mpeg21:2002:02-DIDL-NS" xmlns:dii="urn:mpeg:mpeg21:2002:01-DII-NS" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:mpeg:mpeg21:2002:02-DIDL-NS http://standards.iso.org/ittf/PubliclyAvailableStandards/MPEG-21_schema_files/did/didl.xsd urn:mpeg:mpeg21:2002:01-DII-NS http://standards.iso.org/ittf/PubliclyAvailableStandards/MPEG-21_schema_files/dii/dii.xsd "&gt;&lt;didl:Item&gt; &lt;didl:Descriptor&gt; &lt;didl:Statement mimeType="text/xml"&gt; &lt;dii:Identifier&gt;urn:nbn:nl:ui:39-4cdece612010e2332d3d304cbbddfdb1&lt;/dii:Identifier&gt;
+&lt;/didl:Statement&gt;
+&lt;/didl:Descriptor&gt;
+ &lt;didl:Descriptor&gt; &lt;didl:Statement mimeType="application/xml"&gt; &lt;dcterms:modified&gt;2016-06-24T12:43:42Z&lt;/dcterms:modified&gt;
+&lt;/didl:Statement&gt;
+&lt;/didl:Descriptor&gt;
+ &lt;didl:Component&gt; &lt;didl:Resource mimeType="text/html" ref="https://www.differ.nl/node/160"/&gt;
+&lt;/didl:Component&gt;
+&lt;didl:Item&gt; &lt;didl:Descriptor&gt; &lt;didl:Statement mimeType="application/xml"&gt; &lt;rdf:type rdf:resource="info:eu-repo/semantics/descriptiveMetadata"/&gt;
+&lt;/didl:Statement&gt;
+&lt;/didl:Descriptor&gt;
+&lt;didl:Component&gt;&lt;didl:Resource mimeType="application/xml"&gt;&lt;mods:mods xmlns:mods="http://www.loc.gov/mods/v3" version="3.0" xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-0.xsd"&gt; &lt;mods:originInfo&gt; &lt;mods:dateIssued encoding="iso8601"&gt;1985&lt;/mods:dateIssued&gt;
+&lt;/mods:originInfo&gt;
+ &lt;mods:titleInfo&gt; &lt;mods:title&gt;Anomalous plasma heating induced by modulation of the current-density profile&lt;/mods:title&gt;
+&lt;/mods:titleInfo&gt;
+ &lt;mods:name type="personal" ID="n160-aut0"&gt; &lt;mods:namePart type="given"/&gt;
+ &lt;mods:namePart type="family"&gt;N.J. Lopes Cardozo&lt;/mods:namePart&gt;
+ &lt;mods:namePart type="termsOfAddress"/&gt;
+ &lt;mods:role&gt; &lt;mods:roleTerm authority="marcrelator" type="code"&gt;aut&lt;/mods:roleTerm&gt;
+&lt;/mods:role&gt;
+&lt;/mods:name&gt;
+ &lt;mods:extension&gt; &lt;dai:daiList xmlns:dai="info:eu-repo/dai" xsi:schemaLocation="info:eu-repo/dai http://purl.org/REP/standards/dai-extension.xsd"&gt; &lt;dai:identifier authority="info:eu-repo/dai/nl" IDref="n160-aut0"&gt;071090665&lt;/dai:identifier&gt;
+&lt;/dai:daiList&gt;
+&lt;/mods:extension&gt;
+ &lt;mods:typeOfResource&gt;text&lt;/mods:typeOfResource&gt;
+&lt;mods:relatedItem type="host"&gt; &lt;mods:titleInfo/&gt;
+&lt;/mods:relatedItem&gt; &lt;mods:genre&gt;info:eu-repo/semantics/report&lt;/mods:genre&gt;
+&lt;/mods:mods&gt;&lt;/didl:Resource&gt;&lt;/didl:Component&gt;&lt;/didl:Item&gt;&lt;didl:Item&gt; &lt;didl:Descriptor&gt; &lt;didl:Statement mimeType="application/xml"&gt; &lt;rdf:type rdf:resource="info:eu-repo/semantics/humanStartPage"/&gt;
+&lt;/didl:Statement&gt;
+&lt;/didl:Descriptor&gt;
+&lt;didl:Component&gt;&lt;didl:Resource mimeType="text/html" ref="https://www.differ.nl/node/160"/&gt;&lt;/didl:Component&gt;&lt;/didl:Item&gt;&lt;/didl:Item&gt; &lt;/didl:DIDL&gt;
+&lt;/metadata&gt;
+  &lt;/record&gt;
+  </part><part name="meta">&lt;meta xmlns="http://meresco.org/namespace/harvester/meta"&gt;
+  &lt;upload&gt;&lt;id&gt;differ:oai:www.differ.nl:160&lt;/id&gt;&lt;/upload&gt;
+  &lt;record&gt;
+    &lt;id&gt;oai:www.differ.nl:160&lt;/id&gt;
+    &lt;harvestdate&gt;2019-11-20T17:59:50Z&lt;/harvestdate&gt;
+  &lt;/record&gt;
+  &lt;repository&gt;
+    &lt;id&gt;differ&lt;/id&gt;
+    &lt;set&gt;&lt;/set&gt;
+    &lt;baseurl&gt;https://www.differ.nl/oai&lt;/baseurl&gt;
+    &lt;repositoryGroupId&gt;differ&lt;/repositoryGroupId&gt;
+    &lt;metadataPrefix&gt;nl_didl&lt;/metadataPrefix&gt;
+    &lt;collection&gt;&lt;/collection&gt;
+  &lt;/repository&gt;
+&lt;/meta&gt;</part></document></srw:recordData>
+    </srw:record>
+</ucp:updateRequest>

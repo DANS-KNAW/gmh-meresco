@@ -48,7 +48,7 @@ class GmhTestIntegrationState(IntegrationState):
     def __init__(self, stateName, tests=None, fastMode=False):
         IntegrationState.__init__(self, stateName, tests=tests, fastMode=fastMode)
 
-        self.testdataDir = join(dirname(mydir), 'data')
+        self.testdataDir = join(dirname(mydir), 'updateRequest')
         self.gatewayPort = PortNumberGenerator.next()
         # self.indexPort = PortNumberGenerator.next()
         # self.apiPort = PortNumberGenerator.next()

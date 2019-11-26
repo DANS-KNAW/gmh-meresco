@@ -1,0 +1,99 @@
+<ucp:updateRequest xmlns:srw="http://www.loc.gov/zing/srw/" xmlns:ucp="info:lc/xmlns/update-v1">
+    <srw:version>1.0</srw:version>
+    <ucp:action>info:srw/action/1/replace</ucp:action>
+    <ucp:recordIdentifier>differ:oai:www.differ.nl:232</ucp:recordIdentifier>
+    <srw:record>
+        <srw:recordPacking>xml</srw:recordPacking>
+        <srw:recordSchema>meta</srw:recordSchema>
+        <srw:recordData><document xmlns="http://meresco.org/namespace/harvester/document"><part name="record">&lt;record xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;
+ &lt;header&gt; &lt;identifier&gt;oai:www.differ.nl:232&lt;/identifier&gt;
+ &lt;datestamp&gt;2016-06-08T05:38:36Z&lt;/datestamp&gt;
+&lt;/header&gt;
+   &lt;metadata&gt;
+&lt;didl:DIDL xmlns:didl="urn:mpeg:mpeg21:2002:02-DIDL-NS" xmlns:dii="urn:mpeg:mpeg21:2002:01-DII-NS" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:mpeg:mpeg21:2002:02-DIDL-NS http://standards.iso.org/ittf/PubliclyAvailableStandards/MPEG-21_schema_files/did/didl.xsd urn:mpeg:mpeg21:2002:01-DII-NS http://standards.iso.org/ittf/PubliclyAvailableStandards/MPEG-21_schema_files/dii/dii.xsd "&gt;&lt;didl:Item&gt; &lt;didl:Descriptor&gt; &lt;didl:Statement mimeType="text/xml"&gt; &lt;dii:Identifier&gt;urn:nbn:nl:ui:39-4720abcd4605174ae41bdd50ac65b952&lt;/dii:Identifier&gt;
+&lt;/didl:Statement&gt;
+&lt;/didl:Descriptor&gt;
+ &lt;didl:Descriptor&gt; &lt;didl:Statement mimeType="application/xml"&gt; &lt;dcterms:modified&gt;2016-06-08T05:38:36Z&lt;/dcterms:modified&gt;
+&lt;/didl:Statement&gt;
+&lt;/didl:Descriptor&gt;
+ &lt;didl:Component&gt; &lt;didl:Resource mimeType="text/html" ref="https://www.differ.nl/node/232"/&gt;
+&lt;/didl:Component&gt;
+&lt;didl:Item&gt; &lt;didl:Descriptor&gt; &lt;didl:Statement mimeType="application/xml"&gt; &lt;rdf:type rdf:resource="info:eu-repo/semantics/descriptiveMetadata"/&gt;
+&lt;/didl:Statement&gt;
+&lt;/didl:Descriptor&gt;
+&lt;didl:Component&gt;&lt;didl:Resource mimeType="application/xml"&gt;&lt;mods:mods xmlns:mods="http://www.loc.gov/mods/v3" version="3.0" xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-0.xsd"&gt; &lt;mods:originInfo&gt; &lt;mods:dateIssued encoding="iso8601"&gt;1990&lt;/mods:dateIssued&gt;
+&lt;/mods:originInfo&gt;
+ &lt;mods:titleInfo&gt; &lt;mods:title&gt;Measurement of Electron-Temperature and Density of the Edge Plasma of Jet by Ece and Microwave Reflectometry&lt;/mods:title&gt;
+&lt;/mods:titleInfo&gt;
+ &lt;mods:name type="personal" ID="n232-aut0"&gt; &lt;mods:namePart type="given"&gt;D. V.&lt;/mods:namePart&gt;
+ &lt;mods:namePart type="family"&gt;Bartlett&lt;/mods:namePart&gt;
+ &lt;mods:namePart type="termsOfAddress"/&gt;
+ &lt;mods:role&gt; &lt;mods:roleTerm authority="marcrelator" type="code"&gt;aut&lt;/mods:roleTerm&gt;
+&lt;/mods:role&gt;
+&lt;/mods:name&gt;
+ &lt;mods:name type="personal" ID="n232-aut1"&gt; &lt;mods:namePart type="given"&gt;A. E.&lt;/mods:namePart&gt;
+ &lt;mods:namePart type="family"&gt;Costley&lt;/mods:namePart&gt;
+ &lt;mods:namePart type="termsOfAddress"/&gt;
+ &lt;mods:role&gt; &lt;mods:roleTerm authority="marcrelator" type="code"&gt;aut&lt;/mods:roleTerm&gt;
+&lt;/mods:role&gt;
+&lt;/mods:name&gt;
+ &lt;mods:name type="personal" ID="n232-aut2"&gt; &lt;mods:namePart type="given"&gt;L.&lt;/mods:namePart&gt;
+ &lt;mods:namePart type="family"&gt;Porte&lt;/mods:namePart&gt;
+ &lt;mods:namePart type="termsOfAddress"/&gt;
+ &lt;mods:role&gt; &lt;mods:roleTerm authority="marcrelator" type="code"&gt;aut&lt;/mods:roleTerm&gt;
+&lt;/mods:role&gt;
+&lt;/mods:name&gt;
+ &lt;mods:name type="personal" ID="n232-aut3"&gt; &lt;mods:namePart type="given"&gt;R.&lt;/mods:namePart&gt;
+ &lt;mods:namePart type="family"&gt;Prentice&lt;/mods:namePart&gt;
+ &lt;mods:namePart type="termsOfAddress"/&gt;
+ &lt;mods:role&gt; &lt;mods:roleTerm authority="marcrelator" type="code"&gt;aut&lt;/mods:roleTerm&gt;
+&lt;/mods:role&gt;
+&lt;/mods:name&gt;
+ &lt;mods:name type="personal" ID="n232-aut4"&gt; &lt;mods:namePart type="given"&gt;N. A.&lt;/mods:namePart&gt;
+ &lt;mods:namePart type="family"&gt;Salmon&lt;/mods:namePart&gt;
+ &lt;mods:namePart type="termsOfAddress"/&gt;
+ &lt;mods:role&gt; &lt;mods:roleTerm authority="marcrelator" type="code"&gt;aut&lt;/mods:roleTerm&gt;
+&lt;/mods:role&gt;
+&lt;/mods:name&gt;
+ &lt;mods:name type="personal" ID="n232-aut5"&gt; &lt;mods:namePart type="given"&gt;G.&lt;/mods:namePart&gt;
+ &lt;mods:namePart type="family"&gt;Sips&lt;/mods:namePart&gt;
+ &lt;mods:namePart type="termsOfAddress"/&gt;
+ &lt;mods:role&gt; &lt;mods:roleTerm authority="marcrelator" type="code"&gt;aut&lt;/mods:roleTerm&gt;
+&lt;/mods:role&gt;
+&lt;/mods:name&gt;
+ &lt;mods:typeOfResource&gt;text&lt;/mods:typeOfResource&gt;
+ &lt;mods:abstract&gt;The potential of electron cyclotron emission and microwave reflectometry as techniques for measuring the electron temperature and density in the edge region of tokamak plasmas is investigated. Experiments to realize this potential on JET are described and some illustrative results presented.&lt;/mods:abstract&gt;
+&lt;mods:relatedItem type="host"&gt; &lt;mods:identifier type="isbn" invalid="yes"&gt;0022-3115&lt;/mods:identifier&gt;
+ &lt;mods:identifier type="doi"&gt;doi:10.1016/0022-3115(90)90193-q&lt;/mods:identifier&gt;
+ &lt;mods:titleInfo&gt; &lt;mods:title&gt;Journal of Nuclear Materials&lt;/mods:title&gt;
+&lt;/mods:titleInfo&gt;
+ &lt;mods:part&gt; &lt;mods:detail type="volume"&gt; &lt;mods:number&gt;176&lt;/mods:number&gt;
+&lt;/mods:detail&gt;
+ &lt;mods:extent unit="page"&gt; &lt;mods:start&gt;1064&lt;/mods:start&gt;
+ &lt;mods:end&gt;1069&lt;/mods:end&gt;
+&lt;/mods:extent&gt;
+&lt;/mods:part&gt;
+&lt;/mods:relatedItem&gt; &lt;mods:genre&gt;info:eu-repo/semantics/article&lt;/mods:genre&gt;
+&lt;/mods:mods&gt;&lt;/didl:Resource&gt;&lt;/didl:Component&gt;&lt;/didl:Item&gt;&lt;didl:Item&gt; &lt;didl:Descriptor&gt; &lt;didl:Statement mimeType="application/xml"&gt; &lt;rdf:type rdf:resource="info:eu-repo/semantics/humanStartPage"/&gt;
+&lt;/didl:Statement&gt;
+&lt;/didl:Descriptor&gt;
+&lt;didl:Component&gt;&lt;didl:Resource mimeType="text/html" ref="https://www.differ.nl/node/232"/&gt;&lt;/didl:Component&gt;&lt;/didl:Item&gt;&lt;/didl:Item&gt; &lt;/didl:DIDL&gt;
+&lt;/metadata&gt;
+  &lt;/record&gt;
+  </part><part name="meta">&lt;meta xmlns="http://meresco.org/namespace/harvester/meta"&gt;
+  &lt;upload&gt;&lt;id&gt;differ:oai:www.differ.nl:232&lt;/id&gt;&lt;/upload&gt;
+  &lt;record&gt;
+    &lt;id&gt;oai:www.differ.nl:232&lt;/id&gt;
+    &lt;harvestdate&gt;2019-11-20T18:18:08Z&lt;/harvestdate&gt;
+  &lt;/record&gt;
+  &lt;repository&gt;
+    &lt;id&gt;differ&lt;/id&gt;
+    &lt;set&gt;&lt;/set&gt;
+    &lt;baseurl&gt;https://www.differ.nl/oai&lt;/baseurl&gt;
+    &lt;repositoryGroupId&gt;differ&lt;/repositoryGroupId&gt;
+    &lt;metadataPrefix&gt;nl_didl&lt;/metadataPrefix&gt;
+    &lt;collection&gt;&lt;/collection&gt;
+  &lt;/repository&gt;
+&lt;/meta&gt;</part></document></srw:recordData>
+    </srw:record>
+</ucp:updateRequest>
