@@ -38,25 +38,19 @@ from meresco.core import Observable
 from meresco.components import lxmltostring
 from meresco.components.xml_generic import  __file__ as xml_genericpath
 from meresco.components.xml_generic.validate import ValidateException
+from meresco.xml.namespaces import namespaces
 
 ## Schema validatie:
 from os.path import abspath, dirname, join
 
-oftenUsedNamespaces = {
-    'oai_dc': "http://www.openarchives.org/OAI/2.0/oai_dc/",
-    'dc': "http://purl.org/dc/elements/1.1/",
-    'oai': "http://www.openarchives.org/OAI/2.0/",
-    'lom': "http://ltsc.ieee.org/xsd/LOM",
-    'meta': "http://meresco.org/namespace/harvester/meta",
-}
 
 class Validate(Observable):
 
     def __init__(self, xSDPathList=[], nsMap=None):
         Observable.__init__(self)
         
-        self._namespacesMap = oftenUsedNamespaces.copy()
-        self._namespacesMap.update(nsMap or {})
+        self._namespacesMap = namespaces
+        self._namespacesMap.copyUpdate(nsMap or {})
         self._xmlSchemas = []
         
         ## Fill the schemas list for later use:

@@ -36,8 +36,6 @@ from meresco.xml.namespaces import namespaces
 from lxml import etree
 from lxml.etree import _ElementTree, fromstring, tostring
 
-DOC_NS = '{http://meresco.org/namespace/harvester/document}'
-
 
 class AddMetadataDocumentPart(Converter):
     def __init__(self, partName, fromKwarg, toKwarg=None, name=None):

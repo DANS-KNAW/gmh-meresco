@@ -49,36 +49,19 @@ from weightless.io import Reactor
 
 from storage import StorageComponent
 from storage.storageadapter import StorageAdapter
-
-
 from storage.storagecomponent import HashDistributeStrategy, DefaultStrategy
+
+from meresco.xml.namespaces import namespaces
+
 from meresco.dans.storagesplit import Md5HashDistributeStrategy
 from meresco.dans.xmlvalidator import Validate
-
-# Normalisation Logging:
-from meresco.dans.logger import Logger
-
+from meresco.dans.logger import Logger # Normalisation Logging:
 from meresco.dans.normalisedidl import NormaliseDIDL
 from meresco.dans.addparttodocument import AddMetadataDocumentPart
 
 # from meresco.dans.metapartconverter import AddMetadataNamespace
 # from meresco.dans.longconverter import NormaliseOaiRecord
 
-namespacesMap = {
-    'dip'     : 'urn:mpeg:mpeg21:2005:01-DIP-NS',
-    'dii'     : 'urn:mpeg:mpeg21:2002:01-DII-NS',
-    'document': 'http://meresco.org/namespace/harvester/document',
-    'oai'     : 'http://www.openarchives.org/OAI/2.0/',
-    'meta'    : 'http://meresco.org/namespace/harvester/meta',
-    'oai_dc'  : 'http://www.openarchives.org/OAI/2.0/oai_dc/',
-    'dc'      : 'http://purl.org/dc/elements/1.1/',
-    'mods'    : 'http://www.loc.gov/mods/v3',
-    'didl'    : 'urn:mpeg:mpeg21:2002:02-DIDL-NS',
-    'rdf'     : 'http://www.w3.org/1999/02/22-rdf-syntax-ns#',
-    'ucp'     : 'info:lc/xmlns/update-v1',
-    'dcterms' : 'http://purl.org/dc/terms/',
-    'xsi' : 'http://www.w3.org/2001/XMLSchema-instance'
-}
 
 NORMALISED_DOC_NAME = 'normdoc'
 
@@ -132,7 +115,7 @@ def main(reactor, port, statePath, **ignored):
                         (FilterMessages(allowed=['add']),
 
                             # (LogComponent("LXML:"),),
-                            (Validate([('DIDL container','//didl:DIDL', 'didl.xsd'), ('MODS metadata', '//mods:mods', 'mods-3-6.xsd')], nsMap=namespacesMap),
+                            (Validate([('DIDL container','//didl:DIDL', 'didl.xsd'), ('MODS metadata', '//mods:mods', 'mods-3-6.xsd')], nsMap=namespaces),
                                 # (LogComponent("VALIDATED:"),),
 
                                 (AddMetadataDocumentPart(partName='normdoc', fromKwarg='lxmlNode'),
