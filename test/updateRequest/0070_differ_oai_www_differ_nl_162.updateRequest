@@ -34,7 +34,7 @@
  &lt;mods:typeOfResource&gt;text&lt;/mods:typeOfResource&gt;
 &lt;mods:relatedItem type="host"&gt; &lt;mods:titleInfo/&gt;
 &lt;/mods:relatedItem&gt; &lt;mods:genre&gt;info:eu-repo/semantics/report&lt;/mods:genre&gt;
-&lt;/mods:mods&gt;&lt;/didl:Resource&gt;&lt;/didl:Component&gt;&lt;/didl:Item&gt;&lt;didl:Item&gt; &lt;didl:Descriptor&gt; &lt;didl:Statement mimeType="application/xml"&gt; &lt;rdf:type rdf:resource="info:eu-repo/semantics/humanStartPage"/&gt;
+&lt;/mods:mods&gt;&lt;/didl:Resource&gt;&lt;/didl:Component&gt;&lt;/didl:Item&gt;&lt;didl:Item&gt; &lt;didl:Descriptor&gt; &lt;didl:Statement mimeType="application/xml"&gt; &lt;rdf:type rdf:resource="info:eu-repo/semantics/StartPage"/&gt;
 &lt;/didl:Statement&gt;
 &lt;/didl:Descriptor&gt;
 &lt;didl:Component&gt;&lt;didl:Resource mimeType="text/html" ref="https://www.differ.nl/node/162"/&gt;&lt;/didl:Component&gt;&lt;/didl:Item&gt;&lt;/didl:Item&gt; &lt;/didl:DIDL&gt;

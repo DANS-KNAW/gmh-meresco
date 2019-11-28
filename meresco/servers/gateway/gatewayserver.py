@@ -65,6 +65,11 @@ from meresco.dans.addparttodocument import AddMetadataDocumentPart
 
 NORMALISED_DOC_NAME = 'normdoc'
 
+
+namespacesMap = {
+    'dip' : 'urn:mpeg:mpeg21:2005:01-DIP-NS',
+}
+
 def main(reactor, port, statePath, **ignored):
 
     oaiSuspendRegister = SuspendRegister()
@@ -115,14 +120,14 @@ def main(reactor, port, statePath, **ignored):
                         (FilterMessages(allowed=['add']),
 
                             # (LogComponent("LXML:"),),
-                            (Validate([('DIDL container','//didl:DIDL', 'didl.xsd'), ('MODS metadata', '//mods:mods', 'mods-3-6.xsd')], nsMap=namespaces),
+                            (Validate([('DIDL container','//didl:DIDL', 'didl.xsd'), ('MODS metadata', '//mods:mods', 'mods-3-6.xsd')]),
                                 # (LogComponent("VALIDATED:"),),
 
                                 (AddMetadataDocumentPart(partName='normdoc', fromKwarg='lxmlNode'),
                                 
-                                    # (NormaliseDIDL(nsMap=namespacesMap), # Normalise DIDL in partname=normdoc metadata
-                                    #     (normLogger,),
-                                    # ),
+                                    (NormaliseDIDL(nsMap=namespacesMap, fromKwarg='lxmlNode'), # Normalise DIDL in partname=normdoc metadata
+                                        (normLogger,),
+                                    ),
 
                                     (XmlPrintLxml(fromKwarg='lxmlNode', toKwarg='data', pretty_print=True),
                                         (RewritePartname(NORMALISED_DOC_NAME), # Rename converted part.

@@ -49,8 +49,7 @@ class Validate(Observable):
     def __init__(self, xSDPathList=[], nsMap=None):
         Observable.__init__(self)
         
-        self._namespacesMap = namespaces
-        self._namespacesMap.copyUpdate(nsMap or {})
+        self._namespacesMap = namespaces.copyUpdate(nsMap or {})
         self._xmlSchemas = []
         
         ## Fill the schemas list for later use:

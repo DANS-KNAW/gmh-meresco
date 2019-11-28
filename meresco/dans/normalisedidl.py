@@ -1,17 +1,23 @@
 # -*- coding: utf-8 -*-
-from lxml.etree import parse, _ElementTree, tostring, XMLSchema, parse as lxmlParse
+from lxml.etree import parse, _ElementTree, tostring, fromstring, XMLSchema, parse as lxmlParse
 from lxml import etree
 from xml.sax.saxutils import escape as escapeXml
-from meresco.core import Observable
+
 from copy import deepcopy
 from StringIO import StringIO
+
+from meresco.core import Observable
 from meresco.components.xml_generic.validate import ValidateException
-from xmlvalidator import formatExceptionLine
+from meresco.components import Converter
+from meresco.xml.namespaces import namespaces
+
+# from meresco.dans.uiaconverter import UiaConverter
+
 from dateutil.parser import parse as parseDate
 
+from xmlvalidator import formatExceptionLine
 import commons as comm
 
-#Schema validatie:
 from os.path import abspath, dirname, join
 
 # This component handles ADD messages only.
@@ -75,40 +81,58 @@ descr_templ = """<didl:Descriptor>
                     </didl:Statement>
                 </didl:Descriptor>"""
 
+# TODO: uploadid is printed into normalisation logger. Instead we should print the OAI-PMH identifier only, for the uploadid may be confusing to repository managers.
+# I.e: 'oai:www.differ.nl:162' instead of 'differ:oai:www.differ.nl:162'
 
-class NormaliseDIDL(Observable):
+# TODO: inherit class from UiaConverter
+
+class NormaliseDIDL(Converter):
     """A class that normalizes DIDL container to the Edustandaard applicationprofile"""
-    
-    def __init__(self, nsMap={}):
-        Observable.__init__(self)
-        self._nsMap=nsMap
+    def __init__(self, fromKwarg, toKwarg=None, name=None, nsMap=None):
+        Converter.__init__(self, name=name, fromKwarg=fromKwarg, toKwarg=toKwarg)
+        self._nsMap = namespaces.copyUpdate(nsMap or {})
         self._bln_success = False
 
-    def _detectAndConvert(self, anObject):
-        if type(anObject) == _ElementTree:
-            return self.convert(anObject)
-        return anObject
 
-    def convert(self, lxmlNode):
-        self._bln_success = False
+    def _convertArgs(self, *args, **kwargs):
+        """ Overrides meresco.components.Converter#_convertArgs() to be able to extract the meresco uploadid. """
+        try:
+            oldvalue = kwargs[self._fromKwarg]
+            self._identifier = kwargs['identifier']
+        except KeyError:
+            pass
+        else:
+            del kwargs[self._fromKwarg]
+            kwargs[self._toKwarg] = self._convert(oldvalue)
+        return args, kwargs
 
-        ## Remove all XML-comments from the (normalized) DIDL/MODS tree. Cannot supply parser options to Venturi: XML-Comments will also be read by iterchildren().
-        comments = lxmlNode.xpath('//comment()')    
+
+    def _convert(self, lxmlNode):
+        if not type(lxmlNode) == _ElementTree:
+            return lxmlNode
+        self._bln_success = False #TODO: Is this still in use?
+
+
+        #start conversion: Look for <part name="normdoc"> in the document:
+        metadata_tree = fromstring(lxmlNode.xpath("//document:document/document:part[@name='normdoc']/text()", namespaces=self._nsMap)[0]) #TODO: import 'normdoc" string.
+
+        ## Remove all XML-comments from the DIDL/MODS tree: XML-Comments will also be read by iterchildren().
+        comments = metadata_tree.xpath('//comment()')    
         for c in comments:
             p = c.getparent()
             p.remove(c)
 
-        result_tree = self._normaliseRecord(lxmlNode)
-        if result_tree != None:
-            self._bln_success = True
-        return result_tree
+        norm_md_tree = self._normaliseRecord(metadata_tree)
 
-    def all_unknown(self, method, *args, **kwargs):
-        self._identifier = kwargs.get('identifier')
-        newArgs = [self._detectAndConvert(arg) for arg in args]
-        newKwargs = dict((key, self._detectAndConvert(value)) for key, value in kwargs.items())
-        if self._bln_success:
-            yield self.all.unknown(method, *newArgs, **newKwargs)
+        if norm_md_tree != None:
+            self._bln_success = True
+
+        normdocpart = lxmlNode.xpath("//document:document/document:part[@name='normdoc']", namespaces=self._nsMap)
+        if normdocpart:
+            normdocpart[0].text = tostring(norm_md_tree, encoding=XML_ENCODING).decode(XML_ENCODING)
+
+        return lxmlNode
+
 
     def _normaliseRecord(self, lxmlNode):
         str_didl = ''
