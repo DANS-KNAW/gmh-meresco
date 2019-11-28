@@ -55,8 +55,9 @@ from meresco.xml.namespaces import namespaces
 
 from meresco.dans.storagesplit import Md5HashDistributeStrategy
 from meresco.dans.xmlvalidator import Validate
-from meresco.dans.logger import Logger # Normalisation Logging:
+from meresco.dans.logger import Logger # Normalisation Logger.
 from meresco.dans.normalisedidl import NormaliseDIDL
+from meresco.dans.normalisemods import NormaliseMODS
 from meresco.dans.addparttodocument import AddMetadataDocumentPart
 
 # from meresco.dans.metapartconverter import AddMetadataNamespace
@@ -68,6 +69,9 @@ NORMALISED_DOC_NAME = 'normdoc'
 
 namespacesMap = {
     'dip' : 'urn:mpeg:mpeg21:2005:01-DIP-NS',
+    'gal': "info:eu-repo/grantAgreement",
+    'hbo': "info:eu-repo/xmlns/hboMODSextension",
+    'wmp': "http://www.surfgroepen.nl/werkgroepmetadataplus",
 }
 
 def main(reactor, port, statePath, **ignored):
@@ -79,7 +83,6 @@ def main(reactor, port, statePath, **ignored):
 
     normLogger = Logger(join(statePath, 'normlogger'))
 
-    # WST:
     # strategie = HashDistributeStrategy() # filename (=partname) is also hashed: difficult to read by human eye...
     strategie = Md5HashDistributeStrategy()
 
@@ -118,25 +121,24 @@ def main(reactor, port, statePath, **ignored):
                             (oaiJazz,),
                         ),
                         (FilterMessages(allowed=['add']),
-
                             # (LogComponent("LXML:"),),
                             (Validate([('DIDL container','//didl:DIDL', 'didl.xsd'), ('MODS metadata', '//mods:mods', 'mods-3-6.xsd')]),
                                 # (LogComponent("VALIDATED:"),),
-
                                 (AddMetadataDocumentPart(partName='normdoc', fromKwarg='lxmlNode'),
-                                
                                     (NormaliseDIDL(nsMap=namespacesMap, fromKwarg='lxmlNode'), # Normalise DIDL in partname=normdoc metadata
                                         (normLogger,),
-                                    ),
-
-                                    (XmlPrintLxml(fromKwarg='lxmlNode', toKwarg='data', pretty_print=True),
-                                        (RewritePartname(NORMALISED_DOC_NAME), # Rename converted part.
-                                            (storeComponent,), # Store converted/renamed part.
+                                        (NormaliseMODS(nsMap=namespacesMap, fromKwarg='lxmlNode'), # Normalise MODS in partname=normdoc metadata
+                                            (normLogger,),
+                                            (XmlPrintLxml(fromKwarg='lxmlNode', toKwarg='data'),
+                                                (RewritePartname(NORMALISED_DOC_NAME), # Rename converted part.
+                                                    (storeComponent,), # Store converted/renamed part.
+                                                )
+                                            ),
+                                            (OaiAddDeleteRecordWithPrefixesAndSetSpecs(metadataPrefixes=[NORMALISED_DOC_NAME]),
+                                                (oaiJazz,),
+                                            )
                                         )
-                                    ),
-                                    (OaiAddDeleteRecordWithPrefixesAndSetSpecs(metadataPrefixes=[NORMALISED_DOC_NAME]),
-                                        (oaiJazz,),
-                                    ),
+                                    )
                                 )
                             )
                         )
