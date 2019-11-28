@@ -55,6 +55,12 @@ from storage.storagecomponent import HashDistributeStrategy, DefaultStrategy
 from meresco.dans.storagesplit import Md5HashDistributeStrategy
 from meresco.dans.xmlvalidator import Validate
 
+# Normalisation Logging:
+from meresco.dans.logger import Logger
+
+from meresco.dans.normalisedidl import NormaliseDIDL
+from meresco.dans.addparttodocument import AddMetadataDocumentPart
+
 # from meresco.dans.metapartconverter import AddMetadataNamespace
 # from meresco.dans.longconverter import NormaliseOaiRecord
 
@@ -82,6 +88,8 @@ def main(reactor, port, statePath, **ignored):
     oaiJazz = be((OaiJazz(join(statePath, 'oai')),
         (oaiSuspendRegister,)
     ))
+
+    normLogger = Logger(join(statePath, 'normlogger'))
 
     # WST:
     # strategie = HashDistributeStrategy() # filename (=partname) is also hashed: difficult to read by human eye...
@@ -123,39 +131,26 @@ def main(reactor, port, statePath, **ignored):
                         ),
                         (FilterMessages(allowed=['add']),
 
-                            # Does not work? See comments in component...
-                            # (AddMetadataFormat(fromKwarg="lxmlNode", name='md_format'),
-                            #     (LogComponent("AddMetadataFormat"),),
-                            # ),
-                            # (FilterPartByName(included=['meta']),
-                                # (LogComponent("ADD message"),),
-                            # ),
+                            # (LogComponent("LXML:"),),
+                            (Validate([('DIDL container','//didl:DIDL', 'didl.xsd'), ('MODS metadata', '//mods:mods', 'mods-3-6.xsd')], nsMap=namespacesMap),
+                                # (LogComponent("VALIDATED:"),),
 
-                            # (XmlXPath(["srw:recordData/document:document/document:part[@name='record']/text()"], fromKwarg='lxmlNode'),  # Stuurt IEDERE matching node in een nieuw bericht door. In dit geval: 1x <meresco:document>, met daarin een namePart "record" en namePart "meta".
-                            #     # (LogComponent("RECORD:"),),
-                            #     (XmlParseLxml(fromKwarg='lxmlNode'), #, parseOptions=dict(huge_tree=True, remove_blank_text=True
-                                    # (LogComponent("LXML:"),),
-                                    (Validate([('DIDL container','//didl:DIDL', 'didl.xsd'), ('MODS metadata', '//mods:mods', 'mods-3-6.xsd')], nsMap=namespacesMap), #Verwacht een <metadata> record met daarin didl & mods
-                                        # (XmlXPath(["//oai:metadata"], fromKwarg='lxmlNode', toKwarg='metadata'),
-                                        (LogComponent("VALIDATED:"),),
-                                        # ),
-
-                                        (XmlPrintLxml(fromKwarg='lxmlNode', toKwarg='data', pretty_print=True),
-                                            (RewritePartname(NORMALISED_DOC_NAME), # Rename converted part.
-                                                (storeComponent,), # Store converted/renamed part.
-                                            )
-                                        ),
-                                        (OaiAddDeleteRecordWithPrefixesAndSetSpecs(metadataPrefixes=[NORMALISED_DOC_NAME]),
-                                            (oaiJazz,),
-                                        ),
-                                    ),
+                                (AddMetadataDocumentPart(partName='normdoc', fromKwarg='lxmlNode'),
                                 
-                                # (AddMetadataNamespace(dateformat="%Y-%m-%dT%H:%M:%SZ", fromKwarg='lxmlNode'), # Adds metadataNamespace to meta part in the message.
-                                    # (NormaliseOaiRecord(fromKwarg='lxmlNode'), # Normalises record to: long & original parts. Raises ValidationException if no 'known' metadataformat 
+                                    # (NormaliseDIDL(nsMap=namespacesMap), # Normalise DIDL in partname=normdoc metadata
+                                    #     (normLogger,),
+                                    # ),
 
-                                # )
-                            #     )
-                            # )
+                                    (XmlPrintLxml(fromKwarg='lxmlNode', toKwarg='data', pretty_print=True),
+                                        (RewritePartname(NORMALISED_DOC_NAME), # Rename converted part.
+                                            (storeComponent,), # Store converted/renamed part.
+                                        )
+                                    ),
+                                    (OaiAddDeleteRecordWithPrefixesAndSetSpecs(metadataPrefixes=[NORMALISED_DOC_NAME]),
+                                        (oaiJazz,),
+                                    ),
+                                )
+                            )
                         )
                     )
                 )
