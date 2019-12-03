@@ -167,7 +167,6 @@ def startServer(port, stateDir, **kwargs):
     registerShutdownHandler(statePath=statePath, server=server, reactor=reactor, shutdownMustSucceed=False)
 
     print 'Ready to rumble at %s' % port
-
     stdout.flush()
     reactor.loop()
 

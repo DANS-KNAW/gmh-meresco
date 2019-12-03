@@ -50,20 +50,17 @@ class GmhTestIntegrationState(IntegrationState):
 
         self.testdataDir = join(dirname(mydir), 'updateRequest')
         self.gatewayPort = PortNumberGenerator.next()
+        self.apiPort = PortNumberGenerator.next()
         # self.indexPort = PortNumberGenerator.next()
-        # self.apiPort = PortNumberGenerator.next()
-        # self.lucenePort = PortNumberGenerator.next()
-        # self.sruslavePort = PortNumberGenerator.next()
+
 
     def binDir(self):
         return join(projectDir, 'bin')
 
     def setUp(self):
         self.startGatewayServer()
-        # self.startLuceneServer()
+        self.startApiServer()        
         # self.startIndexServer()
-        # self.startApiServer()
-        # self.startSruSlaveServer()
         self.waitForServicesStarted()
         self._createDatabase()
         sleep(0.2)
@@ -103,7 +100,6 @@ class GmhTestIntegrationState(IntegrationState):
             serviceReadyUrl='http://localhost:%s/info/version' % self.apiPort,
             cwd=dirname(abspath(executable)),
             port=self.apiPort,
-            lucenePort=self.lucenePort,
             gatewayPort=self.gatewayPort,
             stateDir=join(self.integrationTempdir, 'api'),
             quickCommit=True,

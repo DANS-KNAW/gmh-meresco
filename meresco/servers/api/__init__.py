@@ -4,7 +4,7 @@
 # features of various components of the "Meresco Suite".
 # Also see http://meresco.org.
 #
-# Copyright (C) 2012-2016 Seecr (Seek You Too B.V.) http://seecr.nl
+# Copyright (C) 2016 Seecr (Seek You Too B.V.) http://seecr.nl
 #
 # This file is part of "Meresco Examples"
 #
@@ -23,31 +23,3 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #
 ## end license ##
-
-from os import getuid
-import sys
-assert getuid() != 0, "Do not run tests as 'root'"
-
-
-from seecrdeps import includeParentAndDeps
-includeParentAndDeps(__file__, scanForDeps=True)
-
-from seecr.test.testrunner import TestRunner
-from _integration import GmhTestIntegrationState
-
-if __name__ == '__main__': #TODO: arg[0] fastMode uitlezen. 
-    runner = TestRunner()
-    # Setting fastmode to True, will SKIP the upload part, and reuse existing database/store for the integration tests.
-    runner.fastMode = False
-    print "FASTMODE:", runner.fastMode
-
-    GmhTestIntegrationState(
-        "brigmh",
-        tests=[
-            '_integration.gatewaytest.GatewayTest',
-            '_integration.apitest.ApiTest',
-        ],
-        fastMode=runner.fastMode
-        ).addToTestRunner(runner)
-    runner.run()
-
