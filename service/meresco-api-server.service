@@ -3,7 +3,7 @@ Description=Meresco BRIGMH API Server
 
 [Service]
 User=meresco
-ExecStart=<path to:> start-api --port=<portnumber> --stateDir=<path to api statedir>
+ExecStart=<path to:> start-api --port=<portnumber> --gatewayPort=<portnumber>  --stateDir=<path to api statedir>
 Restart=on-failure
 
 [Install]

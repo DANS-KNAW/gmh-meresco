@@ -1,0 +1,10 @@
+[Unit]
+Description=Meresco BRIGMH BRI Server
+
+[Service]
+User=meresco
+ExecStart=<path to:> start-bri --port=<portnumber>
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

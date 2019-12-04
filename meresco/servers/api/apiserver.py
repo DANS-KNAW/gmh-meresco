@@ -38,7 +38,7 @@ from meresco.components import RenameFieldForExact, PeriodicDownload, XmlPrintLx
 from meresco.components.http import ObservableHttpServer, BasicHttpHandler, PathFilter, Deproxy
 from meresco.components.log import LogCollector, ApacheLogWriter, HandleRequestLog, LogCollectorScope, QueryLogWriter, DirectoryLog, LogFileServer, LogComponent
 
-from meresco.oai import OaiPmh, OaiDownloadProcessor, UpdateAdapterFromOaiDownloadProcessor, OaiJazz, OaiBranding, OaiProvenance, OaiAddDeleteRecordWithPrefixesAndSetSpecs, SuspendRegister
+from meresco.oai import OaiPmh, OaiDownloadProcessor, UpdateAdapterFromOaiDownloadProcessor, OaiJazz, OaiBranding, OaiProvenance, OaiAddDeleteRecordWithPrefixesAndSetSpecs
 
 
 from seecr.utils import DebugPrompt
@@ -81,7 +81,7 @@ def createDownloadHelix(reactor, periodicDownload, oaiDownload, storageComponent
                             (storageComponent,),
                         )
                     ),
-                    (FilterMessages(allowed=['add']),
+                    (FilterMessages(allowed=['add']), #TODO: NL_DIDL_COMBINED_PREFIX formaat aanmaken en naar storage schrijven.
                         # (LogComponent("ADD"),),
 
                         (XmlXPath(['//document:document/document:part[@name="normdoc"]/text()'], fromKwarg='lxmlNode', toKwarg='data', namespaces=NAMESPACEMAP),
@@ -156,21 +156,10 @@ def main(reactor, port, statePath, gatewayPort, quickCommit=False, **ignored):
     strategie = Md5HashDistributeStrategy()
     storage = StorageComponent(join(statePath, 'store'), strategy=strategie, partsRemovedOnDelete=[NL_DIDL_NORMALISED_PREFIX, NL_DIDL_COMBINED_PREFIX, 'metadata'])
 
-##### SEECR ##
-
-    # oaiSuspendRegister = SuspendRegister()
-    oaiJazz = OaiJazz(join(statePath, 'oai'), alwaysDeleteInPrefixes=[NL_DIDL_NORMALISED_PREFIX])
+    oaiJazz = OaiJazz(join(statePath, 'oai'))
     oaiJazz.updateMetadataFormat("metadata", "http://didl.loc.nl/didl.xsd", NAMESPACEMAP.didl) #TODO: Use correct schema-locations and namespaces.
     oaiJazz.updateMetadataFormat(NL_DIDL_COMBINED_PREFIX, "http://combined.schema.nl", "http://gh.kb-dans.nl/combined/v0.9/")
     oaiJazz.updateMetadataFormat(NL_DIDL_NORMALISED_PREFIX, "http://norm.schema.nl", NAMESPACEMAP.norm)
-    # oaiJazz.addObserver(oaiSuspendRegister)
-
-
-#############
-
-
-    # oaiJazz = OaiJazz(join(statePath, 'oai'))
-    # oaiJazz.updateMetadataFormat(OAI_DC_PARTNAME, "http://www.openarchives.org/OAI/2.0/oai_dc.xsd", "http://purl.org/dc/elements/1.1/")
 
     normLogger = Logger(join(statePath, '..', 'gateway', 'normlogger'))
 

@@ -77,7 +77,7 @@ namespacesMap = {
 def main(reactor, port, statePath, **ignored):
 
     oaiSuspendRegister = SuspendRegister()
-    oaiJazz = be((OaiJazz(join(statePath, 'oai')),
+    oaiJazz = be((OaiJazz(join(statePath, 'oai'), alwaysDeleteInPrefixes=[NORMALISED_DOC_NAME]),
         (oaiSuspendRegister,)
     ))
 

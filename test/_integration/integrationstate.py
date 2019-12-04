@@ -51,7 +51,7 @@ class GmhTestIntegrationState(IntegrationState):
         self.testdataDir = join(dirname(mydir), 'updateRequest')
         self.gatewayPort = PortNumberGenerator.next()
         self.apiPort = PortNumberGenerator.next()
-        # self.indexPort = PortNumberGenerator.next()
+        self.briPort = PortNumberGenerator.next()
 
 
     def binDir(self):
@@ -59,8 +59,8 @@ class GmhTestIntegrationState(IntegrationState):
 
     def setUp(self):
         self.startGatewayServer()
-        self.startApiServer()        
-        # self.startIndexServer()
+        self.startApiServer()
+        self.startBriServer()
         self.waitForServicesStarted()
         self._createDatabase()
         sleep(0.2)
@@ -77,18 +77,17 @@ class GmhTestIntegrationState(IntegrationState):
             stateDir=join(self.integrationTempdir, 'gateway'),
             waitForStart=False)
 
-    def startIndexServer(self):
-        executable = self.binPath('start-index')
+    def startBriServer(self):
+        executable = self.binPath('start-bri')
         self._startServer(
-            serviceName='index',
+            serviceName='bri',
             debugInfo=True,
             executable=executable,
             serviceReadyUrl='http://localhost:%s/als/het/maar/connecten/kan/404/is/prima' % self.gatewayPort, # Ding heeft geen http interface meer... We moeten wat...
             cwd=dirname(abspath(executable)),
-            port=self.indexPort,
-            luceneserverPort=self.lucenePort,
+            port=self.briPort,
             gatewayPort=self.gatewayPort,
-            stateDir=join(self.integrationTempdir, 'index'),
+            stateDir=join(self.integrationTempdir, 'bri'),
             quickCommit=True,
             waitForStart=False)
 
@@ -96,6 +95,7 @@ class GmhTestIntegrationState(IntegrationState):
         executable = self.binPath('start-api')
         self._startServer(
             serviceName='api',
+            debugInfo=True,
             executable=executable,
             serviceReadyUrl='http://localhost:%s/info/version' % self.apiPort,
             cwd=dirname(abspath(executable)),
@@ -105,30 +105,6 @@ class GmhTestIntegrationState(IntegrationState):
             quickCommit=True,
             waitForStart=False)
 
-    def startLuceneServer(self):
-        executable = self.binPath('start-lucene-server')
-        print 'start-lucene-server', executable
-        self._startServer(
-            serviceName='lucene',
-            executable=executable,
-            serviceReadyUrl='http://localhost:%s/info/version' % self.lucenePort,
-            port=self.lucenePort,
-            stateDir=join(self.integrationTempdir, 'lucene'),
-            waitForStart=True,
-            core=["narcis"], # core=["oai_dc"],
-            env=dict(JAVA_BIN=JAVA_BIN, LANG="en_US.UTF-8"))
-
-    def startSruSlaveServer(self):
-        executable = self.binPath('start-sruslave')
-        self._startServer(
-            serviceName='sruslave',
-            executable=executable,
-            serviceReadyUrl='http://localhost:%s/info/version' % self.sruslavePort,
-            cwd=dirname(abspath(executable)),
-            port=self.sruslavePort,
-            lucenePort=self.lucenePort,
-            stateDir=join(self.integrationTempdir, 'api'),
-            waitForStart=False)
 
     def _createDatabase(self):
         if self.fastMode:
@@ -138,7 +114,6 @@ class GmhTestIntegrationState(IntegrationState):
         print "Creating database in", self.integrationTempdir
         try:
             for f in sorted(glob(self.testdataDir + '/*.updateRequest')):
-            # for f in listdir(self.testdataDir):
                 print "Uploading file:", f
                 postRequest(self.gatewayPort, '/update', data=open(join(self.testdataDir, f)).read(), parse=False)
             sleepWheel(2)
