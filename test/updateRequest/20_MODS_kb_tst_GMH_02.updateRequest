@@ -1,28 +1,18 @@
-<ucp:updateRequest xmlns:ucp="info:lc/xmlns/update-v1">
-    <srw:version xmlns:srw="http://www.loc.gov/zing/srw/">1.0</srw:version>
+<ucp:updateRequest xmlns:srw="http://www.loc.gov/zing/srw/" xmlns:ucp="info:lc/xmlns/update-v1">
+    <srw:version>1.0</srw:version>
     <ucp:action>info:srw/action/1/replace</ucp:action>
     <ucp:recordIdentifier>kb_tst:GMH:02</ucp:recordIdentifier>
-    <srw:record xmlns:srw="http://www.loc.gov/zing/srw/">
+    <srw:record>
         <srw:recordPacking>xml</srw:recordPacking>
         <srw:recordSchema>metadata</srw:recordSchema>
-        <srw:recordData><document xmlns="http://meresco.org/namespace/harvester/document"><part name="header">&lt;header xmlns="http://www.openarchives.org/OAI/2.0/"&gt;
+        <srw:recordData><document xmlns="http://meresco.org/namespace/harvester/document"><part name="record">
+            &lt;record xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;
+            &lt;header xmlns="http://www.openarchives.org/OAI/2.0/"&gt;
             &lt;identifier&gt;GMH:02&lt;/identifier&gt;
             &lt;datestamp&gt;2011-08-28T13:51:55Z&lt;/datestamp&gt;
             &lt;setSpec&gt;KB&lt;/setSpec&gt;
-            &lt;setSpec&gt;KB:GMH&lt;/setSpec&gt;&lt;/header&gt;</part><part name="meta">&lt;meta xmlns="http://meresco.org/namespace/harvester/meta"&gt;
-                &lt;upload&gt;&lt;id&gt;kb_tst:GMH:02&lt;/id&gt;&lt;/upload&gt;
-                &lt;record&gt;
-                &lt;id&gt;GMH:02&lt;/id&gt;
-                &lt;/record&gt;
-                &lt;repository&gt;
-                &lt;id&gt;kb_tst&lt;/id&gt;
-                &lt;set&gt;&lt;/set&gt;
-                &lt;baseurl&gt;http://kb.utwente.nl/cgi/oai2&lt;/baseurl&gt;
-                &lt;repositoryGroupId&gt;kb&lt;/repositoryGroupId&gt;
-                &lt;metadataPrefix&gt;nl_didl&lt;/metadataPrefix&gt;
-                &lt;collection&gt;&lt;/collection&gt;
-                &lt;/repository&gt;
-                &lt;/meta&gt;</part><part name="metadata">&lt;metadata xmlns=&quot;http://www.openarchives.org/OAI/2.0/&quot;&gt;
+            &lt;setSpec&gt;KB:GMH&lt;/setSpec&gt;&lt;/header&gt;
+            &lt;metadata xmlns=&quot;http://www.openarchives.org/OAI/2.0/&quot;&gt;
                     &lt;didl:DIDL xmlns:didl=&quot;urn:mpeg:mpeg21:2002:02-DIDL-NS&quot; xmlns:dc=&quot;http://purl.org/dc/elements/1.1/&quot;
                         xmlns:dcterms=&quot;http://purl.org/dc/terms/&quot;
                         xmlns:rdf=&quot;http://www.w3.org/1999/02/22-rdf-syntax-ns#&quot;
@@ -118,8 +108,21 @@
                         &lt;/didl:Item&gt;
                     &lt;/didl:DIDL&gt;
                 &lt;/metadata&gt;
-                </part>
-            </document>
-        </srw:recordData>
+                &lt;/record&gt;
+                </part><part name="meta">&lt;meta xmlns="http://meresco.org/namespace/harvester/meta"&gt;
+                &lt;upload&gt;&lt;id&gt;kb_tst:GMH:02&lt;/id&gt;&lt;/upload&gt;
+                &lt;record&gt;
+                &lt;id&gt;GMH:02&lt;/id&gt;
+                &lt;/record&gt;
+                &lt;repository&gt;
+                &lt;id&gt;kb_tst&lt;/id&gt;
+                &lt;set&gt;&lt;/set&gt;
+                &lt;baseurl&gt;http://kb.utwente.nl/cgi/oai2&lt;/baseurl&gt;
+                &lt;repositoryGroupId&gt;kb&lt;/repositoryGroupId&gt;
+                &lt;metadataPrefix&gt;nl_didl&lt;/metadataPrefix&gt;
+                &lt;collection&gt;&lt;/collection&gt;
+                &lt;/repository&gt;
+                &lt;/meta&gt;
+                </part></document></srw:recordData>
     </srw:record>
 </ucp:updateRequest>
