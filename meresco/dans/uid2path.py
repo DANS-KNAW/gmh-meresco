@@ -2,9 +2,9 @@
 
 import sys
 import os
-from meresco.dans.storagesplit import md5Split
+from storagesplit import md5Split
 
-# usage example: python uid2path.py "tue:oai:library.tue.nl:692605"
+# usage example: python uid2path.py tue:oai:library.tue.nl:692605
 
 def getPath(id):
     splitted = md5Split((id, 'metadata'))
