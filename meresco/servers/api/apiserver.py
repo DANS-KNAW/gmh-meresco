@@ -48,6 +48,7 @@ from meresco.xml import namespaces
 
 from storage.storageadapter import StorageAdapter
 
+from meresco.dans.nl_didl_combined import NL_DIDL_combined
 from meresco.dans.storagesplit import Md5HashDistributeStrategy
 from meresco.dans.writedeleted import ResurrectTombstone, WriteTombstone
 from meresco.servers.gateway.gatewayserver import NORMALISED_DOC_NAME
@@ -86,7 +87,7 @@ def createDownloadHelix(reactor, periodicDownload, oaiDownload, storageComponent
 
                         (XmlXPath(['//document:document/document:part[@name="normdoc"]/text()'], fromKwarg='lxmlNode', toKwarg='data', namespaces=NAMESPACEMAP),
                             # (LogComponent("NORMDOC"),),
-                            (XmlParseLxml(fromKwarg='data', toKwarg='lxmlNode'),                                
+                            (XmlParseLxml(fromKwarg='data', toKwarg='lxmlNode'),
                                 (RewritePartname(NL_DIDL_NORMALISED_PREFIX), # Hernoemt partname van 'record' naar "metadata".
                                     (XmlPrintLxml(fromKwarg="lxmlNode", toKwarg="data", pretty_print=True),
                                         (storageComponent,) # Schrijft oai:metadata (=origineel) naar storage.
@@ -100,7 +101,7 @@ def createDownloadHelix(reactor, periodicDownload, oaiDownload, storageComponent
                                     # (NL_DIDL_COMBINED_PREFIX, '', 'http://gh.kb-dans.nl/combined/v0.9/') ]
                                 ),
                                 (LogComponent("addOaiRecord:"),),
-                                (storageComponent,), 
+                                (storageComponent,),
                                 (oaiJazz,) # Assert partNames header and meta are available from storage!
                             ) #! OaiAddRecord
                             # (OaiAddDeleteRecordWithPrefixesAndSetSpecs(metadataPrefixes=[
@@ -108,7 +109,7 @@ def createDownloadHelix(reactor, periodicDownload, oaiDownload, storageComponent
                             #         # (NL_DIDL_NORMALISED_PREFIX, '', 'http://gh.kb-dans.nl/normalised/v0.9/'),
                             #         # (NL_DIDL_COMBINED_PREFIX, '', 'http://gh.kb-dans.nl/combined/v0.9/')
                             #     ]),
-                            #     (storageComponent,), 
+                            #     (storageComponent,),
                             #     (oaiJazz,) # Assert partNames header and meta are available from storage!
                             # ) #! OaiAddRecord
 
@@ -126,6 +127,20 @@ def createDownloadHelix(reactor, periodicDownload, oaiDownload, storageComponent
                                         )
                                     )
                                 )
+                            )
+                        ),
+
+                        (XmlXPath(['//document:document/document:part[@name="record"]/text()'], fromKwarg='lxmlNode',
+                               toKwarg='data', namespaces=NAMESPACEMAP),
+                            (XmlParseLxml(fromKwarg='data', toKwarg='lxmlNode'),
+                                (NL_DIDL_combined(nsMap=NAMESPACEMAP),
+                                    # Create combined format from stored metadataPart and normalized part.
+                                    (XmlPrintLxml(fromKwarg='lxmlNode', toKwarg='data'),  # Convert it to plaintext
+                                        (RewritePartname(NL_DIDL_COMBINED_PREFIX),  # Rename combined partName
+                                            (storageComponent,)  # Write combined partName to storage
+                                        )
+                                    )
+                                ),
                             )
                         ),
 
@@ -232,7 +247,7 @@ def main(reactor, port, statePath, gatewayPort, quickCommit=False, **ignored):
                             url="http://www.narcis.nl/images/logos/logo-knaw-house.gif",
                             link="http://oai.narcis.nl",
                             title="Narcis - The gateway to scholarly information in The Netherlands"),
-                        ),                        
+                        ),
                     )
                 ),
 
@@ -241,7 +256,7 @@ def main(reactor, port, statePath, gatewayPort, quickCommit=False, **ignored):
                 (PathFilter('/rss'),
                     (LoggerRSS( title = 'Gemeenschappelijke Harvester DANS-KB', description = 'Harvester normalisation log for: ', link = 'http://rss.gharvester.dans.knaw.nl/rss', maximumRecords = 30),
                         (normLogger,
-                            (storage,)                            
+                            (storage,)
                         )
                     )
                 ),
