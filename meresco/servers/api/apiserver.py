@@ -125,6 +125,14 @@ def createDownloadHelix(reactor, periodicDownload, oaiDownload, storageComponent
                                             (storageComponent,) # Schrijft OAI-header naar storage.
                                         )
                                     )
+                                ),
+                                # Schrijf 'metadata' partname naar storage:
+                                (XmlXPath(['/oai:record/oai:metadata'], fromKwarg='lxmlNode', namespaces=NAMESPACEMAP),
+                                    (RewritePartname("metadata"),
+                                        (XmlPrintLxml(fromKwarg="lxmlNode", toKwarg="data", pretty_print=True),
+                                            (storageComponent,) # Schrijft metadata naar storage.
+                                        )
+                                    )
                                 )
                             )
                         ),
@@ -157,7 +165,7 @@ def main(reactor, port, statePath, gatewayPort, quickCommit=False, **ignored):
     storage = StorageComponent(join(statePath, 'store'), strategy=strategie, partsRemovedOnDelete=[NL_DIDL_NORMALISED_PREFIX, NL_DIDL_COMBINED_PREFIX, 'metadata'])
 
     oaiJazz = OaiJazz(join(statePath, 'oai'))
-    oaiJazz.updateMetadataFormat("metadata", "http://didl.loc.nl/didl.xsd", NAMESPACEMAP.didl) #TODO: Use correct schema-locations and namespaces.
+    oaiJazz.updateMetadataFormat("metadata", "http://didl.loc.nl/didl.xsd", NAMESPACEMAP.didl) #TODO: Use correct schema-locations and namespaces. http://agharvester21.dans.knaw.nl:8000/oai?verb=ListMetadataFormats
     oaiJazz.updateMetadataFormat(NL_DIDL_COMBINED_PREFIX, "http://combined.schema.nl", "http://gh.kb-dans.nl/combined/v0.9/")
     oaiJazz.updateMetadataFormat(NL_DIDL_NORMALISED_PREFIX, "http://norm.schema.nl", NAMESPACEMAP.norm)
 
