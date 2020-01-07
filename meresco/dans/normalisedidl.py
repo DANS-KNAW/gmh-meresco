@@ -11,7 +11,7 @@ from meresco.components.xml_generic.validate import ValidateException
 from meresco.components import Converter
 from meresco.xml.namespaces import namespaces
 
-# from meresco.dans.uiaconverter import UiaConverter
+from meresco.dans.uiaconverter import UiaConverter
 
 from dateutil.parser import parse as parseDate
 
@@ -84,27 +84,13 @@ descr_templ = """<didl:Descriptor>
 # TODO: uploadid is printed into normalisation logger. Instead we should print the OAI-PMH identifier only, for the uploadid may be confusing to repository managers.
 # I.e: 'oai:www.differ.nl:162' instead of 'differ:oai:www.differ.nl:162'
 
-# TODO: inherit class from UiaConverter
 
-class NormaliseDIDL(Converter):
+class NormaliseDIDL(UiaConverter):
     """A class that normalizes DIDL container to the Edustandaard applicationprofile"""
     def __init__(self, fromKwarg, toKwarg=None, name=None, nsMap=None):
-        Converter.__init__(self, name=name, fromKwarg=fromKwarg, toKwarg=toKwarg)
+        UiaConverter.__init__(self, name=name, fromKwarg=fromKwarg, toKwarg=toKwarg)
         self._nsMap = namespaces.copyUpdate(nsMap or {})
         self._bln_success = False
-
-
-    def _convertArgs(self, *args, **kwargs):
-        """ Overrides meresco.components.Converter#_convertArgs() to be able to extract the meresco uploadid. """
-        try:
-            oldvalue = kwargs[self._fromKwarg]
-            self._identifier = kwargs['identifier']
-        except KeyError:
-            pass
-        else:
-            del kwargs[self._fromKwarg]
-            kwargs[self._toKwarg] = self._convert(oldvalue)
-        return args, kwargs
 
 
     def _convert(self, lxmlNode):
@@ -238,14 +224,14 @@ class NormaliseDIDL(Converter):
                 modified = datedict[key]
                 break
         if not tl_modified[0].strip() == modified:
-            self.do.logMsg(self._identifier, LOGGER1, prefix=STR_DIDL)
+            self.do.logMsg(self._uploadid, LOGGER1, prefix=STR_DIDL)
 
 #3:     Get PidResourceMimetype
         mimetypelist = lxmlNode.xpath('//didl:DIDL/didl:Item/didl:Component/didl:Resource/@mimeType', namespaces=self._nsMap)
         if len(mimetypelist) > 0:
             mimetype = mimetypelist[0].strip()
             if not comm.isMimeType(mimetype):
-                self.do.logMsg(self._identifier, LOGGER2 + mimetype , prefix=STR_DIDL)
+                self.do.logMsg(self._uploadid, LOGGER2 + mimetype , prefix=STR_DIDL)
 
 #4:     Get PidResourceLocation:
         pidlocation = self._findAndBindFirst(lxmlNode, '%s',
@@ -274,10 +260,10 @@ class NormaliseDIDL(Converter):
         descriptiveMetadataItem = lxmlNode.xpath('//didl:DIDL/didl:Item/didl:Item[didl:Descriptor/didl:Statement/rdf:type/@rdf:resource="info:eu-repo/semantics/descriptiveMetadata"]', namespaces=self._nsMap)
         if len(descriptiveMetadataItem) == 0: #Fallback to @resource (no rdf nmsp), if available...
             descriptiveMetadataItem = lxmlNode.xpath('//didl:DIDL/didl:Item/didl:Item[didl:Descriptor/didl:Statement/rdf:type/@resource="info:eu-repo/semantics/descriptiveMetadata"]', namespaces=self._nsMap)
-            if len(descriptiveMetadataItem) > 0: self.do.logMsg(self._identifier, LOGGER3, prefix=STR_DIDL)
+            if len(descriptiveMetadataItem) > 0: self.do.logMsg(self._uploadid, LOGGER3, prefix=STR_DIDL)
         if len(descriptiveMetadataItem) == 0: #Fallback to dip namespace, if available...
             descriptiveMetadataItem = lxmlNode.xpath('//didl:DIDL/didl:Item/didl:Item[didl:Descriptor/didl:Statement/dip:ObjectType/text()="info:eu-repo/semantics/descriptiveMetadata"]', namespaces=self._nsMap)
-            if len(descriptiveMetadataItem) > 0: self.do.logMsg(self._identifier, LOGGER4, prefix=STR_DIDL)
+            if len(descriptiveMetadataItem) > 0: self.do.logMsg(self._uploadid, LOGGER4, prefix=STR_DIDL)
         if len(descriptiveMetadataItem) > 0:
             #look for first DMI containing MODS:
             dmi_mods = None
@@ -313,7 +299,7 @@ class NormaliseDIDL(Converter):
         if len(modified) > 0 and comm.isISO8601(modified[0]):
             return descr_templ % ('<dcterms:modified>'+modified[0].strip()+'</dcterms:modified>')
         elif len(modified) > 0:
-            self.do.logMsg(self._identifier, LOGGER5 + modified[0], prefix=STR_DIDL)
+            self.do.logMsg(self._uploadid, LOGGER5 + modified[0], prefix=STR_DIDL)
         return ''
 
     def _getIdentifierDescriptor(self, lxmlNode):
@@ -329,10 +315,10 @@ class NormaliseDIDL(Converter):
         objectfiles = lxmlNode.xpath('//didl:DIDL/didl:Item/didl:Item[didl:Descriptor/didl:Statement/rdf:type/@rdf:resource="info:eu-repo/semantics/objectFile"]', namespaces=self._nsMap)
         if len(objectfiles) ==0:
             objectfiles = lxmlNode.xpath('//didl:DIDL/didl:Item/didl:Item[didl:Descriptor/didl:Statement/rdf:type/@resource="info:eu-repo/semantics/objectFile"]', namespaces=self._nsMap)
-            if len(objectfiles) > 0: self.do.logMsg(self._identifier, LOGGER6, prefix=STR_DIDL)
+            if len(objectfiles) > 0: self.do.logMsg(self._uploadid, LOGGER6, prefix=STR_DIDL)
         if len(objectfiles) ==0:
             objectfiles = lxmlNode.xpath('//didl:DIDL/didl:Item/didl:Item[didl:Descriptor/didl:Statement/dip:ObjectType/text()="info:eu-repo/semantics/objectFile"]', namespaces=self._nsMap)
-            if len(objectfiles) > 0: self.do.logMsg(self._identifier, LOGGER7, prefix=STR_DIDL)
+            if len(objectfiles) > 0: self.do.logMsg(self._uploadid, LOGGER7, prefix=STR_DIDL)
         for objectfile in objectfiles:
         #1:Define correct ObjectFile descriptor:
             of_container += '<didl:Item><didl:Descriptor><didl:Statement mimeType="application/xml"><rdf:type rdf:resource="info:eu-repo/semantics/objectFile"/></didl:Statement></didl:Descriptor>'
@@ -399,7 +385,7 @@ class NormaliseDIDL(Converter):
                 ## We need both mimeType and URI: (MIMETYPE is required by DIDL schema, @ref not).
                 if len(mimeType) > 0 and len(uri) > 0:
                     if not comm.isMimeType(mimeType[0]):
-                        self.do.logMsg(self._identifier, LOGGER8 + mimeType[0], prefix=STR_DIDL)
+                        self.do.logMsg(self._uploadid, LOGGER8 + mimeType[0], prefix=STR_DIDL)
                     if comm.isURL(uri[0].strip()):
                         resources += """<didl:Resource mimeType="%s" ref="%s"/>""" % (escapeXml(mimeType[0].strip()), escapeXml(comm.urlQuote(uri[0].strip())))
                         _url_list.append("""<didl:Resource mimeType="%s" ref="%s"/>""" % (escapeXml(mimeType[0].strip()), escapeXml(comm.urlQuote(uri[0].strip()))))
@@ -422,23 +408,23 @@ class NormaliseDIDL(Converter):
         if len(didl_hsp_item) == 0:
             didl_hsp_item = lxmlNode.xpath('//didl:Item/didl:Item[didl:Descriptor/didl:Statement/rdf:type/@resource="info:eu-repo/semantics/humanStartPage"]', namespaces=self._nsMap)
             if len(didl_hsp_item) > 0:
-                self.do.logMsg(self._identifier, LOGGER9, prefix=STR_DIDL)
+                self.do.logMsg(self._uploadid, LOGGER9, prefix=STR_DIDL)
             if len(didl_hsp_item) == 0:
                 didl_hsp_item = lxmlNode.xpath('//didl:Item/didl:Item[didl:Descriptor/didl:Statement/dip:ObjectType/text()="info:eu-repo/semantics/humanStartPage"]', namespaces=self._nsMap)
                 if len(didl_hsp_item) > 0:
-                    self.do.logMsg(self._identifier, LOGGER10, prefix=STR_DIDL)
+                    self.do.logMsg(self._uploadid, LOGGER10, prefix=STR_DIDL)
                 if len(didl_hsp_item) == 0:
-                    self.do.logMsg(self._identifier, LOGGER11, prefix=STR_DIDL)
+                    self.do.logMsg(self._uploadid, LOGGER11, prefix=STR_DIDL)
                     return ""
 
         uriref  =  didl_hsp_item[0].xpath('self::didl:Item/didl:Component/didl:Resource/@ref', namespaces=self._nsMap)
         mimetype = didl_hsp_item[0].xpath('self::didl:Item/didl:Component/didl:Resource/@mimeType', namespaces=self._nsMap)
                 
         if len(mimetype) == 0:
-            self.do.logMsg(self._identifier, LOGGER13, prefix=STR_DIDL)
+            self.do.logMsg(self._uploadid, LOGGER13, prefix=STR_DIDL)
         
         if len(mimetype) > 0 and not comm.isMimeType(mimetype[0]):
-            self.do.logMsg(self._identifier, LOGGER12 + mimetype[0], prefix=STR_DIDL)
+            self.do.logMsg(self._uploadid, LOGGER12 + mimetype[0], prefix=STR_DIDL)
 
         if len(uriref) == 0 or not comm.isURL(uriref[0]):
             raise ValidateException(formatExceptionLine(EXCEPTION11, prefix=STR_DIDL))

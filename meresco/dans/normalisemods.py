@@ -14,6 +14,7 @@ from xmlvalidator import formatExceptionLine
 from dateutil.parser import parse as parseDate
 from datetime import *
 from normalisedidl import XML_ENCODING #TODO: Import it from a more intuitive location
+from meresco.dans.uiaconverter import UiaConverter
 
 import commons as comm
 
@@ -88,12 +89,10 @@ mods_edu_tlelements = ["titleInfo", "relatedItem", "name", "language", "typeOfRe
 # Skipped tl elements because not part of EduStandaard: , ["location", "note", "physicalDescription", "recordInfo", "tableOfContents", "targetAudience"]
 
 
-# TODO: Inherit from UAIConverter
-
-class NormaliseMODS(Converter):
+class NormaliseMODS(UiaConverter):
     """A class that normalizes MODS metadata to the EduStandaard applicationprofile"""
     def __init__(self, fromKwarg, toKwarg=None, name=None, nsMap=None):
-        Converter.__init__(self, name=name, fromKwarg=fromKwarg, toKwarg=toKwarg)
+        UiaConverter.__init__(self, name=name, fromKwarg=fromKwarg, toKwarg=toKwarg)
         self._nsMap = namespaces.copyUpdate(nsMap or {})
         self._bln_success = False
         self._edu_extension_schemas = []
@@ -106,18 +105,6 @@ class NormaliseMODS(Converter):
             except XMLSchemaParseError, e:
                 print 'XMLSchemaParseError.', e.error_log.last_error
                 raise
-
-    def _convertArgs(self, *args, **kwargs):
-        """ Overrides meresco.components.Converter#_convertArgs() to be able to extract the meresco uploadid. """
-        try:
-            oldvalue = kwargs[self._fromKwarg]
-            self._identifier = kwargs['identifier']
-        except KeyError:
-            pass
-        else:
-            del kwargs[self._fromKwarg]
-            kwargs[self._toKwarg] = self._convert(oldvalue)
-        return args, kwargs
 
 
     def _convert(self, lxmlNode):
@@ -312,7 +299,7 @@ class NormaliseMODS(Converter):
                 if comm.isValidRFC3066(langterm_node.text):
                     langterm_node.set('authority', 'rfc3066')
                 else:
-                    self.do.logMsg(self._identifier, langterm_node.text + LOGGER1, prefix=STR_MODS)
+                    self.do.logMsg(self._uploadid, langterm_node.text + LOGGER1, prefix=STR_MODS)
                     childNode.remove(langterm_node)
             elif langterm_node.get("type") == "text":
                 langterm_node.attrib.pop('authority', None)
@@ -540,7 +527,7 @@ class NormaliseMODS(Converter):
                     lxmlNode.set("{http://www.w3.org/2001/XMLSchema-instance}schemaLocation", slocation) 
                     return True
         ## Looped over all allowed Edustandaard extensions types: None was found...        
-        self.do.logMsg(self._identifier, LOGGER2, prefix=STR_MODS)
+        self.do.logMsg(self._uploadid, LOGGER2, prefix=STR_MODS)
         return False
 
 ## Add possible dai identifiers from daiList in Mods Extension, if some dai is not already given in the mods:name tag (as a nameIdentifier).
@@ -548,7 +535,7 @@ class NormaliseMODS(Converter):
 ## We do NOT VALIDE the identifier, since all other nameIdentifiers are also transferred "as they are".
     def _addDaiFromModExtension(self, mods_node, xml_id, dailist_authority, dailist_dai_text):
         if dailist_authority is not None and "dai" not in dailist_authority:
-            self.do.logMsg(self._identifier, LOGGER3 % (dailist_authority), prefix=STR_MODS)
+            self.do.logMsg(self._uploadid, LOGGER3 % (dailist_authority), prefix=STR_MODS)
             return
 #         Find dais from referring name element by ID:
         name = mods_node.xpath("//mods:mods/mods:name[@ID='"+xml_id+"']", namespaces=self._nsMap)
