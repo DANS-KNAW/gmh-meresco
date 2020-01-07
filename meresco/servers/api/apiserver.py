@@ -48,7 +48,7 @@ from meresco.xml import namespaces
 
 from storage.storageadapter import StorageAdapter
 
-from meresco.dans.nl_didl_combined import NL_DIDL_combined
+from meresco.dans.nldidlcombined import NlDidlCombined
 from meresco.dans.storagesplit import Md5HashDistributeStrategy
 from meresco.dans.writedeleted import ResurrectTombstone, WriteTombstone
 from meresco.servers.gateway.gatewayserver import NORMALISED_DOC_NAME
@@ -133,7 +133,7 @@ def createDownloadHelix(reactor, periodicDownload, oaiDownload, storageComponent
                         (XmlXPath(['//document:document/document:part[@name="record"]/text()'], fromKwarg='lxmlNode',
                                toKwarg='data', namespaces=NAMESPACEMAP),
                             (XmlParseLxml(fromKwarg='data', toKwarg='lxmlNode'),
-                                (NL_DIDL_combined(nsMap=NAMESPACEMAP),
+                                (NlDidlCombined(nsMap=NAMESPACEMAP, fromKwarg='lxmlNode'),
                                     # Create combined format from stored metadataPart and normalized part.
                                     (XmlPrintLxml(fromKwarg='lxmlNode', toKwarg='data'),  # Convert it to plaintext
                                         (RewritePartname(NL_DIDL_COMBINED_PREFIX),  # Rename combined partName
