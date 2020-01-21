@@ -45,5 +45,5 @@ if __name__ == '__main__':
     parser.addOption('', '--quickCommit', help="True or False. Use True for integration tests. Defaults to False.", mandatory=False)
     options, arguments =  parser.parse()
 
-    from meresco.servers.bri.briserver import startServer
+    from meresco.servers.resolver.resolverserver import startServer
     startServer(**vars(options))

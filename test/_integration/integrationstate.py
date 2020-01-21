@@ -51,7 +51,7 @@ class GmhTestIntegrationState(IntegrationState):
         self.testdataDir = join(dirname(mydir), 'updateRequest')
         self.gatewayPort = PortNumberGenerator.next()
         self.apiPort = PortNumberGenerator.next()
-        self.briPort = PortNumberGenerator.next()
+        self.resolverPort = PortNumberGenerator.next()
 
 
     def binDir(self):
@@ -60,7 +60,7 @@ class GmhTestIntegrationState(IntegrationState):
     def setUp(self):
         self.startGatewayServer()
         self.startApiServer()
-        self.startBriServer()
+        self.startResolverServer()
         self.waitForServicesStarted()
         self._createDatabase()
         sleep(0.2)
@@ -77,17 +77,17 @@ class GmhTestIntegrationState(IntegrationState):
             stateDir=join(self.integrationTempdir, 'gateway'),
             waitForStart=False)
 
-    def startBriServer(self):
-        executable = self.binPath('start-bri')
+    def startResolverServer(self):
+        executable = self.binPath('start-resolver')
         self._startServer(
-            serviceName='bri',
+            serviceName='resolver',
             debugInfo=True,
             executable=executable,
-            serviceReadyUrl='http://localhost:%s/als/het/maar/connecten/kan/404/is/prima' % self.gatewayPort, # Ding heeft geen http interface meer... We moeten wat...
+            serviceReadyUrl='http://localhost:%s/als/het/maar/connecten/kan/404/is/prima' % self.resolverPort, # Ding heeft geen http interface meer... We moeten wat...
             cwd=dirname(abspath(executable)),
-            port=self.briPort,
+            port=self.resolverPort,
             gatewayPort=self.gatewayPort,
-            stateDir=join(self.integrationTempdir, 'bri'),
+            stateDir=join(self.integrationTempdir, 'resolver'),
             quickCommit=True,
             waitForStart=False)
 

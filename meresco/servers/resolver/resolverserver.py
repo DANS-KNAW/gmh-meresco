@@ -156,7 +156,7 @@ def main(reactor, port, statePath, gatewayPort, quickCommit=False, **ignored):
 
 def startServer(port, stateDir, gatewayPort, quickCommit=False, **kwargs):
     setSignalHandlers()
-    print 'Firing up BRI Server.'
+    print 'Firing up (NBN) Resolver Server.'
     statePath = abspath(stateDir)
 
     reactor = Reactor()
