@@ -59,11 +59,13 @@ NL_DIDL_NORMALISED_PREFIX = 'nl_didl_norm'
 NL_DIDL_COMBINED_PREFIX = 'nl_didl_combined'
 
 NAMESPACEMAP = namespaces.copyUpdate({
-    'dip' : 'urn:mpeg:mpeg21:2005:01-DIP-NS',
-    'gal': "info:eu-repo/grantAgreement",
-    'hbo': "info:eu-repo/xmlns/hboMODSextension",
-    'wmp': "http://www.surfgroepen.nl/werkgroepmetadataplus",
-    'norm'  : 'http://dans.knaw.nl/narcis/normalized',
+    'dip'           : 'urn:mpeg:mpeg21:2005:01-DIP-NS',
+    'gal'           : 'info:eu-repo/grantAgreement',
+    'hbo'           : 'info:eu-repo/xmlns/hboMODSextension',
+    'wmp'           : 'http://www.surfgroepen.nl/werkgroepmetadataplus',
+    'gmhnorm'       : 'http://gh.kb-dans.nl/normalised/v0.9/',
+    'gmhcombined'   : 'http://gh.kb-dans.nl/combined/v0.9/',
+
 })
 
 
@@ -128,7 +130,10 @@ def createDownloadHelix(reactor, periodicDownload, oaiDownload, storageComponent
                                     )
                                 ),
                                 # Schrijf 'metadata' partname naar storage:
-                                (XmlXPath(['/oai:record/oai:metadata'], fromKwarg='lxmlNode', namespaces=NAMESPACEMAP),
+                                # Op gharvester21 gaat dit niet goed: Daar is het root element <metadata> in het 'metadata' part, in plaats van <DIDL>.
+                                # Liever hier een child::node(), echter gaat deze syntax mis i.c.m. XmlXPath component??
+                                (XmlXPath(['/oai:record/oai:metadata/didl:DIDL'], fromKwarg='lxmlNode', namespaces=NAMESPACEMAP),
+                                    # (LogComponent("METADATA_PART"),),
                                     (RewritePartname("metadata"),
                                         (XmlPrintLxml(fromKwarg="lxmlNode", toKwarg="data", pretty_print=True),
                                             (storageComponent,) # Schrijft metadata naar storage.
@@ -180,9 +185,9 @@ def main(reactor, port, statePath, gatewayPort, quickCommit=False, **ignored):
     storage = StorageComponent(join(statePath, 'store'), strategy=strategie, partsRemovedOnDelete=[NL_DIDL_NORMALISED_PREFIX, NL_DIDL_COMBINED_PREFIX, 'metadata'])
 
     oaiJazz = OaiJazz(join(statePath, 'oai'))
-    oaiJazz.updateMetadataFormat("metadata", "http://didl.loc.nl/didl.xsd", NAMESPACEMAP.didl) #TODO: Use correct schema-locations and namespaces. http://agharvester21.dans.knaw.nl:8000/oai?verb=ListMetadataFormats
-    oaiJazz.updateMetadataFormat(NL_DIDL_COMBINED_PREFIX, "http://combined.schema.nl", "http://gh.kb-dans.nl/combined/v0.9/")
-    oaiJazz.updateMetadataFormat(NL_DIDL_NORMALISED_PREFIX, "http://norm.schema.nl", NAMESPACEMAP.norm)
+    oaiJazz.updateMetadataFormat("metadata", "http://didl.loc.nl/didl.xsd", NAMESPACEMAP.didl)
+    oaiJazz.updateMetadataFormat(NL_DIDL_COMBINED_PREFIX, "", NAMESPACEMAP.gmhcombined)
+    oaiJazz.updateMetadataFormat(NL_DIDL_NORMALISED_PREFIX, "", NAMESPACEMAP.gmhnorm)
 
     normLogger = Logger(join(statePath, '..', 'gateway', 'normlogger'))
 
@@ -236,33 +241,45 @@ def main(reactor, port, statePath, gatewayPort, quickCommit=False, **ignored):
                 # ),
 
 
-
-# TODO: Verb=Identify op orde
                 (PathFilter('/oai'),
                     (OaiPmh(
-                            repositoryName="NARCIS OAI-pmh",
-                            adminEmail="narcis@dans.knaw.nl",
-                            externalUrl="http://oai.narcis.nl",
+                            repositoryName="Gemeenschappelijke Metadata Harvester DANS-KB",
+                            adminEmail="harvester@dans.knaw.nl",
+                            externalUrl="http://oai.gharvester.dans.knaw.nl",
                             batchSize=200,
-                            supportXWait=False
+                            supportXWait=False,
+                            # preciseDatestamp=False,
+                            # deleteInSets=False
                         ),
                         (oaiJazz, ),
-                        # (oaiSuspendRegister, ), #TODO: Waarom schrijven naar dit 'SuspendRegister"? Dit is code aangeleverd door Seecr?!
                         (RetrieveToGetDataAdapter(),
                             (storage,),
                         ),
                         (OaiBranding(
-                            url="http://www.narcis.nl/images/logos/logo-knaw-house.gif",
-                            link="http://oai.narcis.nl",
-                            title="Narcis - The gateway to scholarly information in The Netherlands"),
+                            url="https://www.narcis.nl/images/logos/logo-knaw-house.gif", #TODO: Link to a joint-GMH icon...
+                            link="https://harvester.dans.knaw.nl",
+                            title="Gemeenschappelijke Metadata Harvester (GMH) van DANS en de KB"),
                         ),
+
+                        # (OaiProvenance(
+                        #     nsMap=NAMESPACEMAP,
+                        #     baseURL=('meta', '//meta:repository/meta:baseurl/text()'),
+                        #     harvestDate=('meta', '//meta:record/meta:harvestdate/text()'),
+                        #     metadataNamespace=('meta', '//meta:record/meta:metadataNamespace/text()'),
+                        #     identifier=('header','//oai:identifier/text()'),
+                        #     datestamp=('header', '//oai:datestamp/text()')
+                        #     ),
+                        #     (storage,)
+                        # ),
+
+
                     )
                 ),
 
 
 
                 (PathFilter('/rss'),
-                    (LoggerRSS( title = 'Gemeenschappelijke Harvester DANS-KB', description = 'Harvester normalisation log for: ', link = 'http://rss.gharvester.dans.knaw.nl/rss', maximumRecords = 30),
+                    (LoggerRSS( title = 'GMH DANS-KB Normalisationlog Syndication', description = 'Harvester normalisation log for: ', link = 'http://rss.gharvester.dans.knaw.nl/rss', maximumRecords = 30),
                         (normLogger,
                             (storage,)
                         )

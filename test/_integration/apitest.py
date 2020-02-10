@@ -50,8 +50,15 @@ testNamespaces = namespaces.copyUpdate({'oaibrand':'http://www.openarchives.org/
 class ApiTest(IntegrationTestCase):
 
 
+    def testRSS(self): # From GMH21 OK
+        header, body = getRequest(self.apiPort, '/rss', dict(repositoryId='kb_tst', maximumRecords=10)) #, startRecord='1'
+        # print "RSS body:", etree.tostring(body)   
+        self.assertEquals(6, len(xpath(body, "/rss/channel/item/description")))
+        self.assertEqual('GMH DANS-KB Normalisationlog Syndication', xpathFirst(body, '//channel/title/text()'))
+        self.assertEqual('DIDL: HumanStartPage descriptor found in depricated dip namespace.\n', xpathFirst(body, '//item/description/text()'))
 
-    def testOai(self):
+
+    def testOai(self): # NOTIN GMH21
         header, body = getRequest(self.apiPort, '/oai', dict(verb="ListRecords", metadataPrefix=NL_DIDL_NORMALISED_PREFIX))
         # print "OAI body:", etree.tostring(body) #
         records = xpath(body, '//oai:record/oai:metadata')
@@ -63,27 +70,55 @@ class ApiTest(IntegrationTestCase):
     #     self.assertEqual('Search', xpathFirst(body, '//dc:subject/text()'))
         
 
-    def testOaiIdentify(self):
+    def testOaiIdentify(self): # From GMH21 OK
         header, body = getRequest(self.apiPort, '/oai', dict(verb="Identify"))
         # print "OAI Identify:", etree.tostring(body)
-        self.assertEqual('NARCIS OAI-pmh', xpathFirst(body, '//oai:Identify/oai:repositoryName/text()'))
-        self.assertEqual('Narcis - The gateway to scholarly information in The Netherlands', testNamespaces.xpathFirst(body, '//oai:Identify/oai:description/oaibrand:branding/oaibrand:collectionIcon/oaibrand:title/text()'))
+        self.assertEquals('HTTP/1.0 200 OK\r\nContent-Type: text/xml; charset=utf-8', header)
+        self.assertEqual('Gemeenschappelijke Metadata Harvester DANS-KB', xpathFirst(body, '//oai:Identify/oai:repositoryName/text()'))
+        self.assertEqual('harvester@dans.knaw.nl', xpathFirst(body, '//oai:Identify/oai:adminEmail/text()'))
+        self.assertEqual('Gemeenschappelijke Metadata Harvester (GMH) van DANS en de KB', testNamespaces.xpathFirst(body, '//oai:Identify/oai:description/oaibrand:branding/oaibrand:collectionIcon/oaibrand:title/text()'))
 
-    def testOaiListSets(self):
+
+    def testOaiListMetadataFormats(self): # From GMH21 OK
+        header, body = getRequest(self.apiPort, '/oai', dict(verb="ListMetadataFormats"))
+        # print 'ListMetadataFormats:', etree.tostring(body)
+        self.assertEquals('HTTP/1.0 200 OK\r\nContent-Type: text/xml; charset=utf-8', header)
+        self.assertEquals(3, len(xpath(body, "//oai:ListMetadataFormats/oai:metadataFormat")))
+        self.assertEqual('metadata', xpath(body, "//oai:ListMetadataFormats/oai:metadataFormat[1]/oai:metadataPrefix/text()")[0])
+        self.assertEqual('nl_didl_combined', xpath(body, "//oai:ListMetadataFormats/oai:metadataFormat[2]/oai:metadataPrefix/text()")[0])
+        self.assertEqual('nl_didl_norm', xpath(body, "//oai:ListMetadataFormats/oai:metadataFormat[3]/oai:metadataPrefix/text()")[0])
+
+
+    def testOaiListSets(self): # From GMH21 TODO
         header, body = getRequest(self.apiPort, '/oai', dict(verb="ListSets"))
         # print "ListSets", etree.tostring(body)
+        self.assertEquals('HTTP/1.0 200 OK\r\nContent-Type: text/xml; charset=utf-8', header)
+        # self.assertEquals(7, len(body.OAI_PMH.ListSets.set))
+        # self.assertEquals('kb', body.OAI_PMH.ListSets.set[0].setSpec)        
         # self.assertEqual({'publication','openaire','oa_publication','ec_fundedresources','thesis','dataset'}, set(xpath(body, '//oai:setSpec/text()')))
 
-    def testOaiListMetadataFormats(self):
-        header, body = getRequest(self.apiPort, '/oai', dict(verb="ListMetadataFormats"))
-        # print "ListMetadataFormats", etree.tostring(body)
-        # self.assertEqual({'oai_dc'}, set(xpath(body, '//oai:metadataFormat/oai:metadataPrefix/text()')))
+    # def testOaiListSets(self):
+    #     header, body = getRequest(reactor, port, '/oai', {'verb': 'ListSets'})
+    #     # print 'ListSets:', body.xml()
+    #     self.assertEquals('HTTP/1.0 200 OK\r\nContent-Type: text/xml; charset=utf-8', header)
+    #     self.assertEquals(7, len(body.OAI_PMH.ListSets.set))
+    #     self.assertEquals('kb', body.OAI_PMH.ListSets.set[0].setSpec)
 
 
-    def testRSS(self): #TODO: Find out why DIFFER has two similair entries in the lohfile
-        header, body = getRequest(self.apiPort, '/rss', dict(repositoryId='beeldengeluid', maximumRecords=10)) #, startRecord='1'
-        # print "RSS body:", etree.tostring(body)
-        descriptions = xpath(body, "/rss/channel/item/description")        
-        self.assertEquals(1, len(descriptions))
-        self.assertEqual('Gemeenschappelijke Harvester DANS-KB', xpathFirst(body, '//channel/title/text()'))
-        self.assertEqual('MODS: mods is not a valid RFC3066 language code.\n', xpathFirst(body, '//item/description/text()'))
+    def testDeleteRecord(self): # From GMH21 TODO
+        header, body = getRequest(self.apiPort, '/oai', dict(verb="GetRecord", metadataPrefix='metadata', identifier='kb_tst:GMH:05')) #kb_tst:GMH:06
+        # print "GetRecord DELETED", etree.tostring(body)
+        # self.assertEquals('deleted', xpath(body, "//oai:GetRecord/oai:record[1]/oai:header/@status")[0])
+
+
+    def testProvenanceMetaDataNamespace(self): # From GMH21 TODO
+        header, body = getRequest(self.apiPort, '/oai', dict(verb="ListRecords", metadataPrefix='metadata'))
+        # print "ListRecords, nl_didl_norm:", etree.tostring(body)
+        self.assertEquals('HTTP/1.0 200 OK\r\nContent-Type: text/xml; charset=utf-8', header)
+        self.assertEquals(16, len(xpath(body, "//oai:ListRecords/oai:record")))
+
+        # for record in xpath(body, "//oai:ListRecords/oai:record"):
+        #     if not str(record.header.status) == 'deleted':
+        #         # print 'metadataNamespace:', str(record.about.provenance.originDescription.metadataNamespace)
+        #         self.assertTrue('mods' in str(record.about.provenance.originDescription.metadataNamespace))
+
