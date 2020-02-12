@@ -51,7 +51,7 @@ class ApiTest(IntegrationTestCase):
     def testRSS(self): # GMH21 OK
         header, body = getRequest(self.apiPort, '/rss', dict(repositoryId='kb_tst', maximumRecords=10)) #, startRecord='1'
         # print "RSS body:", etree.tostring(body)   
-        self.assertEquals(6, len(xpath(body, "/rss/channel/item/description")))
+        self.assertEqual(6, len(xpath(body, "/rss/channel/item/description")))
         self.assertEqual('GMH DANS-KB Normalisationlog Syndication', xpathFirst(body, '//channel/title/text()'))
         self.assertEqual('DIDL: HumanStartPage descriptor found in depricated dip namespace.\n', xpathFirst(body, '//item/description/text()'))
 
@@ -59,8 +59,8 @@ class ApiTest(IntegrationTestCase):
     def testOaiListMetadataFormats(self): # GMH21 OK
         header, body = getRequest(self.apiPort, '/oai', dict(verb="ListMetadataFormats"))
         # print 'ListMetadataFormats:', etree.tostring(body)
-        self.assertEquals('HTTP/1.0 200 OK\r\nContent-Type: text/xml; charset=utf-8', header)
-        self.assertEquals(3, len(xpath(body, "//oai:ListMetadataFormats/oai:metadataFormat")))
+        self.assertEqual('HTTP/1.0 200 OK\r\nContent-Type: text/xml; charset=utf-8', header)
+        self.assertEqual(3, len(xpath(body, "//oai:ListMetadataFormats/oai:metadataFormat")))
         self.assertEqual('metadata', xpath(body, "//oai:ListMetadataFormats/oai:metadataFormat[1]/oai:metadataPrefix/text()")[0])
         self.assertEqual('nl_didl_combined', xpath(body, "//oai:ListMetadataFormats/oai:metadataFormat[2]/oai:metadataPrefix/text()")[0])
         self.assertEqual('nl_didl_norm', xpath(body, "//oai:ListMetadataFormats/oai:metadataFormat[3]/oai:metadataPrefix/text()")[0])
@@ -69,7 +69,7 @@ class ApiTest(IntegrationTestCase):
     def testOaiIdentify(self): # GMH21 OK
         header, body = getRequest(self.apiPort, '/oai', dict(verb="Identify"))
         # print "OAI Identify:", etree.tostring(body)
-        self.assertEquals('HTTP/1.0 200 OK\r\nContent-Type: text/xml; charset=utf-8', header)
+        self.assertEqual('HTTP/1.0 200 OK\r\nContent-Type: text/xml; charset=utf-8', header)
         self.assertEqual('Gemeenschappelijke Metadata Harvester DANS-KB', xpathFirst(body, '//oai:Identify/oai:repositoryName/text()'))
         self.assertEqual('harvester@dans.knaw.nl', xpathFirst(body, '//oai:Identify/oai:adminEmail/text()'))
         self.assertEqual('Gemeenschappelijke Metadata Harvester (GMH) van DANS en de KB', testNamespaces.xpathFirst(body, '//oai:Identify/oai:description/oaibrand:branding/oaibrand:collectionIcon/oaibrand:title/text()'))
@@ -78,16 +78,16 @@ class ApiTest(IntegrationTestCase):
     def testOaiListSets(self): # GMH21 TODO
         header, body = getRequest(self.apiPort, '/oai', dict(verb="ListSets"))
         # print "ListSets", etree.tostring(body)
-        self.assertEquals('HTTP/1.0 200 OK\r\nContent-Type: text/xml; charset=utf-8', header)
-        self.assertEquals(1, len(xpath(body, "//oai:ListSets/oai:set")))
-        self.assertEquals('TODO', xpath(body, "//oai:ListSets/oai:set[1]/oai:setSpec/text()")[0])
+        self.assertEqual('HTTP/1.0 200 OK\r\nContent-Type: text/xml; charset=utf-8', header)
+        self.assertEqual(1, len(xpath(body, "//oai:ListSets/oai:set")))
+        self.assertEqual('TODO', xpath(body, "//oai:ListSets/oai:set[1]/oai:setSpec/text()")[0])
 
         
     def testProvenanceMetaDataNamespace(self): # GMH21 OK
         header, body = getRequest(self.apiPort, '/oai', dict(verb="ListRecords", metadataPrefix='metadata'))
         # print "testProvenanceMetaDataNamespace:", etree.tostring(body)
-        self.assertEquals('HTTP/1.0 200 OK\r\nContent-Type: text/xml; charset=utf-8', header)
-        self.assertEquals(16, len(xpath(body, "//oai:ListRecords/oai:record")))
+        self.assertEqual('HTTP/1.0 200 OK\r\nContent-Type: text/xml; charset=utf-8', header)
+        self.assertEqual(16, len(xpath(body, "//oai:ListRecords/oai:record")))
         for provNamespace in testNamespaces.xpath(body, "//oaiprov:originDescription/oaiprov:metadataNamespace/text()"):
             self.assertTrue('didl' in provNamespace)
 
@@ -95,29 +95,29 @@ class ApiTest(IntegrationTestCase):
     def testOaiSet(self): # GMH21 TODO
         header, body = getRequest(self.apiPort, '/oai', dict(verb="ListRecords", metadataPrefix='nl_didl_combined', set='TODO'))
         # print 'testOaiSet:', etree.tostring(body)
-        self.assertEquals('HTTP/1.0 200 OK\r\nContent-Type: text/xml; charset=utf-8', header)
-        self.assertEquals(16, len(xpath(body, "//oai:ListRecords/oai:record")))
+        self.assertEqual('HTTP/1.0 200 OK\r\nContent-Type: text/xml; charset=utf-8', header)
+        self.assertEqual(16, len(xpath(body, "//oai:ListRecords/oai:record")))
 
 
     def testOaiGetRecord(self): # GMH21 OK
         header, body = getRequest(self.apiPort, '/oai', dict(verb='GetRecord', metadataPrefix='metadata', identifier='kb_tst:GMH:04'))
         # print 'testOaiSet:', etree.tostring(body)
-        self.assertEquals('HTTP/1.0 200 OK\r\nContent-Type: text/xml; charset=utf-8', header)
-        self.assertEquals(1, len(xpath(body, "//oai:GetRecord/oai:record/oai:header/oai:identifier")))
+        self.assertEqual('HTTP/1.0 200 OK\r\nContent-Type: text/xml; charset=utf-8', header)
+        self.assertEqual(1, len(xpath(body, "//oai:GetRecord/oai:record/oai:header/oai:identifier")))
 
 
     def testDeleteRecord(self): # GMH21 TODO
         header, body = getRequest(self.apiPort, '/oai', dict(verb="GetRecord", metadataPrefix='metadata', identifier='kb_tst:GMH:05')) #differ:oai:www.differ.nl:160
         # print "GetRecord DELETED", etree.tostring(body)
-        self.assertEquals('HTTP/1.0 200 OK\r\nContent-Type: text/xml; charset=utf-8', header)
+        self.assertEqual('HTTP/1.0 200 OK\r\nContent-Type: text/xml; charset=utf-8', header)
         # self.assertEquals('deleted', xpath(body, "//oai:GetRecord/oai:record[1]/oai:header/@status")[0])
 
 
     def testOai(self): # GMH31
         header, body = getRequest(self.apiPort, '/oai', dict(verb="ListRecords", metadataPrefix=NL_DIDL_NORMALISED_PREFIX))
         # print "OAI body:", etree.tostring(body)
-        self.assertEquals('HTTP/1.0 200 OK\r\nContent-Type: text/xml; charset=utf-8', header)
-        self.assertEquals(16, len(xpath(body, "//oai:ListRecords/oai:record")))
+        self.assertEqual('HTTP/1.0 200 OK\r\nContent-Type: text/xml; charset=utf-8', header)
+        self.assertEqual(16, len(xpath(body, "//oai:ListRecords/oai:record")))
         self.assertEqual('nl_didl', xpathFirst(body, '//oaiprov:provenance/oaiprov:originDescription/oaiprov:metadataNamespace/text()'))
 
 # De deletes komen zeker door van de GateWay, echter worden er voor de test-records nooit een update gestuurd, waardoor de records dus NIET als @status=deleted in de PMH komen (want zijn er nooit in geweest). Vraag is hoe erg dit is, en hoe vaak dit in de practijk voorkomt.Het is wel verwarrend.

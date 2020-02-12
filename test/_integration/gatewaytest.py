@@ -48,3 +48,9 @@ class GatewayTest(IntegrationTestCase):
         self.assertEqual('HTTP/1.0 200 OK\r\nContent-Type: text/xml; charset=utf-8', header)
         adminEmail = xpath(body, '//oai:Identify/oai:adminEmail/text()')
         self.assertEqual("ab@narcis.nl", adminEmail[0])
+
+    def testOaixInfo(self):
+        header, body = getRequest(self.gatewayPort, '/oaix/info/index')
+        self.assertEqual('HTTP/1.0 200 OK\r\nContent-Type: text/html; charset=utf-8', header)
+        # print "testOaixInfo:", etree.tostring(body)
+        self.assertTrue('normdoc' in etree.tostring(body))

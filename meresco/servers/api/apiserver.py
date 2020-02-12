@@ -209,7 +209,7 @@ def main(reactor, port, statePath, gatewayPort, quickCommit=False, **ignored):
         userAgentAddition='ApiServer',
         xWait=True,
         name='api',
-        autoCommit=True)
+        autoCommit=False)
 
 
     return \
