@@ -228,6 +228,7 @@
                 &lt;upload&gt;&lt;id&gt;kb_tst:GMH:05&lt;/id&gt;&lt;/upload&gt;
                 &lt;record&gt;
                 &lt;id&gt;GMH:05&lt;/id&gt;
+                &lt;harvestdate&gt;2019-11-20T17:59:50Z&lt;/harvestdate&gt;
                 &lt;/record&gt;
                 &lt;repository&gt;
                 &lt;id&gt;kb_tst&lt;/id&gt;

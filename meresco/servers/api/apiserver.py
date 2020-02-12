@@ -65,6 +65,8 @@ NAMESPACEMAP = namespaces.copyUpdate({
     'wmp'           : 'http://www.surfgroepen.nl/werkgroepmetadataplus',
     'gmhnorm'       : 'http://gh.kb-dans.nl/normalised/v0.9/',
     'gmhcombined'   : 'http://gh.kb-dans.nl/combined/v0.9/',
+    'meta' : 'http://meresco.org/namespace/harvester/meta',
+    'oai': 'http://www.openarchives.org/OAI/2.0/'
 
 })
 
@@ -76,7 +78,7 @@ def createDownloadHelix(reactor, periodicDownload, oaiDownload, storageComponent
             (oaiDownload, # Implementation/Protocol of a PeriodicDownload...
                 (UpdateAdapterFromOaiDownloadProcessor(), # Maakt van een SRU update/delete bericht (lxmlNode) een relevante message: 'delete' of 'add' message.
                     (FilterMessages(['delete']), # Filtert delete messages
-                        # (LogComponent("Delete Update"),),
+                        (LogComponent("Delete Update"),),
                         (storageComponent,), # Delete from storage
                         (oaiJazz,), # Delete from OAI-pmh repo
                         # Write a 'deleted' part to the storage, that holds the (Record)uploadId.
@@ -207,7 +209,7 @@ def main(reactor, port, statePath, gatewayPort, quickCommit=False, **ignored):
         userAgentAddition='ApiServer',
         xWait=True,
         name='api',
-        autoCommit=False)
+        autoCommit=True)
 
 
     return \
@@ -215,32 +217,6 @@ def main(reactor, port, statePath, gatewayPort, quickCommit=False, **ignored):
         createDownloadHelix(reactor, periodicGateWayDownload, oaiDownload, storage, oaiJazz),
         (ObservableHttpServer(reactor, port, compressResponse=True),
             (BasicHttpHandler(),
-
-                # (PathFilter(["/oai"]),
-                #     (OaiPmh(repositoryName="NARCIS OAI-pmh", adminEmail="narcis@dans.knaw.nl", externalUrl="http://oai.narcis.nl"),
-                #         (oaiJazz,),
-                #         (StorageAdapter(),
-                #             (storage,)
-                #         ),
-                #         (OaiBranding(
-                #             url="http://www.narcis.nl/images/logos/logo-knaw-house.gif",
-                #             link="http://oai.narcis.nl",
-                #             title="Narcis - The gateway to scholarly information in The Netherlands"),
-                #         ),
-                #         (OaiProvenance(
-                #             nsMap=NAMESPACEMAP,
-                #             baseURL=('meta', '//meta:repository/meta:baseurl/text()'),
-                #             harvestDate=('meta', '//meta:record/meta:harvestdate/text()'),
-                #             metadataNamespace=('meta', '//meta:record/meta:metadataNamespace/text()'),
-                #             identifier=('header','//oai:identifier/text()'),
-                #             datestamp=('header', '//oai:datestamp/text()')
-                #             ),
-                #             (storage,)
-                #         )
-                #     )
-                # ),
-
-
                 (PathFilter('/oai'),
                     (OaiPmh(
                             repositoryName="Gemeenschappelijke Metadata Harvester DANS-KB",
@@ -260,32 +236,27 @@ def main(reactor, port, statePath, gatewayPort, quickCommit=False, **ignored):
                             link="https://harvester.dans.knaw.nl",
                             title="Gemeenschappelijke Metadata Harvester (GMH) van DANS en de KB"),
                         ),
-
-                        # (OaiProvenance(
-                        #     nsMap=NAMESPACEMAP,
-                        #     baseURL=('meta', '//meta:repository/meta:baseurl/text()'),
-                        #     harvestDate=('meta', '//meta:record/meta:harvestdate/text()'),
-                        #     metadataNamespace=('meta', '//meta:record/meta:metadataNamespace/text()'),
-                        #     identifier=('header','//oai:identifier/text()'),
-                        #     datestamp=('header', '//oai:datestamp/text()')
-                        #     ),
-                        #     (storage,)
-                        # ),
-
-
+                        (OaiProvenance(
+                            nsMap=NAMESPACEMAP,
+                            baseURL=('meta', '//meta:repository/meta:baseurl/text()'),
+                            harvestDate=('meta', '//meta:harvestdate/text()'),
+                            metadataNamespace=('meta', '//meta:metadataPrefix/text()'), #TODO: Kan hardcoded in harvester mapper gezet eventueel: <metadataNamespace>urn:mpeg:mpeg21:2002:01-DII-NS</metadataNamespace>?? (storage,) #metadataNamespace=('meta', '//meta:record/meta:metadataNamespace/text()'),
+                            identifier=('header','//oai:identifier/text()'),
+                            datestamp=('header', '//oai:datestamp/text()')
+                            ),  
+                            (RetrieveToGetDataAdapter(),
+                                (storage,),
+                            )
+                        )
                     )
                 ),
-
-
-
                 (PathFilter('/rss'),
                     (LoggerRSS( title = 'GMH DANS-KB Normalisationlog Syndication', description = 'Harvester normalisation log for: ', link = 'http://rss.gharvester.dans.knaw.nl/rss', maximumRecords = 30),
                         (normLogger,
                             (storage,)
                         )
                     )
-                ),
-
+                )
             )
         )
     )
