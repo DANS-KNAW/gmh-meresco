@@ -97,7 +97,7 @@ def main(reactor, port, statePath, **ignored):
                 (IpFilter(allowedIps=['127.0.0.1']),
                     (PathFilter('/oaix', excluding=['/oaix/info']),
                         (OaiPmh(repositoryName='Gateway',
-                                adminEmail='ab@narcis.nl',
+                                adminEmail='harvester@dans.knaw.nl',
                                 supportXWait=True,
                                 batchSize=2000 # Override default batch size of 200.
                             ),

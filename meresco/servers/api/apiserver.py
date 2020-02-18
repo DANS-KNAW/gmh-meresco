@@ -38,7 +38,7 @@ from meresco.components import RenameFieldForExact, PeriodicDownload, XmlPrintLx
 from meresco.components.http import ObservableHttpServer, BasicHttpHandler, PathFilter, Deproxy
 from meresco.components.log import LogCollector, ApacheLogWriter, HandleRequestLog, LogCollectorScope, QueryLogWriter, DirectoryLog, LogFileServer, LogComponent
 
-from meresco.oai import OaiPmh, OaiDownloadProcessor, UpdateAdapterFromOaiDownloadProcessor, OaiJazz, OaiBranding, OaiProvenance, OaiAddDeleteRecordWithPrefixesAndSetSpecs
+from meresco.oai import OaiPmh, OaiDownloadProcessor, UpdateAdapterFromOaiDownloadProcessor, OaiJazz, OaiBranding, OaiProvenance#, OaiAddDeleteRecordWithPrefixesAndSetSpecs
 
 
 from seecr.utils import DebugPrompt
@@ -54,6 +54,7 @@ from meresco.dans.writedeleted import ResurrectTombstone, WriteTombstone
 from meresco.servers.gateway.gatewayserver import NORMALISED_DOC_NAME
 from meresco.dans.loggerrss import LoggerRSS
 from meresco.dans.logger import Logger # Normalisation Logger.
+from meresco.seecr.oai import OaiAddDeleteRecordWithPrefixesAndSetSpecs, OaiAddRecord
 
 NL_DIDL_NORMALISED_PREFIX = 'nl_didl_norm'
 NL_DIDL_COMBINED_PREFIX = 'nl_didl_combined'
@@ -96,29 +97,27 @@ def createDownloadHelix(reactor, periodicDownload, oaiDownload, storageComponent
                                     (XmlPrintLxml(fromKwarg="lxmlNode", toKwarg="data", pretty_print=True),
                                         (storageComponent,) # Schrijft oai:metadata (=origineel) naar storage.
                                     )
-                                )
+                                )                     
                             ),
 # TODO: Setspecs van een record overnemen en toevoegen.
-                            (OaiAddDeleteRecordWithPrefixesAndSetSpecs(setSpecs=['TODO'], metadataPrefixes=[ 'metadata', NL_DIDL_NORMALISED_PREFIX, NL_DIDL_COMBINED_PREFIX ]
-                                    # ('metadata', 'http://standards.iso.org/ittf/PubliclyAvailableStandards/MPEG-21_schema_files/did/didmodel.xsd', 'urn:mpeg:mpeg21:2002:02-DIDL-NS'),
-                                    # (NL_DIDL_NORMALISED_PREFIX, '', 'http://gh.kb-dans.nl/normalised/v0.9/'),
-                                    # (NL_DIDL_COMBINED_PREFIX, '', 'http://gh.kb-dans.nl/combined/v0.9/') ]
-                                ),
-                                (LogComponent("addOaiRecord:"),),
-                                (storageComponent,),
-                                (oaiJazz,) # Assert partNames header and meta are available from storage!
-                            ) #! OaiAddRecord
-                            # (OaiAddDeleteRecordWithPrefixesAndSetSpecs(metadataPrefixes=[
-                            #         ('metadata', 'http://standards.iso.org/ittf/PubliclyAvailableStandards/MPEG-21_schema_files/did/didmodel.xsd', 'urn:mpeg:mpeg21:2002:02-DIDL-NS'),
+                            # (OaiAddDeleteRecordWithPrefixesAndSetSpecs(setSpecs=['TODO'], metadataPrefixes=[ 'metadata', NL_DIDL_NORMALISED_PREFIX, NL_DIDL_COMBINED_PREFIX ]
+                            #         # ('metadata', 'http://standards.iso.org/ittf/PubliclyAvailableStandards/MPEG-21_schema_files/did/didmodel.xsd', 'urn:mpeg:mpeg21:2002:02-DIDL-NS'),
                             #         # (NL_DIDL_NORMALISED_PREFIX, '', 'http://gh.kb-dans.nl/normalised/v0.9/'),
-                            #         # (NL_DIDL_COMBINED_PREFIX, '', 'http://gh.kb-dans.nl/combined/v0.9/')
-                            #     ]),
+                            #         # (NL_DIDL_COMBINED_PREFIX, '', 'http://gh.kb-dans.nl/combined/v0.9/') ]
+                            #     ),
+                            #     (LogComponent("OaiAddDeleteRecordWithPrefixesAndSetSpecs:"),),
                             #     (storageComponent,),
                             #     (oaiJazz,) # Assert partNames header and meta are available from storage!
-                            # ) #! OaiAddRecord
-
+                            # )
                         ),
 
+                        # (XmlXPath(['//document:document/document:part[@name="normdoc"]/text()'], fromKwarg='lxmlNode', toKwarg='lxmlNode', namespaces=NAMESPACEMAP),
+                        #     (OaiAddRecord(),
+                        #         (LogComponent("OaiAddRecord:"),),
+                        #         (storageComponent,),
+                        #         (oaiJazz,) # Assert partNames header and meta are available from storage!
+                        #     )
+                        # ),
 
                         (XmlXPath(['//document:document/document:part[@name="record"]/text()'], fromKwarg='lxmlNode', toKwarg='data', namespaces=NAMESPACEMAP),
                             (XmlParseLxml(fromKwarg='data', toKwarg='lxmlNode'),
@@ -163,7 +162,16 @@ def createDownloadHelix(reactor, periodicDownload, oaiDownload, storageComponent
                             (RewritePartname("meta"),
                                 (storageComponent,) # Schrijft harvester 'meta' data naar storage.
                             )
+                        ),
+
+                        (OaiAddRecord(metadataPrefixes=[('metadata', 'http://standards.iso.org/ittf/PubliclyAvailableStandards/MPEG-21_schema_files/did/didmodel.xsd', 'urn:mpeg:mpeg21:2002:02-DIDL-NS'),
+                                    (NL_DIDL_NORMALISED_PREFIX, '', NAMESPACEMAP.gmhnorm),
+                                    (NL_DIDL_COMBINED_PREFIX, '', NAMESPACEMAP.gmhcombined)]), #[(partname, schema, namespace)]
+                            # (LogComponent("OaiAddRecord:"),),
+                            (storageComponent,),
+                            (oaiJazz,) # Assert partNames header and meta are available from storage!
                         )
+
                     ),
 
                     (FilterMessages(allowed=['add']),

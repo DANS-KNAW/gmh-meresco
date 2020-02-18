@@ -31,6 +31,7 @@ from lxml import etree
 from lxml.etree import tostring, fromstring
 
 NL_DIDL_NORMALISED_PREFIX = 'nl_didl_norm'
+NL_DIDL_COMBINED_PREFIX = 'nl_didl_combined'
 
 # TODO: create UnitTestCase for o.a. writeDelete / unDelete
 
@@ -75,12 +76,19 @@ class ApiTest(IntegrationTestCase):
         self.assertEqual('Gemeenschappelijke Metadata Harvester (GMH) van DANS en de KB', testNamespaces.xpathFirst(body, '//oai:Identify/oai:description/oaibrand:branding/oaibrand:collectionIcon/oaibrand:title/text()'))
 
 
-    def testOaiListSets(self): # GMH21 TODO
+    def testOaiListSets(self): # GMH21 OK
         header, body = getRequest(self.apiPort, '/oai', dict(verb="ListSets"))
         # print "ListSets", etree.tostring(body)
         self.assertEqual('HTTP/1.0 200 OK\r\nContent-Type: text/xml; charset=utf-8', header)
-        self.assertEqual(1, len(xpath(body, "//oai:ListSets/oai:set")))
-        self.assertEqual('TODO', xpath(body, "//oai:ListSets/oai:set[1]/oai:setSpec/text()")[0])
+        self.assertEqual({'kb:KB:GMH','beeldengeluid:view','kb:KB','beeldengeluid','kb','differ'}, set(xpath(body, "//oai:ListSets/oai:set/oai:setSpec/text()")))
+
+
+    def testOaiListMetadataFormats(self): # GMH31 OK
+        header, body = getRequest(self.apiPort, '/oai', dict(verb="ListMetadataFormats"))
+        # print "ListMetadataFormats", etree.tostring(body)
+        self.assertEqual('HTTP/1.0 200 OK\r\nContent-Type: text/xml; charset=utf-8', header)
+        self.assertEqual(3, len(xpath(body, "//oai:ListMetadataFormats/oai:metadataFormat")))
+        self.assertEqual({NL_DIDL_COMBINED_PREFIX,'metadata',NL_DIDL_NORMALISED_PREFIX}, set(xpath(body, "//oai:ListMetadataFormats/oai:metadataFormat/oai:metadataPrefix/text()")))
 
         
     def testProvenanceMetaDataNamespace(self): # GMH21 OK
@@ -92,11 +100,11 @@ class ApiTest(IntegrationTestCase):
             self.assertTrue('didl' in provNamespace)
 
 
-    def testOaiSet(self): # GMH21 TODO
-        header, body = getRequest(self.apiPort, '/oai', dict(verb="ListRecords", metadataPrefix='nl_didl_combined', set='TODO'))
+    def testOaiSet(self): # GMH21 OK
+        header, body = getRequest(self.apiPort, '/oai', dict(verb="ListRecords", metadataPrefix=NL_DIDL_COMBINED_PREFIX, set='kb'))
         # print 'testOaiSet:', etree.tostring(body)
         self.assertEqual('HTTP/1.0 200 OK\r\nContent-Type: text/xml; charset=utf-8', header)
-        self.assertEqual(16, len(xpath(body, "//oai:ListRecords/oai:record")))
+        self.assertEqual(8, len(xpath(body, "//oai:ListRecords/oai:record")))
 
 
     def testOaiGetRecord(self): # GMH21 OK
@@ -113,14 +121,14 @@ class ApiTest(IntegrationTestCase):
         # self.assertEquals('deleted', xpath(body, "//oai:GetRecord/oai:record[1]/oai:header/@status")[0])
 
 
-    def testOai(self): # GMH31
+    def testOai(self): # GMH31 OK
         header, body = getRequest(self.apiPort, '/oai', dict(verb="ListRecords", metadataPrefix=NL_DIDL_NORMALISED_PREFIX))
         # print "OAI body:", etree.tostring(body)
         self.assertEqual('HTTP/1.0 200 OK\r\nContent-Type: text/xml; charset=utf-8', header)
         self.assertEqual(16, len(xpath(body, "//oai:ListRecords/oai:record")))
         self.assertEqual('nl_didl', xpathFirst(body, '//oaiprov:provenance/oaiprov:originDescription/oaiprov:metadataNamespace/text()'))
 
-# De deletes komen zeker door van de GateWay, echter worden er voor de test-records nooit een update gestuurd, waardoor de records dus NIET als @status=deleted in de PMH komen (want zijn er nooit in geweest). Vraag is hoe erg dit is, en hoe vaak dit in de practijk voorkomt.Het is wel verwarrend.
+# De deletes komen zeker door van de GateWay, echter worden er voor de test-records nooit een initiele update gestuurd, waardoor de records dus NIET als @status=deleted in de PMH komen (want zijn er nooit in geweest). Vraag is hoe erg dit is, en hoe vaak dit in de practijk voorkomt.Het is wel verwarrend.
 
 
 # [addOaiRecord:] addOaiRecord(*(), **{'setSpecs': ['TODO'], 'identifier': 'beeldengeluid:oai:publications.beeldengeluid.nl:157', 'metadataPrefixes': ['metadata', 'nl_didl_norm', 'nl_didl_combined']})
