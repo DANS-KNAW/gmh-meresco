@@ -98,26 +98,8 @@ def createDownloadHelix(reactor, periodicDownload, oaiDownload, storageComponent
                                         (storageComponent,) # Schrijft oai:metadata (=origineel) naar storage.
                                     )
                                 )                     
-                            ),
-# TODO: Setspecs van een record overnemen en toevoegen.
-                            # (OaiAddDeleteRecordWithPrefixesAndSetSpecs(setSpecs=['TODO'], metadataPrefixes=[ 'metadata', NL_DIDL_NORMALISED_PREFIX, NL_DIDL_COMBINED_PREFIX ]
-                            #         # ('metadata', 'http://standards.iso.org/ittf/PubliclyAvailableStandards/MPEG-21_schema_files/did/didmodel.xsd', 'urn:mpeg:mpeg21:2002:02-DIDL-NS'),
-                            #         # (NL_DIDL_NORMALISED_PREFIX, '', 'http://gh.kb-dans.nl/normalised/v0.9/'),
-                            #         # (NL_DIDL_COMBINED_PREFIX, '', 'http://gh.kb-dans.nl/combined/v0.9/') ]
-                            #     ),
-                            #     (LogComponent("OaiAddDeleteRecordWithPrefixesAndSetSpecs:"),),
-                            #     (storageComponent,),
-                            #     (oaiJazz,) # Assert partNames header and meta are available from storage!
-                            # )
+                            )
                         ),
-
-                        # (XmlXPath(['//document:document/document:part[@name="normdoc"]/text()'], fromKwarg='lxmlNode', toKwarg='lxmlNode', namespaces=NAMESPACEMAP),
-                        #     (OaiAddRecord(),
-                        #         (LogComponent("OaiAddRecord:"),),
-                        #         (storageComponent,),
-                        #         (oaiJazz,) # Assert partNames header and meta are available from storage!
-                        #     )
-                        # ),
 
                         (XmlXPath(['//document:document/document:part[@name="record"]/text()'], fromKwarg='lxmlNode', toKwarg='data', namespaces=NAMESPACEMAP),
                             (XmlParseLxml(fromKwarg='data', toKwarg='lxmlNode'),
@@ -154,7 +136,7 @@ def createDownloadHelix(reactor, periodicDownload, oaiDownload, storageComponent
                                             (storageComponent,)  # Write combined partName to storage
                                         )
                                     )
-                                ),
+                                )
                             )
                         ),
 
@@ -170,16 +152,20 @@ def createDownloadHelix(reactor, periodicDownload, oaiDownload, storageComponent
                             # (LogComponent("OaiAddRecord:"),),
                             (storageComponent,),
                             (oaiJazz,) # Assert partNames header and meta are available from storage!
-                        )
+                        ),
+
+                        (ResurrectTombstone(),
+                            (storageComponent,),
+                        ),                    
 
                     ),
 
-                    (FilterMessages(allowed=['add']),
-                        # (LogComponent("UnDelete"),),
-                        (ResurrectTombstone(),
-                            (storageComponent,),
-                        )
-                    )
+                    # (FilterMessages(allowed=['add']),
+                    #     # (LogComponent("UnDelete"),),
+                    #     (ResurrectTombstone(),
+                    #         (storageComponent,),
+                    #     )
+                    # )
                 )
             )
         )
