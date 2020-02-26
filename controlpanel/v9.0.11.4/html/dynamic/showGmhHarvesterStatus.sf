@@ -1,0 +1,184 @@
+## begin license ##
+#
+# "Meresco Harvester" consists of two subsystems, namely an OAI-harvester and
+# a web-control panel.
+# "Meresco Harvester" is originally called "Sahara" and was developed for
+# SURFnet by:
+# Seek You Too B.V. (CQ2) http://www.cq2.nl
+#
+# Copyright (C) 2017, 2019 Seecr (Seek You Too B.V.) https://seecr.nl
+# Copyright (C) 2019 Stichting Kennisnet https://www.kennisnet.nl
+#
+# This file is part of "Meresco Harvester"
+#
+# "Meresco Harvester" is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# "Meresco Harvester" is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with "Meresco Harvester"; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+#
+## end license ##
+
+import pageplain
+
+def main(**kwargs):
+    if kwargs['path'].endswith('/js'):
+        yield js(**kwargs)
+        return
+    yield pageplain.layoutWithMenu(_contents, additionalScripts=['/showGmhHarvesterStatus/js'], **kwargs)
+
+def js(**kwargs):
+    yield 'HTTP/1.0 200 Ok\r\nContent-Type: text/javascript; charset=utf-8\r\n\r\n'
+    yield '''
+$.tablesorter.addParser({
+        // set a unique id
+        id: 'errors',
+        is: function(s) {
+            // return false so this parser is not auto detected
+            return false;
+        },
+        format: function(s) {
+            // format your data for normalization
+            return s.toLowerCase().replace(/errors/,'');
+        },
+        // set type, either numeric or text
+        type: 'numeric'
+    });
+
+$("table").tablesorter({
+            headers: {
+                3: {sorter: false},
+                4: {sorter: 'errors'},
+                5: {sorter: 'errors'},
+                6: {sorter: false}
+            },
+            sortList: [[0,0]],
+            sortInitialOrder: "desc"
+        });
+'''
+
+
+def xpath(node, path):
+    return node.xpath(path, namespaces={'diag':'http://www.loc.gov/zing/srw/diagnostic/'})
+
+def _contents(arguments, session, **kwargs):
+    domainId = arguments.get('domainId', [None])[0]
+    repositoryGroupId = arguments.get('repositoryGroupId', [None])[0]
+    repositoryId = arguments.get('repositoryId', [None])[0]
+    statuses = observable.call.getStatus(domainId=domainId, repositoryGroupId=repositoryGroupId, repositoryId=repositoryId)
+    repository = observable.call.getRepository(identifier=repositoryId, domainId=domainId)
+
+    loggedIn = 'user' in session
+
+    invalid = dict([(status.get('repositoryId'), status) for status in statuses])
+
+    yield """
+<h1>Gemeenschappelijke Metadata Harvester Validation Report</h1>
+<h2>Domain: {domainId} </h2>
+<div>""".format(domainId=domainId)
+
+    if repositoryGroupId:
+        yield """<h3>RepositoryGroup: {}</h3>""".format(repositoryGroupId)
+    if repositoryId:
+        yield """<h3>Repository: {}</h3>""".format(repositoryId)
+
+    yield """
+<table class="event tablesorter" width="100%" cellspacing="0" cellpadding="0" border="0">
+    <thead>
+        <tr>
+            <th style="text-align:left">Repository</th>
+            <th style="text-align:left">Last successful harvest</th>
+            <th style="text-align:left">Total records</th>
+            <th style="text-align:left">#Validation Errors</th>
+            <th style="text-align:left">Normalisation log</th>
+            <th style="text-align:left">Download validation errors</th>
+        </tr>
+    </thead>
+    <tbody>"""
+    for status in sorted(statuses, key=lambda s: (s.get('repositoryGroupId', '').lower(), s.get('repositoryId'))):
+        repositoryId = status.get('repositoryId')
+        repositoryGroupId = status.get('repositoryGroupId')
+        errorsnr = int(status.get('totalerrors', 0))
+        lastHarvestDate = status.get('lastHarvestDate') or ''
+        if lastHarvestDate:
+            lastHarvestDate = ZuluTime(lastHarvestDate).local()
+
+        yield """
+        <tr class="table_row">
+            <td {style} class="link">{identifier}</td>
+            <td {style}>{lastHarvestDate}</td>
+            <td>{total}</td>
+            <td class="link">""".format(
+            style=errorsnr and 'style="font-weight:bold"' or '',
+            identifier=escapeHtml(repositoryId),
+            total=escapeHtml(str(status.get('total', 0) or '')),
+            lastHarvestDate=escapeHtml(lastHarvestDate),
+            )
+
+        nrOfValidationErrors = int(invalid[repositoryId].get('invalid') or '0') if repositoryId in invalid else 0
+        if nrOfValidationErrors > 0:
+            yield """<b>{}</b>""".format(
+                "{} error{}".format(nrOfValidationErrors, 's' if nrOfValidationErrors != 1 else ''))
+
+        yield """
+            </td>
+            <td class="link">"""
+        yield """<a target="_blank" href="{repositoryEditLink}">RSS-feed</a>""".format(
+                repositoryEditLink="http://rss.gharvester.dans.knaw.nl/rss?{}".format(urlencode(dict(identifier=repositoryId))),
+                caption=escapeHtml(repositoryId) if loggedIn else escapeHtml(repositoryId))
+        
+        if errorsnr:
+            yield """<a name="{name}" href="{href}">{errorText}</a>""".format(
+                name="top_{}".format(repositoryId),
+                href="#{}".format(repositoryId),
+                errorText="{} error{}".format(errorsnr, "s" if errorsnr != 1 else ""))
+        yield """
+            </td>
+            <td class="link">"""
+	#nrOfValidationErrors = int(invalid[repositoryId].get('invalid') or '0') if repositoryId in invalid else 0
+        if nrOfValidationErrors > 0:
+            yield """<a href="{xlsLink}">Excel spreadsheet</a>""".format(xlsLink="/xls?{}".format(urlencode(arguments)))
+        yield """</td>
+    </tbody>
+</table>
+</div>"""
+
+
+    yield """
+<div>
+    <h3>Validatie Errors</h3>
+    <table class="event" width="100%" cellspacing="0" cellpadding="0" border="0">"""
+    for status in statuses:
+        repositoryId = status.get('repositoryId')
+        invalidnr = int(status.get('invalid') or '0')
+        if invalidnr:
+            yield """
+        <tr class="eventinfo">
+            <td colspan="2"><a name="{name}" href="{href}">{repositoryId}</a></td>
+        </tr>
+        <tr>
+            <td>Nr. of validation errors: <strong>{invalidnr}</strong></td><td>Validation Error Message:</td>
+        </tr>""".format(
+                name=repositoryId,
+                href="#top_{}".format(repositoryId),
+                repositoryId=repositoryId,
+                invalidnr=invalidnr)
+
+            invalidIds = status.get('recentinvalids', [])
+            for invalidId in invalidIds:
+                recordId = invalidId.split(":", 1)[-1]
+                invalidRecord = observable.call.getInvalidRecord(domainId, repositoryId, recordId)
+                diagnosticsDetails = xpath(invalidRecord, '//diag:diagnostic/diag:details/text()')[0]
+
+                yield """<tr><td class="link"><a href="{invalidRecordLink}" target="_blank">{recordId}</a></td><td>{diagnostic}</td></tr>""".format(invalidRecordLink="{}?verb=GetRecord&{}".format(repository.get('baseurl'), urlencode(dict(identifier=recordId, metadataPrefix=repository.get('metadataPrefix')))), recordId=recordId, diagnostic=diagnosticsDetails)
+    yield """
+</table>
+</div>"""
