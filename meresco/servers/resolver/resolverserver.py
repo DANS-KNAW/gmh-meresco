@@ -143,7 +143,6 @@ def main(reactor, port, statePath, gatewayPort, quickCommit=False, **ignored):
                 (PathFilter('/rss'),
                     (LogComponent("RSS path"),),
                 )
-
                 # (PathFilter('/rss'),
                 #     (LoggerRSS( title = 'Gemeenschappelijke Harvester DANS-KB', description = 'Harvester normalisation log for: ', link = 'http://rss.gharvester.dans.knaw.nl/rss', maximumRecords = 30),
                 #         (normLogger,

@@ -51,6 +51,7 @@ class GmhTestIntegrationState(IntegrationState):
         self.testdataDir = join(dirname(mydir), 'updateRequest')
         self.gatewayPort = PortNumberGenerator.next()
         self.apiPort = PortNumberGenerator.next()
+        # self.apiPort = 55745
         self.resolverPort = PortNumberGenerator.next()
 
 
@@ -118,6 +119,8 @@ class GmhTestIntegrationState(IntegrationState):
                 postRequest(self.gatewayPort, '/update', data=open(join(self.testdataDir, f)).read(), parse=False)
             sleepWheel(2)
             print "Finished creating database in %s seconds" % (time() - start)
+            # print "Pauzing for a while..."
+            # sleepWheel(600)
         except Exception:
             print 'Error received while creating database for', self.stateName
             print_exc()

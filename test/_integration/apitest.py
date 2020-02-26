@@ -128,6 +128,12 @@ class ApiTest(IntegrationTestCase):
         self.assertEqual(16, len(xpath(body, "//oai:ListRecords/oai:record")))
         self.assertEqual('nl_didl', xpathFirst(body, '//oaiprov:provenance/oaiprov:originDescription/oaiprov:metadataNamespace/text()'))
 
+
+    def testXls(self): # GMH31
+        header, body = getRequest(self.apiPort, '/xls', dict(rgid="bogus"))
+        self.assertEqual('HTTP/1.0 404 Not Found\r\nContent-Type: text/html; charset=utf-8', header)
+        
+
 # De deletes komen zeker door van de GateWay, echter worden er voor de test-records nooit een initiele update gestuurd, waardoor de records dus NIET als @status=deleted in de PMH komen (want zijn er nooit in geweest). Vraag is hoe erg dit is, en hoe vaak dit in de practijk voorkomt.Het is wel verwarrend.
 
 

@@ -55,6 +55,7 @@ from meresco.servers.gateway.gatewayserver import NORMALISED_DOC_NAME
 from meresco.dans.loggerrss import LoggerRSS
 from meresco.dans.logger import Logger # Normalisation Logger.
 from meresco.seecr.oai import OaiAddDeleteRecordWithPrefixesAndSetSpecs, OaiAddRecord
+from meresco.dans.xlsserver import XlsServer
 
 NL_DIDL_NORMALISED_PREFIX = 'nl_didl_norm'
 NL_DIDL_COMBINED_PREFIX = 'nl_didl_combined'
@@ -71,6 +72,9 @@ NAMESPACEMAP = namespaces.copyUpdate({
 
 })
 
+myPath = dirname(abspath(__file__))
+# dynamicHtmlPath = join(myPath, 'controlpanel', 'html', 'dynamic')
+# staticHtmlPath = join(myPath, 'controlpanel', 'html', 'static')
 
 def createDownloadHelix(reactor, periodicDownload, oaiDownload, storageComponent, oaiJazz):
     return \
@@ -250,7 +254,11 @@ def main(reactor, port, statePath, gatewayPort, quickCommit=False, **ignored):
                             (storage,)
                         )
                     )
-                )
+                ),
+                (PathFilter('/xls'),
+                    # (LogComponent("XLS-Request:"),),
+                    (XlsServer(),) #TODO: dataDir, logDir & stateDir hier meegeven...
+                )                
             )
         )
     )
