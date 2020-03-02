@@ -83,7 +83,7 @@ def createDownloadHelix(reactor, periodicDownload, oaiDownload, storageComponent
             (oaiDownload, # Implementation/Protocol of a PeriodicDownload...
                 (UpdateAdapterFromOaiDownloadProcessor(), # Maakt van een SRU update/delete bericht (lxmlNode) een relevante message: 'delete' of 'add' message.
                     (FilterMessages(['delete']), # Filtert delete messages
-                        (LogComponent("Delete Update"),),
+                        # (LogComponent("Delete Update"),),
                         (storageComponent,), # Delete from storage
                         (oaiJazz,), # Delete from OAI-pmh repo
                         # Write a 'deleted' part to the storage, that holds the (Record)uploadId.
