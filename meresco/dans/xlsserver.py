@@ -96,7 +96,7 @@ class File(object):
 class XlsServer(object):
     def __init__(self, name=None):
         self._name = name
-        self._repostatus = RepositoryStatus('logDir', 'stateDir') 
+        self._repostatus = RepositoryStatus('/var/log/meresco-harvester', '/var/lib/meresco-harvester/state')
 
     def handleRequest(self, path, port=None, Client=None, Method=None, Headers=None, **kwargs):
         resolvedFileOrDir = self._createXLS(kwargs.get("arguments")['rgid'][0])
@@ -166,7 +166,7 @@ class XlsServer(object):
         return None
 
     def _getRepositoryJson(self, domainId, repositoryId):        
-        repojsonfile = join('dataDir', escapeFilename("%s.%s.repository" % (domainId, repositoryId)) )
+        repojsonfile = join('/var/lib/meresco-harvester/data', escapeFilename("%s.%s.repository" % (domainId, repositoryId)) )
         if not isfile(repojsonfile):
             return None
         return repojsonfile

@@ -48,10 +48,11 @@ from meresco.dans.storagesplit import Md5HashDistributeStrategy
 from meresco.xml import namespaces
 
 # from storage.storageadapter import StorageAdapter
-
 # from meresco.dans.storagesplit import Md5HashDistributeStrategy
-from meresco.dans.writedeleted import ResurrectTombstone, WriteTombstone
+
+from meresco.dans.nbnresolver import NbnResolver
 from meresco.servers.gateway.gatewayserver import NORMALISED_DOC_NAME
+
 # from meresco.dans.loggerrss import LoggerRSS
 # from meresco.dans.logger import Logger # Normalisation Logger.
 
@@ -73,34 +74,33 @@ def createDownloadHelix(reactor, periodicDownload, oaiDownload, storageComponent
         (XmlParseLxml(fromKwarg="data", toKwarg="lxmlNode", parseOptions=dict(huge_tree=True, remove_blank_text=True)), # Convert from plain text to lxml-object.
             (oaiDownload, # Implementation/Protocol of a PeriodicDownload...
                 (UpdateAdapterFromOaiDownloadProcessor(), # Maakt van een SRU update/delete bericht (lxmlNode) een relevante message: 'delete' of 'add' message.
-                    (FilterMessages(['delete']), # Filtert delete messages
-                        (LogComponent("Delete msg:"),),
-                        # Write a 'deleted' part to the storage, that holds the (Record)uploadId.
-                        # (WriteTombstone(),
-                        #     (storageComponent,),
-                        # )
-                    ),
+                    # (FilterMessages(['delete']), # Filtert delete messages
+                    #     # (LogComponent("Delete msg:"),),
+                    #     # Write a 'deleted' part to the storage, that holds the (Record)uploadId.
+                    #     # (WriteTombstone(),
+                    #     #     (storageComponent,),
+                    #     # )
+                    # ),
                     (FilterMessages(allowed=['add']),
-                        # (LogComponent("Add msg:"),),
+                        # (LogComponent("AddToNBNRES"),),
+                        (NbnResolver(ro=False, nsMap=NAMESPACEMAP),
+                            (LogComponent("FROM NBN"),),
+                            # (storageComponent,),
+                        ),
                         
-                        (XmlXPath(['//document:document/document:part[@name="normdoc"]/text()'], fromKwarg='lxmlNode', toKwarg='data', namespaces=NAMESPACEMAP),                            
-                            (XmlParseLxml(fromKwarg='data', toKwarg='lxmlNode'),
-                                # (LogComponent("NORMDOC"),),   #TODO: get urn:nbn and location from document.                             
-                                # (RewritePartname(NL_DIDL_NORMALISED_PREFIX), # Hernoemt partname van 'record' naar "metadata".
-                                #     (XmlPrintLxml(fromKwarg="lxmlNode", toKwarg="data", pretty_print=True),
-                                #         (storageComponent,) # Schrijft oai:metadata (=origineel) naar storage.
-                                #     )
-                                # )
-                            )
-                        )
-                    ),
+                        # (XmlXPath(['//document:document/document:part[@name="normdoc"]/text()'], fromKwarg='lxmlNode', toKwarg='data', namespaces=NAMESPACEMAP),                            
+                        #     (XmlParseLxml(fromKwarg='data', toKwarg='lxmlNode'),
+                        #         (LogComponent("NORMDOC"),),   #TODO: get urn:nbn and location from document.
 
-                    # (FilterMessages(allowed=['add']),
-                    #     # (LogComponent("UnDelete"),),
-                    #     (ResurrectTombstone(),
-                    #         (storageComponent,),
-                    #     )
-                    # )
+                        #         # (RewritePartname(NL_DIDL_NORMALISED_PREFIX), # Hernoemt partname van 'record' naar "metadata".
+                        #         #     (XmlPrintLxml(fromKwarg="lxmlNode", toKwarg="data", pretty_print=True),
+                        #         #         (storageComponent,) # Schrijft oai:metadata (=origineel) naar storage.
+                        #         #     )
+                        #         # )
+                        #     )
+                        # )
+
+                    )
                 )
             )
         )
@@ -115,23 +115,23 @@ def main(reactor, port, statePath, gatewayPort, quickCommit=False, **ignored):
     # normLogger = Logger(join(statePath, '..', 'gateway', 'normlogger'))
 
     strategie = Md5HashDistributeStrategy()
-    storage = StorageComponent(join(statePath, 'store'), strategy=strategie, partsRemovedOnDelete=['metadata'])    
+    storage = StorageComponent(join(statePath, 'store'), strategy=strategie, partsRemovedOnDelete=['metadata'])
 
     periodicGateWayDownload = PeriodicDownload(
         reactor,
         host='localhost',
         port=gatewayPort,
         schedule=Schedule(period=1 if quickCommit else 10), # WST: Interval in seconds before sending a new request to the GATEWAY in case of an error while processing batch records.(default=1). IntegrationTests need 1 second! Otherwise tests will fail!
-        name='bri',
+        name='resolver',
         autoStart=True)
 
     oaiDownload = OaiDownloadProcessor(
         path='/oaix',
         metadataPrefix=NORMALISED_DOC_NAME,
         workingDirectory=join(statePath, 'harvesterstate', 'gateway'),
-        userAgentAddition='BriServer',
+        userAgentAddition='ResolverServer',
         xWait=True,
-        name='bri',
+        name='resolver',
         autoCommit=False)
 
 
@@ -140,16 +140,12 @@ def main(reactor, port, statePath, gatewayPort, quickCommit=False, **ignored):
         createDownloadHelix(reactor, periodicGateWayDownload, oaiDownload, storage),
         (ObservableHttpServer(reactor, port, compressResponse=True),
             (BasicHttpHandler(),
-                (PathFilter('/rss'),
-                    (LogComponent("RSS path"),),
+                (PathFilter('/resolver'),
+                    (LogComponent("RESOLVER:"),),
+                    (NbnResolver(ro=True),
+                        (storage,),
+                    )
                 )
-                # (PathFilter('/rss'),
-                #     (LoggerRSS( title = 'Gemeenschappelijke Harvester DANS-KB', description = 'Harvester normalisation log for: ', link = 'http://rss.gharvester.dans.knaw.nl/rss', maximumRecords = 30),
-                #         (normLogger,
-                #             (storage,)                            
-                #         )
-                #     )
-                # )
             )
         )
     )

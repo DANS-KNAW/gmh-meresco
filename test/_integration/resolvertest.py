@@ -4,7 +4,7 @@
 # features of various components of the "Meresco Suite".
 # Also see http://meresco.org.
 #
-# Copyright (C) 2012-2016 Seecr (Seek You Too B.V.) http://seecr.nl
+# Copyright (C) 2016 Seecr (Seek You Too B.V.) http://seecr.nl
 #
 # This file is part of "Meresco Examples"
 #
@@ -24,31 +24,15 @@
 #
 ## end license ##
 
-from os import getuid
-import sys
-assert getuid() != 0, "Do not run tests as 'root'"
+from seecr.test import IntegrationTestCase
+from seecr.test.utils import getRequest
+from meresco.xml import xpath
+from lxml import etree
+from meresco.servers.gateway.gatewayserver import NORMALISED_DOC_NAME
 
+class ResolverTest(IntegrationTestCase):
 
-from seecrdeps import includeParentAndDeps
-includeParentAndDeps(__file__, scanForDeps=True)
-
-from seecr.test.testrunner import TestRunner
-from _integration import GmhTestIntegrationState
-
-if __name__ == '__main__': #TODO: arg[0] fastMode uitlezen. 
-    runner = TestRunner()
-    # Setting fastmode to True, will SKIP the upload part, and reuse existing database/store for the integration tests.
-    runner.fastMode = False
-    print "FASTMODE:", runner.fastMode
-
-    GmhTestIntegrationState(
-        "brigmh",
-        tests=[
-            '_integration.gatewaytest.GatewayTest',
-            '_integration.apitest.ApiTest',
-            '_integration.resolvertest.ResolverTest',
-        ],
-        fastMode=runner.fastMode
-        ).addToTestRunner(runner)
-    runner.run()
-
+    def testOaiIdentify(self):
+        header, body = getRequest(self.resolverPort, '/resolver', arguments=dict(identifier='urn:nbn:nl-0'))
+        # print "Identify body:", etree.tostring(body)
+        self.assertEqual('HTTP/1.0 404 Not Found\r\nContent-Type: text/html; charset=utf-8', header)

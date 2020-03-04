@@ -101,7 +101,7 @@ def createDownloadHelix(reactor, periodicDownload, oaiDownload, storageComponent
                                     (XmlPrintLxml(fromKwarg="lxmlNode", toKwarg="data", pretty_print=True),
                                         (storageComponent,) # Schrijft oai:metadata (=origineel) naar storage.
                                     )
-                                )                     
+                                )
                             )
                         ),
 

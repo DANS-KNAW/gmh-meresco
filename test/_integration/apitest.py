@@ -131,6 +131,7 @@ class ApiTest(IntegrationTestCase):
 
     def testXls(self): # GMH31
         header, body = getRequest(self.apiPort, '/xls', dict(rgid="bogus"))
+        # print "testXls:", header
         self.assertEqual('HTTP/1.0 404 Not Found\r\nContent-Type: text/html; charset=utf-8', header)
         
 

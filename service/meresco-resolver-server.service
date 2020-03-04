@@ -1,0 +1,10 @@
+[Unit]
+Description=Meresco BRIGMH NBN Resolver Server
+
+[Service]
+User=meresco
+ExecStart=<path to:> start-resolver --port=<portnumber> --gatewayPort=<gatewayPortnumber>
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
