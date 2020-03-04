@@ -317,7 +317,7 @@ class NormaliseMODS(UiaConverter):
         for genre in modsNode.iterfind('{'+self._nsMap.get('mods')+'}genre'):
         
             for key, value in GENRES_SEMANTIEK.iteritems():
-                    if genre.text.strip().lower().find(key) >= 0: #found a (lowercased) genre
+                    if genre.text and genre.text.strip().lower().find(key) >= 0: #found a (lowercased) genre
                         fqGenre = value
                         break
         
