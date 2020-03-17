@@ -27,7 +27,7 @@
 ## end license ##
 
 from os import listdir
-from os.path import join, abspath, dirname, isdir
+from os.path import join, abspath, dirname, isdir, realpath
 from time import sleep, time
 from traceback import print_exc
 
@@ -37,6 +37,9 @@ from seecr.test.utils import postRequest, sleepWheel
 
 from glob import glob
 
+import mysql.connector
+from mysql.connector import errorcode
+
 mydir = dirname(abspath(__file__))
 projectDir = dirname(dirname(mydir))
 
@@ -44,27 +47,29 @@ JAVA_BIN="/usr/lib/jvm/jre-1.8.0/bin"
 if not isdir(JAVA_BIN):
     JAVA_BIN="/etc/alternatives/jre_1.8.0/bin"
 
+
 class GmhTestIntegrationState(IntegrationState):
     def __init__(self, stateName, tests=None, fastMode=False):
         IntegrationState.__init__(self, stateName, tests=tests, fastMode=fastMode)
-
         self.testdataDir = join(dirname(mydir), 'updateRequest')
         self.gatewayPort = PortNumberGenerator.next()
         self.apiPort = PortNumberGenerator.next()
-        # self.apiPort = 55745
         self.resolverPort = PortNumberGenerator.next()
 
 
     def binDir(self):
         return join(projectDir, 'bin')
 
+
     def setUp(self):
+        # self._truncateTestDb(realpath(join(mydir, '..', 'conf','config.ini')))
         self.startGatewayServer()
         self.startApiServer()
         self.startResolverServer()
         self.waitForServicesStarted()
         self._createDatabase()
         sleep(0.2)
+
 
     def startGatewayServer(self):
         executable = self.binPath('start-gateway')
@@ -78,19 +83,6 @@ class GmhTestIntegrationState(IntegrationState):
             stateDir=join(self.integrationTempdir, 'gateway'),
             waitForStart=False)
 
-    def startResolverServer(self):
-        executable = self.binPath('start-resolver')
-        self._startServer(
-            serviceName='resolver',
-            debugInfo=True,
-            executable=executable,
-            serviceReadyUrl='http://localhost:%s/als/het/maar/connecten/kan/404/is/prima' % self.resolverPort, # Ding heeft geen http interface meer... We moeten wat...
-            cwd=dirname(abspath(executable)),
-            port=self.resolverPort,
-            gatewayPort=self.gatewayPort,
-            stateDir=join(self.integrationTempdir, 'resolver'),
-            quickCommit=True,
-            waitForStart=False)
 
     def startApiServer(self):
         executable = self.binPath('start-api')
@@ -103,6 +95,22 @@ class GmhTestIntegrationState(IntegrationState):
             port=self.apiPort,
             gatewayPort=self.gatewayPort,
             stateDir=join(self.integrationTempdir, 'api'),
+            quickCommit=True,
+            waitForStart=False)
+
+
+    def startResolverServer(self):
+        executable = self.binPath('start-resolver')
+        self._startServer(
+            serviceName='resolver',
+            debugInfo=True,
+            executable=executable,
+            serviceReadyUrl='http://localhost:%s/als/het/maar/connecten/kan/404/is/prima' % self.resolverPort,
+            cwd=dirname(abspath(executable)),
+            port=self.resolverPort,
+            gatewayPort=self.gatewayPort,
+            stateDir=join(self.integrationTempdir, 'resolver'),
+            dbConfig = realpath(join(mydir, '..', 'conf','config.ini')),
             quickCommit=True,
             waitForStart=False)
 
@@ -126,3 +134,59 @@ class GmhTestIntegrationState(IntegrationState):
             print_exc()
             sleep(1)
             exit(1)
+
+
+    def tearDown(self):
+        super(GmhTestIntegrationState, self).tearDown() #Call super, otherwise the services will NOT be killed and continue to run!
+
+
+    def _truncateTestDb(self, dbconfig):
+        try:
+            cnx = mysql.connector.connect(**self._db_config(dbconfig))
+            cursor = cnx.cursor()
+
+            query = ("SET FOREIGN_KEY_CHECKS=0")
+            cursor.execute(query)
+            query = ("TRUNCATE TABLE tst_nbnresolver.identifier_location")
+            cursor.execute(query)
+            query = ("TRUNCATE TABLE tst_nbnresolver.location_registrant")
+            cursor.execute(query)
+            query = ("TRUNCATE TABLE tst_nbnresolver.identifier_registrant")
+            cursor.execute(query)
+            query = ("TRUNCATE TABLE tst_nbnresolver.registrant")
+            cursor.execute(query)
+            query = ("TRUNCATE TABLE tst_nbnresolver.identifier")
+            cursor.execute(query)
+            query = ("TRUNCATE TABLE tst_nbnresolver.location")
+            cursor.execute(query)
+            query = ("SET FOREIGN_KEY_CHECKS = 1")
+            cursor.execute(query)
+
+            cursor.close()
+            cnx.commit()
+            cnx.close()
+
+        except mysql.connector.Error as err:
+            print "Error with SQLstore: {}".format(err)
+
+
+    def _db_config(self, conffile_path, section='mysql'):
+        """ Read database configuration file and return a dictionary object
+        :param filename: name of the configuration file
+        :param section: section of database configuration
+        :return: a dictionary of database parameters
+        """
+        # create parser and read ini configuration file
+        parser = ConfigParser.ConfigParser()
+        parser.read(conffile_path)
+
+        # get section, default to mysql
+        db = {}
+        if parser.has_section(section):
+            items = parser.items(section)
+            for item in items:
+                db[item[0]] = item[1]
+        else:
+            raise Exception('{0} not found in the {1} file'.format(section, conffile_path))
+        print "DB-configfile read from: {0}".format(conffile_path, )
+        return db
