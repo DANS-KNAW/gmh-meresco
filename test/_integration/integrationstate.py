@@ -38,7 +38,7 @@ from seecr.test.utils import postRequest, sleepWheel
 from glob import glob
 
 import mysql.connector
-from mysql.connector import errorcode
+import ConfigParser
 
 mydir = dirname(abspath(__file__))
 projectDir = dirname(dirname(mydir))
@@ -105,7 +105,7 @@ class GmhTestIntegrationState(IntegrationState):
             serviceName='resolver',
             debugInfo=True,
             executable=executable,
-            serviceReadyUrl='http://localhost:%s/als/het/maar/connecten/kan/404/is/prima' % self.resolverPort,
+            serviceReadyUrl='http://localhost:%s/als/het/maar/connecten/kan/404/is/prima' % self.resolverPort, # Ding heeft geen http interface meer... We moeten wat...
             cwd=dirname(abspath(executable)),
             port=self.resolverPort,
             gatewayPort=self.gatewayPort,
