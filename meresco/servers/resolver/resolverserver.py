@@ -35,7 +35,7 @@ from meresco.core.alltodo import AllToDo
 from meresco.core.processtools import setSignalHandlers, registerShutdownHandler
 
 from meresco.components import RenameFieldForExact, PeriodicDownload, XmlPrintLxml, XmlXPath, FilterMessages, RewritePartname, XmlParseLxml, CqlMultiSearchClauseConversion, PeriodicCall, Schedule, XsltCrosswalk, RetrieveToGetDataAdapter #, Rss, RssItem
-from meresco.components.http import ObservableHttpServer, BasicHttpHandler, PathFilter, Deproxy
+from meresco.components.http import ObservableHttpServer, BasicHttpHandler, PathFilter, Deproxy, StringServer, FileServer
 from meresco.components.log import LogCollector, ApacheLogWriter, HandleRequestLog, LogCollectorScope, QueryLogWriter, DirectoryLog, LogFileServer, LogComponent
 
 from meresco.oai import OaiPmh, OaiDownloadProcessor, UpdateAdapterFromOaiDownloadProcessor, OaiJazz, OaiBranding, OaiProvenance, OaiAddDeleteRecordWithPrefixesAndSetSpecs
@@ -43,16 +43,12 @@ from meresco.oai import OaiPmh, OaiDownloadProcessor, UpdateAdapterFromOaiDownlo
 
 from seecr.utils import DebugPrompt
 
-from meresco.dans.storagesplit import Md5HashDistributeStrategy
-
 from meresco.xml import namespaces
-
-# from storage.storageadapter import StorageAdapter
-# from meresco.dans.storagesplit import Md5HashDistributeStrategy
-
-from meresco.dans.nbnresolver import NbnResolver
+from meresco.dans.resolver import Resolver
 from meresco.dans.resolverstoragecomponent import ResolverStorageComponent
 from meresco.servers.gateway.gatewayserver import NORMALISED_DOC_NAME
+
+from meresco.components.http.utils import ContentTypePlainText, okPlainText, ContentTypeJson
 
 # from meresco.dans.loggerrss import LoggerRSS
 # from meresco.dans.logger import Logger # Normalisation Logger.
@@ -84,8 +80,7 @@ def createDownloadHelix(reactor, periodicDownload, oaiDownload, dbStorageCompone
                     # ),
                     (FilterMessages(allowed=['add']),
                         # (LogComponent("AddToNBNRES"),),
-                        (NbnResolver(ro=False, nsMap=NAMESPACEMAP),
-                            # (LogComponent("ADD"),),
+                        (Resolver(ro=False, nsMap=NAMESPACEMAP),
                             (dbStorageComponent,),
                         ),
                         
@@ -115,9 +110,8 @@ def main(reactor, port, statePath, gatewayPort, dbConfig, quickCommit=False, **i
 #TODO: Implement logging.
     # normLogger = Logger(join(statePath, '..', 'gateway', 'normlogger'))
 
-    strategie = Md5HashDistributeStrategy()
-    # storage = StorageComponent(join(statePath, 'store'), strategy=strategie, partsRemovedOnDelete=['metadata'])
     dbStorageComponent = ResolverStorageComponent(dbConfig)
+    verbose=True
 
     periodicGateWayDownload = PeriodicDownload(
         reactor,
@@ -142,11 +136,8 @@ def main(reactor, port, statePath, gatewayPort, dbConfig, quickCommit=False, **i
         createDownloadHelix(reactor, periodicGateWayDownload, oaiDownload, dbStorageComponent),
         (ObservableHttpServer(reactor, port, compressResponse=True),
             (BasicHttpHandler(),
-                (PathFilter('/resolver'),
-                    (LogComponent("/RESOLVER call"),),
-                    (NbnResolver(ro=True),
-                        (dbStorageComponent,),
-                    )
+                (PathFilter("/"),
+                    (StringServer("Resolver Server", ContentTypePlainText), )
                 )
             )
         )
@@ -154,7 +145,7 @@ def main(reactor, port, statePath, gatewayPort, dbConfig, quickCommit=False, **i
 
 def startServer(port, stateDir, gatewayPort, dbConfig, quickCommit=False, **kwargs):
     setSignalHandlers()
-    print 'Firing up (NBN) Resolver Server.'
+    print 'Firing up resolver Server.'
     statePath = abspath(stateDir)
 
     reactor = Reactor()

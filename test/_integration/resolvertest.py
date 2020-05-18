@@ -33,6 +33,6 @@ from meresco.servers.gateway.gatewayserver import NORMALISED_DOC_NAME
 class ResolverTest(IntegrationTestCase):
 
     def testOaiIdentify(self):
-        header, body = getRequest(self.resolverPort, '/resolver', arguments=dict(identifier='urn:nbn:nl-0'))
-        # print "Identify body:", etree.tostring(body)
-        self.assertEqual('HTTP/1.0 404 Not Found\r\nContent-Type: text/html; charset=utf-8', header)
+        header, body = getRequest(self.resolverPort, '/', arguments=dict(identifier='urn:nbn:nl:ui:39-ae86436a9031f6f287b2fdc6f54e3fe6'))
+        self.assertEqual('HTTP/1.0 200 OK\r\nContent-Type: text/plain; charset=utf-8', header)
+        self.assertEqual('<html><body><p>Resolver Server</p></body></html>', etree.tostring(body))

@@ -69,5 +69,10 @@ local.properties
 # Files that might appear on external disk
 .Spotlight-V100
 .Trashes
- 
+
+# Placeholder files:
 service/meresco-gateway-server.service
+
+test/conf/config.ini
+
+

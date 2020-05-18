@@ -35,38 +35,6 @@ import ConfigParser
 from os.path import abspath, dirname, join, realpath
 
 
-# from .hierarchicalstorage import HierarchicalStorage
-# from .storage import Storage
-
-# class DefaultStrategy(object):
-
-#     @classmethod
-#     def split(self, (identifier, partname)):
-#         result = identifier.split(':',1)
-#         if partname != None:
-#             result += [partname]
-#         return result
-
-#     @classmethod
-#     def join(self, parts):
-#         identifier = ":".join(parts[:-1])
-#         partname = parts[-1]
-#         return identifier, partname
-
-# defaultSplit = DefaultStrategy.split
-# defaultJoin = DefaultStrategy.join
-
-# class HashDistributeStrategy(object):
-
-#     def split(self, (identifier, partname)):
-#         hash = sha1(identifier).hexdigest()
-#         if partname is None:
-#             partname = ""
-#         return hash[0:2], hash[2:4], hash + '.' + partname
-
-#     def join(self, _):
-#         raise KeyError("Unable to join due to hashing of identifiers")
-
 class ResolverStorageComponent(object):
     def __init__(self, dbconfig, name=None): # https://pynative.com/python-mysql-tutorial/
         self._dbconfig = self.read_db_config(conffile_path=dbconfig)
@@ -77,13 +45,30 @@ class ResolverStorageComponent(object):
     def observable_name(self):
         return self._name
 
+    def getRedirLocation(self, nbn):
+        print "getRedirLocation:", nbn
+        return "https://www.narcis.nl"
 
-    def addNbnToDB(self, identifier, locations, urnnbn, rgid, isfailover=False):  # *('beeldengeluid:oai:publications.beeldengeluid.nl:136',), **{'isfailover': False, 'location': 'http://publications.beeldengeluid.nl/pub/136', 'rgid': 'beeldengeluid', 'urnnbn': 'URN:NBN:NL:IN:10-136'}
-        print rgid.upper(), identifier,"=>", locations[0]
+    def getLocations(self, nbn):
+        print "getLocations:", nbn
+        return self._getDBLocationsByNBN_pl(nbn)
 
+    def addNbnToDB(self, identifier, locations, urnnbn, rgid, isfailover=False):
+        """ Add a prioritized list of locations for a pid and repository to storage.
+        The locations-list is added in reversed order.
+        Therefore the highest priority-location will be inserted last and will resolve first.
+
+        :param identifier: meresco uploadid of this record
+        :param locations: prioritized list of locations
+        :param urnnbn: urn:nbn persistent identifier
+        :param rgid: meresco repository group identifier
+        :param isfailover: if True, the locations given are failover locations.
+        :return: void
+        """
         rgid = rgid.lower()
         urnnbn = urnnbn.lower()
-        try:
+
+        try: #TODO: Move all into one transaction.
             registrant_id = self._selectOrInsertRegistrantId_pl(rgid)
             print "registrant_id:", registrant_id
             identifier_id = self._selectOrInsertIdentifierId_pl(registrant_id, urnnbn)
@@ -92,10 +77,30 @@ class ResolverStorageComponent(object):
             self._deletePairsByRegId_pl(registrant_id, identifier_id)
             location_ids = self._selectOrInsertLocationsId_pl(registrant_id, locations)
             # print "location_ids:", location_ids
-            self._insertIdentifierLocations_pl(identifier_id, location_ids, False)
+            self._insertIdentifierLocations_pl(identifier_id, location_ids, isfailover)
 
         except mysql.connector.Error as e:
             print("Error from SQL-db: ", e)
+        return
+
+
+    def _getDBLocationsByNBN_pl(self, nbn_id):
+        try:
+            conn = self._cnxpool.get_connection()
+            cursor = conn.cursor()
+            sql = """SELECT L.location_url, IL.isFailover
+                    FROM identifier I 
+                    JOIN identifier_location IL ON I.identifier_id = IL.identifier_id
+                    JOIN location L ON L.location_id = IL.location_id
+                    WHERE I.identifier_value= '{}'
+                    ORDER BY IL.isFailover, IL.last_modified DESC;""".format(nbn_id)
+            cursor.execute(sql)
+            res = cursor.fetchall()
+            self.close(conn, cursor)
+            return res
+        except mysql.connector.Error as err:
+            print "Error while execute'ing SQL-query: {}: {}".format(sql, err)
+
 
     def _insertIdentifierLocations_pl(self, identifier_id, location_ids, isFailover=False):
         try:
@@ -131,12 +136,15 @@ class ResolverStorageComponent(object):
 
 
     def _selectOrInsertLocationsId_pl(self, registrant_id, locations):
+        """
+        The locations-list is added in reversed order. Therefore the highest priority-location will be inserted last and will resolve first.
+        """
         location_ids=[]
         try:
             conn = self._cnxpool.get_connection()
             cursor = conn.cursor()
 
-            for location_url in locations:
+            for location_url in reversed(locations):
                 sql = """SELECT location.location_id
                          FROM location
                          INNER JOIN location_registrant ON location.location_id = location_registrant.location_id
@@ -224,7 +232,7 @@ class ResolverStorageComponent(object):
             print "Error while execute'ing SQL-query: {}: {}".format(sql, err)
 
 
-    def read_db_config(self, conffile_path, section='mysql'):
+    def read_db_config(self, conffile_path, section='mysql'): #TODO: Even importeren ergens anders vandaan. Dubbele code...
         """ Read database configuration file and return a dictionary object
         :param filename: name of the configuration file
         :param section: section of database configuration
@@ -277,3 +285,4 @@ class ResolverStorageComponent(object):
         """
         cursor.close()
         conn.close()
+

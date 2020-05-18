@@ -62,7 +62,7 @@ class GmhTestIntegrationState(IntegrationState):
 
 
     def setUp(self):
-        # self._truncateTestDb(realpath(join(mydir, '..', 'conf','config.ini')))
+        self._truncateTestDb(realpath(join(mydir, '..', 'conf','config.ini')))
         self.startGatewayServer()
         self.startApiServer()
         self.startResolverServer()
@@ -105,7 +105,7 @@ class GmhTestIntegrationState(IntegrationState):
             serviceName='resolver',
             debugInfo=True,
             executable=executable,
-            serviceReadyUrl='http://localhost:%s/als/het/maar/connecten/kan/404/is/prima' % self.resolverPort, # Ding heeft geen http interface meer... We moeten wat...
+            serviceReadyUrl='http://localhost:%s/' % self.resolverPort,
             cwd=dirname(abspath(executable)),
             port=self.resolverPort,
             gatewayPort=self.gatewayPort,
@@ -113,6 +113,7 @@ class GmhTestIntegrationState(IntegrationState):
             dbConfig = realpath(join(mydir, '..', 'conf','config.ini')),
             quickCommit=True,
             waitForStart=False)
+
 
 
     def _createDatabase(self):

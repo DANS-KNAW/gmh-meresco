@@ -44,7 +44,7 @@ if __name__ == '__main__':
 
     parser = ParseArguments()
     parser.addOption('-p', '--port', type='int', help="Default port number", mandatory=True)
-    parser.addOption('', '--stateDir', help="Directory to write state.", mandatory=True) #TODO: refactor to stateDir?
+    parser.addOption('', '--stateDir', help="Directory to write state.", mandatory=True)
     parser.addOption('', '--gatewayPort', type='int', help="Portnumber of gateway server.", mandatory=True)
     parser.addOption('', '--dbConfig', help="SQL database connection config file location.", mandatory=True)
     parser.addOption('', '--quickCommit', help="True or False. Use True for integration tests. Defaults to False.", mandatory=False)
