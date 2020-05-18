@@ -33,7 +33,10 @@ import mysql.connector
 import mysql.connector.pooling
 import ConfigParser
 from os.path import abspath, dirname, join, realpath
+from re import compile
 
+
+urnnbnRegex = compile('^[uU][rR][nN]:[nN][bB][nN]:[nN][lL](:([a-zA-Z]{2}))?:\\d{2}-.+')
 
 class ResolverStorageComponent(object):
     def __init__(self, dbconfig, name=None): # https://pynative.com/python-mysql-tutorial/
@@ -44,14 +47,6 @@ class ResolverStorageComponent(object):
 
     def observable_name(self):
         return self._name
-
-    def getRedirLocation(self, nbn):
-        print "getRedirLocation:", nbn
-        return "https://www.narcis.nl"
-
-    def getLocations(self, nbn):
-        print "getLocations:", nbn
-        return self._getDBLocationsByNBN_pl(nbn)
 
     def addNbnToDB(self, identifier, locations, urnnbn, rgid, isfailover=False):
         """ Add a prioritized list of locations for a pid and repository to storage.
@@ -68,9 +63,12 @@ class ResolverStorageComponent(object):
         rgid = rgid.lower()
         urnnbn = urnnbn.lower()
 
+        if not urnnbnRegex.match(urnnbn): # DIDL normalisation rejects records with invalid urn:nbn identifiers. So this check is overhead, for this situation.
+            return
+
         try: #TODO: Move all into one transaction.
             registrant_id = self._selectOrInsertRegistrantId_pl(rgid)
-            print "registrant_id:", registrant_id
+            # print "registrant_id:", registrant_id
             identifier_id = self._selectOrInsertIdentifierId_pl(registrant_id, urnnbn)
             # print "identifier_id:", identifier_id
             # Delete all identifier/location pairs from identifier_location table linked to this registrant and identifier...
@@ -81,25 +79,26 @@ class ResolverStorageComponent(object):
 
         except mysql.connector.Error as e:
             print("Error from SQL-db: ", e)
+
         return
 
 
-    def _getDBLocationsByNBN_pl(self, nbn_id):
-        try:
-            conn = self._cnxpool.get_connection()
-            cursor = conn.cursor()
-            sql = """SELECT L.location_url, IL.isFailover
-                    FROM identifier I 
-                    JOIN identifier_location IL ON I.identifier_id = IL.identifier_id
-                    JOIN location L ON L.location_id = IL.location_id
-                    WHERE I.identifier_value= '{}'
-                    ORDER BY IL.isFailover, IL.last_modified DESC;""".format(nbn_id)
-            cursor.execute(sql)
-            res = cursor.fetchall()
-            self.close(conn, cursor)
-            return res
-        except mysql.connector.Error as err:
-            print "Error while execute'ing SQL-query: {}: {}".format(sql, err)
+    # def _getDBLocationsByNBN_pl(self, nbn_id):
+    #     try:
+    #         conn = self._cnxpool.get_connection()
+    #         cursor = conn.cursor()
+    #         sql = """SELECT L.location_url, IL.isFailover
+    #                 FROM identifier I 
+    #                 JOIN identifier_location IL ON I.identifier_id = IL.identifier_id
+    #                 JOIN location L ON L.location_id = IL.location_id
+    #                 WHERE I.identifier_value= '{}'
+    #                 ORDER BY IL.isFailover, IL.last_modified DESC;""".format(nbn_id)
+    #         cursor.execute(sql)
+    #         res = cursor.fetchall()
+    #         self.close(conn, cursor)
+    #         return res
+    #     except mysql.connector.Error as err:
+    #         print "Error while execute'ing SQL-query: {}: {}".format(sql, err)
 
 
     def _insertIdentifierLocations_pl(self, identifier_id, location_ids, isFailover=False):
