@@ -3,7 +3,7 @@ Description=Meresco BRIGMH NBN Resolver Server
 
 [Service]
 User=meresco
-ExecStart=<path to:> start-resolver --port=<portnumber> --gatewayPort=<gatewayPortnumber>
+ExecStart=<path to:> start-resolver --port=<portnumber> --gatewayPort=<gatewayPortnumber> --dbConfig=<path to:> /conf/config.ini'
 Restart=on-failure
 
 [Install]
