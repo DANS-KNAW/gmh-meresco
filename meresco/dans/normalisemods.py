@@ -295,11 +295,11 @@ class NormaliseMODS(UiaConverter):
 ## Language:
     def _tlLanguage(self, childNode):
         for langterm_node in childNode.iterfind("{"+self._nsMap.get('mods')+"}languageTerm"): # Check if languageTerm element is valid orelse remove it.
-            if langterm_node.get("type") == "code": # Do not check for authority: we'll set it fot you if you provided a valid rfc3066 code.
+            if langterm_node.get("type") == "code": # Do not check for authority: we'll set it for you if you provided a valid rfc3066 code.
                 if comm.isValidRFC3066(langterm_node.text):
                     langterm_node.set('authority', 'rfc3066')
                 else:
-                    self.do.logMsg(self._uploadid, langterm_node.text + LOGGER1, prefix=STR_MODS)
+                    self.do.logMsg(self._uploadid, (langterm_node.text if langterm_node.text is not None else "") + LOGGER1, prefix=STR_MODS)
                     childNode.remove(langterm_node)
             elif langterm_node.get("type") == "text":
                 langterm_node.attrib.pop('authority', None)

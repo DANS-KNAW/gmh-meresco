@@ -139,7 +139,7 @@
                                                 &lt;languageTerm type=&quot;text&quot;  authority=&quot;rfc3066&quot; &gt;english&lt;/languageTerm&gt;
                                             &lt;/language&gt;
                                             &lt;language&gt;
-                                                &lt;languageTerm type=&quot;code&quot; &gt;Engels&lt;/languageTerm&gt;
+                                                &lt;languageTerm type=&quot;code&quot; &gt;&lt;/languageTerm&gt;
                                             &lt;/language&gt;
                                             &lt;abstract&gt;We released genetically modified Pseudomonas putida WCS358r into the rhizospheres of wheat plants. The&amp;#13;
                                                 two genetically modified derivatives, genetically modified microorganism (GMM) 2 and GMM 8, carried the&amp;#13;
