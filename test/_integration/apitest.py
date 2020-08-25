@@ -33,8 +33,6 @@ from lxml.etree import tostring, fromstring
 NL_DIDL_NORMALISED_PREFIX = 'nl_didl_norm'
 NL_DIDL_COMBINED_PREFIX = 'nl_didl_combined'
 
-# TODO: create UnitTestCase for o.a. writeDelete / unDelete
-
 testNamespaces = namespaces.copyUpdate({'oaibrand':'http://www.openarchives.org/OAI/2.0/branding/',
     'prs'    : 'http://www.onderzoekinformatie.nl/nod/prs',
     'proj'   : 'http://www.onderzoekinformatie.nl/nod/act',
@@ -114,7 +112,7 @@ class ApiTest(IntegrationTestCase):
         self.assertEqual(1, len(xpath(body, "//oai:GetRecord/oai:record/oai:header/oai:identifier")))
 
 
-    def testDeleteRecord(self): # GMH21 TODO
+    def testDeleteRecord(self): # GMH21 OK
         header, body = getRequest(self.apiPort, '/oai', dict(verb="GetRecord", metadataPrefix='metadata', identifier='kb_tst:GMH:05')) #differ:oai:www.differ.nl:160
         # print "GetRecord DELETED", etree.tostring(body)
         self.assertEqual('HTTP/1.0 200 OK\r\nContent-Type: text/xml; charset=utf-8', header)
@@ -135,24 +133,6 @@ class ApiTest(IntegrationTestCase):
         self.assertEqual('HTTP/1.0 404 Not Found\r\nContent-Type: text/html; charset=utf-8', header)
         
 
-# De deletes komen zeker door van de GateWay, echter worden er voor de test-records nooit een initiele update gestuurd, waardoor de records dus NIET als @status=deleted in de PMH komen (want zijn er nooit in geweest). Vraag is hoe erg dit is, en hoe vaak dit in de practijk voorkomt.Het is wel verwarrend.
+# De deletes komen zeker door van de GateWay, echter worden er voor de test-records nooit een initiele update gestuurd, waardoor de records dus NIET als @status=deleted in de PMH komen (want zijn er nooit in geweest). Vraag is hoe erg dit is, en hoe vaak dit in de practijk voorkomt. Het is wel verwarrend.
 
 
-# [addOaiRecord:] addOaiRecord(*(), **{'setSpecs': ['TODO'], 'identifier': 'beeldengeluid:oai:publications.beeldengeluid.nl:157', 'metadataPrefixes': ['metadata', 'nl_didl_norm', 'nl_didl_combined']})
-# [addOaiRecord:] addOaiRecord(*(), **{'setSpecs': ['TODO'], 'identifier': 'beeldengeluid:oai:publications.beeldengeluid.nl:125', 'metadataPrefixes': ['metadata', 'nl_didl_norm', 'nl_didl_combined']})
-# [addOaiRecord:] addOaiRecord(*(), **{'setSpecs': ['TODO'], 'identifier': 'beeldengeluid:oai:publications.beeldengeluid.nl:136', 'metadataPrefixes': ['metadata', 'nl_didl_norm', 'nl_didl_combined']})
-# [addOaiRecord:] addOaiRecord(*(), **{'setSpecs': ['TODO'], 'identifier': 'beeldengeluid:oai:publications.beeldengeluid.nl:155', 'metadataPrefixes': ['metadata', 'nl_didl_norm', 'nl_didl_combined']})
-# [Delete Update] delete(*(), **{'identifier': 'differ:oai:www.differ.nl:160'})
-# [addOaiRecord:] addOaiRecord(*(), **{'setSpecs': ['TODO'], 'identifier': 'differ:oai:www.differ.nl:161', 'metadataPrefixes': ['metadata', 'nl_didl_norm', 'nl_didl_combined']})
-# [addOaiRecord:] addOaiRecord(*(), **{'setSpecs': ['TODO'], 'identifier': 'differ:oai:www.differ.nl:162', 'metadataPrefixes': ['metadata', 'nl_didl_norm', 'nl_didl_combined']})
-# [addOaiRecord:] addOaiRecord(*(), **{'setSpecs': ['TODO'], 'identifier': 'differ:oai:www.differ.nl:232', 'metadataPrefixes': ['metadata', 'nl_didl_norm', 'nl_didl_combined']})
-# [addOaiRecord:] addOaiRecord(*(), **{'setSpecs': ['TODO'], 'identifier': 'differ:oai:www.differ.nl:163', 'metadataPrefixes': ['metadata', 'nl_didl_norm', 'nl_didl_combined']})
-# [addOaiRecord:] addOaiRecord(*(), **{'setSpecs': ['TODO'], 'identifier': 'kb_tst:GMH:01', 'metadataPrefixes': ['metadata', 'nl_didl_norm', 'nl_didl_combined']})
-# [addOaiRecord:] addOaiRecord(*(), **{'setSpecs': ['TODO'], 'identifier': 'kb_tst:GMH:02', 'metadataPrefixes': ['metadata', 'nl_didl_norm', 'nl_didl_combined']})
-# [addOaiRecord:] addOaiRecord(*(), **{'setSpecs': ['TODO'], 'identifier': 'kb_tst:GMH:03', 'metadataPrefixes': ['metadata', 'nl_didl_norm', 'nl_didl_combined']})
-# [addOaiRecord:] addOaiRecord(*(), **{'setSpecs': ['TODO'], 'identifier': 'kb_tst:GMH:04', 'metadataPrefixes': ['metadata', 'nl_didl_norm', 'nl_didl_combined']})
-# [addOaiRecord:] addOaiRecord(*(), **{'setSpecs': ['TODO'], 'identifier': 'kb_tst:GMH:06', 'metadataPrefixes': ['metadata', 'nl_didl_norm', 'nl_didl_combined']})
-# [addOaiRecord:] addOaiRecord(*(), **{'setSpecs': ['TODO'], 'identifier': 'tud:GMH:07', 'metadataPrefixes': ['metadata', 'nl_didl_norm', 'nl_didl_combined']})
-# [addOaiRecord:] addOaiRecord(*(), **{'setSpecs': ['TODO'], 'identifier': 'tud:GMH:08', 'metadataPrefixes': ['metadata', 'nl_didl_norm', 'nl_didl_combined']})
-# [addOaiRecord:] addOaiRecord(*(), **{'setSpecs': ['TODO'], 'identifier': 'kb_tst:GMH:09', 'metadataPrefixes': ['metadata', 'nl_didl_norm', 'nl_didl_combined']})
-# [Delete Update] delete(*(), **{'identifier': 'kb_tst:GMH:05'})

@@ -13,7 +13,7 @@ from meresco.xml.namespaces import namespaces
 from xmlvalidator import formatExceptionLine
 from dateutil.parser import parse as parseDate
 from datetime import *
-from normalisedidl import XML_ENCODING #TODO: Import it from a more intuitive location
+from normalisedidl import XML_ENCODING
 from meresco.dans.uiaconverter import UiaConverter
 
 import commons as comm

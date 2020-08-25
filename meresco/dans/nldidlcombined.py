@@ -7,7 +7,7 @@ from StringIO import StringIO
 from weightless.core import Transparent, be, compose
 from meresco.dans.uiaconverter import UiaConverter
 
-# TODO: lxml staat het gebruik van colonisednames niet meer toe: gebruik kwarg: prefix="[ns_alias]"
+# lxml staat het gebruik van colonisednames niet meer toe: gebruik kwarg: prefix="[ns_alias]"
 # This component handles ADD messages only.
 # It will try to convert the data from the 'metadata' part into GH combined format.
 # If it fails in doing so, it will block (NOT pass) the ADD message.
