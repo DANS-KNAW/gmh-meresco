@@ -99,7 +99,7 @@ class XlsServer(object):
         self._repostatus = RepositoryStatus('/var/log/meresco-harvester', '/var/lib/meresco-harvester/state')
 
     def handleRequest(self, path, port=None, Client=None, Method=None, Headers=None, **kwargs):
-        resolvedFileOrDir = self._createXLS(kwargs.get("arguments")['rgid'][0])
+        resolvedFileOrDir = self._createXLS(kwargs.get("arguments")['rid'][0])
         if resolvedFileOrDir is None:
             yield httputils.notFoundHtml
             yield '<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">\n'
