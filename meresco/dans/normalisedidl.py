@@ -90,13 +90,11 @@ class NormaliseDIDL(UiaConverter):
     def __init__(self, fromKwarg, toKwarg=None, name=None, nsMap=None):
         UiaConverter.__init__(self, name=name, fromKwarg=fromKwarg, toKwarg=toKwarg)
         self._nsMap = namespaces.copyUpdate(nsMap or {})
-        self._bln_success = False
 
 
     def _convert(self, lxmlNode):
         if not type(lxmlNode) == _ElementTree:
             return lxmlNode
-        self._bln_success = False #TODO: Is this still in use?
 
 
         #start conversion: Look for <part name="normdoc"> in the document:
@@ -109,9 +107,6 @@ class NormaliseDIDL(UiaConverter):
             p.remove(c)
 
         norm_md_tree = self._normaliseRecord(metadata_tree)
-
-        if norm_md_tree != None:
-            self._bln_success = True
 
         normdocpart = lxmlNode.xpath("//document:document/document:part[@name='normdoc']", namespaces=self._nsMap)
         if normdocpart:

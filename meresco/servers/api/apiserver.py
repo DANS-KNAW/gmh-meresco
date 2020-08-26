@@ -91,7 +91,7 @@ def createDownloadHelix(reactor, periodicDownload, oaiDownload, storageComponent
                             (storageComponent,),
                         )
                     ),
-                    (FilterMessages(allowed=['add']), #TODO: NL_DIDL_COMBINED_PREFIX formaat aanmaken en naar storage schrijven.
+                    (FilterMessages(allowed=['add']),
                         # (LogComponent("ADD"),),
 
                         (XmlXPath(['//document:document/document:part[@name="normdoc"]/text()'], fromKwarg='lxmlNode', toKwarg='data', namespaces=NAMESPACEMAP),
@@ -107,7 +107,7 @@ def createDownloadHelix(reactor, periodicDownload, oaiDownload, storageComponent
 
                         (XmlXPath(['//document:document/document:part[@name="record"]/text()'], fromKwarg='lxmlNode', toKwarg='data', namespaces=NAMESPACEMAP),
                             (XmlParseLxml(fromKwarg='data', toKwarg='lxmlNode'),
-                                # TODO: Check indien conversies misgaan, dat ook de meta en header part niet naar storage gaan: geen 1 part als het even kan...
+                                # TODO: Check indien conversies misgaan, dat ook de meta en header part niet naar storage gaan: geen enkel part als het even kan...
                                 # Schrijf 'header' partname naar storage:
                                 (XmlXPath(['/oai:record/oai:header'], fromKwarg='lxmlNode', namespaces=NAMESPACEMAP),
                                     (RewritePartname("header"),
@@ -257,7 +257,7 @@ def main(reactor, port, statePath, gatewayPort, quickCommit=False, **ignored):
                 ),
                 (PathFilter('/xls'),
                     # (LogComponent("XLS-Request:"),),
-                    (XlsServer(),) #TODO: dataDir, logDir & stateDir hier meegeven...
+                    (XlsServer(),)
                 )                
             )
         )

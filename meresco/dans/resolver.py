@@ -13,9 +13,7 @@ class Resolver(Observable):
 
 
     def add(self, identifier, partname, lxmlNode, **kwargs):
-        
-        # TODO: Strip fragments from location (#).
-        # TODO: Check if location is valid URL.
+
         # TODO: Check if we need to resolve urn:nbn avaialable from DIDL-objectFile's too.
 
         # - Meerdere lokaties per urn:nbn per repository: JA, OVERNEMEN (in praktijk is er maar 1 per repo, maar is nodig voor provenance): Er wordt geitereerd over locaties die NIET marked DELETED zijn. De meest recente wint.
