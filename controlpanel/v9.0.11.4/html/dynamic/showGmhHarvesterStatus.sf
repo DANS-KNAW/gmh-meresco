@@ -29,11 +29,13 @@
 
 import pageplain
 
+
 def main(**kwargs):
     if kwargs['path'].endswith('/js'):
         yield js(**kwargs)
         return
     yield pageplain.layoutWithMenu(_contents, additionalScripts=['/showGmhHarvesterStatus/js'], **kwargs)
+
 
 def js(**kwargs):
     yield 'HTTP/1.0 200 Ok\r\nContent-Type: text/javascript; charset=utf-8\r\n\r\n'
@@ -67,14 +69,16 @@ $("table").tablesorter({
 
 
 def xpath(node, path):
-    return node.xpath(path, namespaces={'diag':'http://www.loc.gov/zing/srw/diagnostic/'})
+    return node.xpath(path, namespaces={'diag': 'http://www.loc.gov/zing/srw/diagnostic/'})
+
 
 def _contents(arguments, session, **kwargs):
     domainId = arguments.get('domainId', [None])[0]
     repositoryGroupId = arguments.get('repositoryGroupId', [None])[0]
     repositoryId = arguments.get('repositoryId', [None])[0]
     statuses = observable.call.getStatus(domainId=domainId, repositoryGroupId=repositoryGroupId, repositoryId=repositoryId)
-    repository = observable.call.getRepository(identifier=repositoryId, domainId=domainId)
+
+    # repository = observable.call.getRepository(identifier=repositoryId, domainId=domainId)
 
     loggedIn = 'user' in session
 
@@ -121,7 +125,7 @@ def _contents(arguments, session, **kwargs):
             identifier=escapeHtml(repositoryId),
             total=escapeHtml(str(status.get('total', 0) or '')),
             lastHarvestDate=escapeHtml(lastHarvestDate),
-            )
+        )
 
         nrOfValidationErrors = int(invalid[repositoryId].get('invalid') or '0') if repositoryId in invalid else 0
         if nrOfValidationErrors > 0:
@@ -131,10 +135,9 @@ def _contents(arguments, session, **kwargs):
         yield """
             </td>
             <td class="link">"""
-        yield """<a target="_blank" href="{repositoryEditLink}">RSS-feed</a>""".format(
-                repositoryEditLink="http://rss.gharvester.dans.knaw.nl/rss?{}".format(urlencode(dict(identifier=repositoryId))),
-                caption=escapeHtml(repositoryId) if loggedIn else escapeHtml(repositoryId))
-        
+        # yield """<a target="_blank" href="{repositoryEditLink}">RSS-feed</a>""".format(repositoryEditLink="http://rss.gharvester.dans.knaw.nl/rss?{}".format(urlencode(dict(repositoryId=repositoryId))), caption=escapeHtml(repositoryId))
+        yield """<a target="_blank" href="{repositoryEditLink}">RSS-feed</a>""".format(repositoryEditLink="http://[api-server]/rss?domainId="+domainId+"&{}".format(urlencode(dict(repositoryId=repositoryId))), caption=escapeHtml(repositoryId))
+
         if errorsnr:
             yield """<a name="{name}" href="{href}">{errorText}</a>""".format(
                 name="top_{}".format(repositoryId),
@@ -143,14 +146,15 @@ def _contents(arguments, session, **kwargs):
         yield """
             </td>
             <td class="link">"""
-	#nrOfValidationErrors = int(invalid[repositoryId].get('invalid') or '0') if repositoryId in invalid else 0
+        # nrOfValidationErrors = int(invalid[repositoryId].get('invalid') or '0') if repositoryId in invalid else 0
         if nrOfValidationErrors > 0:
-            yield """<a href="{xlsLink}">Excel spreadsheet</a>""".format(xlsLink="/xls?{}".format(urlencode(arguments)))
-        yield """</td>
-    </tbody>
+            # yield """<a href="{xlsLink}">Excel spreadsheet</a>""".format(xlsLink="/xls?{}".format(urlencode(arguments)))
+            # yield """<a href="{xlsLink}">Excel spreadsheet</a>""".format(xlsLink="http://services.gmh.dans.knaw.nl/validation/download/rid/{}".format(urlencode(dict(rid=repositoryId)))
+            yield """<a href="{xlsLink}">Excel spreadsheet</a>""".format(xlsLink="http://[api-server]/xls?{}".format(urlencode(dict(rid=repositoryId))))
+        yield """</td></tr>"""
+    yield """</tbody>
 </table>
 </div>"""
-
 
     yield """
 <div>
@@ -158,6 +162,7 @@ def _contents(arguments, session, **kwargs):
     <table class="event" width="100%" cellspacing="0" cellpadding="0" border="0">"""
     for status in statuses:
         repositoryId = status.get('repositoryId')
+        repository = observable.call.getRepository(identifier=repositoryId, domainId=domainId)
         invalidnr = int(status.get('invalid') or '0')
         if invalidnr:
             yield """
