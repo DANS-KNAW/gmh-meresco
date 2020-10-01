@@ -303,11 +303,11 @@ class Normalize_nl_MODS(Observable):
 ## Language:
     def _tlLanguage(self, childNode):
         for langterm_node in childNode.iterfind("{"+self._nsMap.get('mods')+"}languageTerm"): # Check if languageTerm element is valid orelse remove it.
-            if langterm_node.get("type") == "code": # Do not check for authority: we'll set it fot you if you provided a valid rfc3066 code.
+            if langterm_node.get("type") == "code": # Do not check for authority: we'll set it for you if you provided a valid rfc3066 code.
                 if comm.isValidRFC3066(langterm_node.text):
                     langterm_node.set('authority', 'rfc3066')
                 else:
-                    self.do.logMsg(self._identifier, langterm_node.text + LOGGER1, prefix=STR_MODS)
+                    self.do.logMsg(self._identifier, (langterm_node.text if langterm_node.text is not None else "") + LOGGER1, prefix=STR_MODS)
                     childNode.remove(langterm_node)
             elif langterm_node.get("type") == "text":
                 langterm_node.attrib.pop('authority', None)
@@ -325,7 +325,7 @@ class Normalize_nl_MODS(Observable):
         for genre in modsNode.iterfind('{'+self._nsMap.get('mods')+'}genre'):
         
             for key, value in GENRES_SEMANTIEK.iteritems():
-                    if genre.text.strip().lower().find(key) >= 0: #found a (lowercased) genre
+                    if genre.text and genre.text.strip().lower().find(key) >= 0: #found a (lowercased) genre
                         fqGenre = value
                         break
         
