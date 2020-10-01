@@ -116,7 +116,7 @@ class ResolverStorageComponent(object):
                     conn.commit()
             self.close(conn, cursor)
         except mysql.connector.Error as err:
-            print "Error while execute'ing SQL-query: {}: {}".format(sql, err)
+            print "Error while execute'ing SQL-query: {}".format(err)
 
     def _deletePairsByRegId_pl(self, registrant_id, identifier_id):
         try:
@@ -131,7 +131,7 @@ class ResolverStorageComponent(object):
             conn.commit()
             self.close(conn, cursor)
         except mysql.connector.Error as err:
-            print "Error while execute'ing SQL-query: {}: {}".format(sql, err)
+            print "Error while execute'ing SQL-query: {}".format(err)
 
 
     def _selectOrInsertLocationsId_pl(self, registrant_id, locations):
@@ -172,7 +172,7 @@ class ResolverStorageComponent(object):
             self.close(conn, cursor)
             return location_ids
         except mysql.connector.Error as err:
-            print "Error while execute'ing SQL-query: {}: {}".format(sql, err)
+            print "Error while execute'ing SQL-query: {}".format(err)
         return location_ids
 
 
@@ -207,7 +207,7 @@ class ResolverStorageComponent(object):
             self.close(conn, cursor)
             return identifier_id
         except mysql.connector.Error as err:
-            print "Error while execute'ing SQL-query: {}: {}".format(sql, err)
+            print "Error while execute'ing SQL-query: {}".format(err)
 
 
     def _selectOrInsertRegistrantId_pl(self, rgid):
@@ -228,7 +228,7 @@ class ResolverStorageComponent(object):
             self.close(conn, cursor)
             return registrant_id
         except mysql.connector.Error as err:
-            print "Error while execute'ing SQL-query: {}: {}".format(sql, err)
+            print "Error while execute'ing SQL-query: {}".format(err)
 
 
     def read_db_config(self, conffile_path, section='mysql'): #TODO: Even importeren ergens anders vandaan. Dubbele code...
