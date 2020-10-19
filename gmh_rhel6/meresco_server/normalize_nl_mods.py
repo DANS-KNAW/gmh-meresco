@@ -266,10 +266,10 @@ class Normalize_nl_MODS(Observable):
 
     def _isValidTitleInfoTag(self, lxmlNode):
         for title in lxmlNode.iterfind(('{%s}title') % self._nsMap['mods']):
-            if not title.text:
+            if not title.text or not title.text.strip():
                 raise ValidateException(formatExceptionLine(EXCEPTION3, prefix=STR_MODS))
         for subtitle in lxmlNode.iterfind(('{%s}subTitle') % self._nsMap['mods']):
-            if not subtitle.text:
+            if not subtitle.text or not subtitle.text.strip():
                 subtitle.getparent().remove(subtitle)
         return True
 
@@ -284,7 +284,7 @@ class Normalize_nl_MODS(Observable):
                 if roleterm.text: roleterm.text = roleterm.text.strip()
             role = name.xpath("self::mods:name/mods:role/mods:roleTerm[@type='code' and @authority='marcrelator']/text()", namespaces=self._nsMap)
             for namepart in name.iterfind(('{%s}namePart') % self._nsMap['mods']):
-                if not namepart.text: # Remove empty nameparts
+                if not namepart.text or not namepart.text.strip(): # Remove empty nameparts
                     name.remove(namepart)
             if not role or len(role) < 1 or name.find(('{%s}namePart') % self._nsMap['mods']) is None: ## Geen roleterm gevonden, of lege string voor type code en authority marcrelator, of geen nameParts: Verwijder dit name element:
                 modsNode.remove(name)
@@ -358,7 +358,7 @@ class Normalize_nl_MODS(Observable):
             raise ValidateException(formatExceptionLine(EXCEPTION7, prefix=STR_MODS))
 
         for child in childNode.xpath("self::mods:originInfo/mods:publisher", namespaces=self._nsMap):
-            if not child.text:
+            if not child.text or not child.text.strip():
                 child.getparent().remove(child)
 
         return childNode if len(childNode) > 0 else None
@@ -461,11 +461,11 @@ class Normalize_nl_MODS(Observable):
                     child.getparent().remove(child)
 
         for child in childNode.xpath("self::mods:relatedItem/mods:originInfo/mods:publisher", namespaces=self._nsMap):
-            if not child.text:
+            if not child.text or not child.text.strip():
                 child.getparent().remove(child)
 
         for subtitle in childNode.xpath("self::mods:relatedItem/mods:titleInfo/mods:subTitle", namespaces=self._nsMap):
-            if not subtitle.text:
+            if not subtitle.text or not subtitle.text.strip():
                 subtitle.getparent().remove(subtitle)
 
         return childNode if len(childNode) > 0 else None
