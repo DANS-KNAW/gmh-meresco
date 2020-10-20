@@ -8,7 +8,7 @@
         <srw:recordData><document xmlns="http://meresco.org/namespace/harvester/document"><part name="record">&lt;record xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;
  &lt;header&gt; &lt;identifier&gt;oai:www.differ.nl:161&lt;/identifier&gt;
  &lt;datestamp&gt;2016-06-24T12:45:40Z&lt;/datestamp&gt;
- &lt;setSpec&gt;closedaccess&lt;/setSpec&gt;
+ &lt;setSpec&gt;openaccess&lt;/setSpec&gt;
 &lt;/header&gt;
    &lt;metadata&gt;
 &lt;didl:DIDL xmlns:didl="urn:mpeg:mpeg21:2002:02-DIDL-NS" xmlns:dii="urn:mpeg:mpeg21:2002:01-DII-NS" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:mpeg:mpeg21:2002:02-DIDL-NS http://standards.iso.org/ittf/PubliclyAvailableStandards/MPEG-21_schema_files/did/didl.xsd urn:mpeg:mpeg21:2002:01-DII-NS http://standards.iso.org/ittf/PubliclyAvailableStandards/MPEG-21_schema_files/dii/dii.xsd "&gt;&lt;didl:Item&gt; &lt;didl:Descriptor&gt; &lt;didl:Statement mimeType="text/xml"&gt; &lt;dii:Identifier&gt;urn:nbn:nl:ui:39-79442a501b171a2d1437557022989bf8&lt;/dii:Identifier&gt;

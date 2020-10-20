@@ -78,7 +78,7 @@ class ApiTest(IntegrationTestCase):
         header, body = getRequest(self.apiPort, '/oai', dict(verb="ListSets"))
         # print "ListSets", etree.tostring(body)
         self.assertEqual('HTTP/1.0 200 OK\r\nContent-Type: text/xml; charset=utf-8', header)
-        self.assertEqual({'kb:KB:GMH','beeldengeluid:view','kb:KB','beeldengeluid','kb','differ'}, set(xpath(body, "//oai:ListSets/oai:set/oai:setSpec/text()")))
+        self.assertEqual({'kb:KB:GMH','beeldengeluid:view','kb:KB','beeldengeluid','kb','differ','differ:openaccess'}, set(xpath(body, "//oai:ListSets/oai:set/oai:setSpec/text()")))
 
 
     def testOaiListMetadataFormats(self): # GMH31 OK
