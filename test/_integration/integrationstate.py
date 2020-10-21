@@ -126,7 +126,8 @@ class GmhTestIntegrationState(IntegrationState):
             for f in sorted(glob(self.testdataDir + '/*.updateRequest')):
                 print "Uploading file:", f
                 postRequest(self.gatewayPort, '/update', data=open(join(self.testdataDir, f)).read(), parse=False)
-            sleepWheel(2)
+                sleepWheel(.3)
+            # sleepWheel(1)
             print "Finished creating database in %s seconds" % (time() - start)
             # print "Pauzing for a while..."
             # sleepWheel(600)

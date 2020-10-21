@@ -78,7 +78,7 @@ class ApiTest(IntegrationTestCase):
         header, body = getRequest(self.apiPort, '/oai', dict(verb="ListSets"))
         # print "ListSets", etree.tostring(body)
         self.assertEqual('HTTP/1.0 200 OK\r\nContent-Type: text/xml; charset=utf-8', header)
-        self.assertEqual({'kb:KB:GMH','beeldengeluid:view','kb:KB','beeldengeluid','kb','differ','differ:openaccess'}, set(xpath(body, "//oai:ListSets/oai:set/oai:setSpec/text()")))
+        self.assertEqual({'kb:KB:GMH','beeldengeluid:view','kb:KB','beeldengeluid','kb','differ','differ:openaccess','differ:closedaccess'}, set(xpath(body, "//oai:ListSets/oai:set/oai:setSpec/text()")))
 
 
     def testOaiListMetadataFormats(self): # GMH31 OK
@@ -93,7 +93,7 @@ class ApiTest(IntegrationTestCase):
         header, body = getRequest(self.apiPort, '/oai', dict(verb="ListRecords", metadataPrefix='metadata'))
         # print "testProvenanceMetaDataNamespace:", etree.tostring(body)
         self.assertEqual('HTTP/1.0 200 OK\r\nContent-Type: text/xml; charset=utf-8', header)
-        self.assertEqual(16, len(xpath(body, "//oai:ListRecords/oai:record")))
+        self.assertEqual(18, len(xpath(body, "//oai:ListRecords/oai:record")))
         for provNamespace in testNamespaces.xpath(body, "//oaiprov:originDescription/oaiprov:metadataNamespace/text()"):
             self.assertTrue('didl' in provNamespace)
 
@@ -102,7 +102,7 @@ class ApiTest(IntegrationTestCase):
         header, body = getRequest(self.apiPort, '/oai', dict(verb="ListRecords", metadataPrefix=NL_DIDL_COMBINED_PREFIX, set='kb'))
         # print 'testOaiSet:', etree.tostring(body)
         self.assertEqual('HTTP/1.0 200 OK\r\nContent-Type: text/xml; charset=utf-8', header)
-        self.assertEqual(8, len(xpath(body, "//oai:ListRecords/oai:record")))
+        self.assertEqual(9, len(xpath(body, "//oai:ListRecords/oai:record")))
 
 
     def testOaiGetRecord(self): # GMH21 OK
@@ -123,7 +123,7 @@ class ApiTest(IntegrationTestCase):
         header, body = getRequest(self.apiPort, '/oai', dict(verb="ListRecords", metadataPrefix=NL_DIDL_NORMALISED_PREFIX))
         # print "OAI body:", etree.tostring(body)
         self.assertEqual('HTTP/1.0 200 OK\r\nContent-Type: text/xml; charset=utf-8', header)
-        self.assertEqual(16, len(xpath(body, "//oai:ListRecords/oai:record")))
+        self.assertEqual(18, len(xpath(body, "//oai:ListRecords/oai:record")))
         self.assertEqual('nl_didl', xpathFirst(body, '//oaiprov:provenance/oaiprov:originDescription/oaiprov:metadataNamespace/text()'))
 
 

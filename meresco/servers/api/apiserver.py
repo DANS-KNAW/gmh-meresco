@@ -196,7 +196,7 @@ def main(reactor, port, statePath, gatewayPort, quickCommit=False, **ignored):
         reactor,
         host='localhost',
         port=gatewayPort,
-        schedule=Schedule(period=1 if quickCommit else 10), # WST: Interval in seconds before sending a new request to the GATEWAY in case of an error while processing batch records.(default=1). IntegrationTests need 1 second! Otherwise tests will fail!
+        schedule=Schedule(period=.1 if quickCommit else 10), # WST: Interval in seconds before sending a new request to the GATEWAY in case of an error while processing batch records.(default=1). IntegrationTests need <=1 second! Otherwise tests will fail!
         name='api',
         autoStart=True)
 
