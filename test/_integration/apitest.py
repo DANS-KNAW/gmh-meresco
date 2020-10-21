@@ -116,7 +116,7 @@ class ApiTest(IntegrationTestCase):
         header, body = getRequest(self.apiPort, '/oai', dict(verb="GetRecord", metadataPrefix='metadata', identifier='kb_tst:GMH:05')) #differ:oai:www.differ.nl:160
         # print "GetRecord DELETED", etree.tostring(body)
         self.assertEqual('HTTP/1.0 200 OK\r\nContent-Type: text/xml; charset=utf-8', header)
-        # self.assertEquals('deleted', xpath(body, "//oai:GetRecord/oai:record[1]/oai:header/@status")[0])
+        self.assertEquals('deleted', xpath(body, "//oai:GetRecord/oai:record[1]/oai:header/@status")[0])
 
 
     def testOai(self): # GMH31 OK
@@ -131,8 +131,3 @@ class ApiTest(IntegrationTestCase):
         header, body = getRequest(self.apiPort, '/xls', dict(rid="bogus"))
         # print "testXls:", header
         self.assertEqual('HTTP/1.0 404 Not Found\r\nContent-Type: text/html; charset=utf-8', header)
-        
-
-# De deletes komen zeker door van de GateWay, echter worden er voor de test-records nooit een initiele update gestuurd, waardoor de records dus NIET als @status=deleted in de PMH komen (want zijn er nooit in geweest). Vraag is hoe erg dit is, en hoe vaak dit in de practijk voorkomt. Het is wel verwarrend.
-
-
