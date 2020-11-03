@@ -4,9 +4,9 @@ info:
   contact:
     email: harvester@dans.knaw.nl
   description: >-
-    Voor het eenvoudig ophalen van een publicatie of van data met een in Nederland toegekende NBN is er de <a href
-    ='https://persistent-identifier.nl'>Nationale Resolver</a>.<br>Deze wordt beheerd door <a href
-    ='https://dans.knaw.nl'>Data Archiving and Networked Services</a> [DANS] en <a href="https://www.kb.nl">KB nationale bibliotheek</a> [KB] <br> Meer informatie over de <a href="https://www.kb.nl/organisatie/onderzoek-expertise/informatie-infrastructuur-diensten-voor-bibliotheken/registration-agency-nbn">'Registration Agency NBN'</a>.
+    For easy retrieval of a publication or data, assigned with a Dutch NBN in the Netherlands, a service called <a href
+    ='https://persistent-identifier.nl'>National Resolver</a> is available. This service is managed by <a href
+    ='https://dans.knaw.nl'>Data Archiving and Networked Services</a> (DANS) and <a href="https://www.kb.nl">KB, National Library of the Netherlands</a> (KB). Find out more about the <a href="https://www.kb.nl/organisatie/onderzoek-expertise/informatie-infrastructuur-diensten-voor-bibliotheken/registration-agency-nbn">'Registration Agency NBN'</a>.
   license:
     name: Apache License 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
@@ -14,7 +14,8 @@ info:
   version: 0.1.0
 
 externalDocs:
-  description: NBN Resolver op GitHub
+
+  description: NBN Resolver on GitHub
   url: 'https://github.com/DANS-KNAW/gmh-meresco/tree/brigmh'
 
 paths:
@@ -35,9 +36,14 @@ paths:
         '201':
           description: Successful operation (created new)
         '400':
-          description: Invalid URN:NBN identifier or location(s) supplied
+          description: Invalid URN:NBN identifier pattern or location uri(s) supplied
         '401':
             $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          description: URN:NBN identifier is valid, but does not match the prefix of the authenticated user
+        '409':
+          description: Conflict, resource already exists
+            
       tags:
         - URN:NBN identifier
 
@@ -56,11 +62,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/NbnLocationsObject'
         '400':
-          description: Invalid URN:NBN identifier supplied
+          description: Invalid URN:NBN identifier pattern supplied
         '401':
             $ref: '#/components/responses/UnauthorizedError'      
         '404':
-          description: Supplied URN:NBN identifier not found, or nbn-prefix not registered to this user.
+          description: Supplied URN:NBN identifier not found, or URN:NBN-prefix is not registered to this user.
       tags:
         - URN:NBN identifier
 
@@ -120,14 +126,16 @@ paths:
     - $ref: '#/components/parameters/uri_location'
     get:
       operationId: getNbnByLocation
-      summary: Returns URN:NBN identifier registered for this location.
-      description: Returns URN:NBN identifier associated with this location.'   
+      summary: Returns URN:NBN identifier(s) registered for this location.
+      description: Returns URN:NBN identifier(s) associated with this location, if at least one of them is registered to the authenticated user.
       responses:
         '200':
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NbnIdentifier'
+                type: array              
+                items:              
+                  $ref: '#/components/schemas/NbnIdentifier'
           description: OK
         '401':
             $ref: '#/components/responses/UnauthorizedError'
