@@ -89,7 +89,7 @@ paths:
       tags:
         - URN:NBN identifier
         
-  /nbn/{identifier}/location:
+  /nbn/{identifier}/locations:
     parameters:
       - $ref: '#/components/parameters/nbn_identifier'
     get:
