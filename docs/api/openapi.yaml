@@ -70,7 +70,7 @@ paths:
       operationId: 'updateNbnRecord'
       requestBody:
         required: true
-        description: A json object that contains the assosiated locations for the {identifier}.
+        description: A json object that contains the associated locations for the {identifier}.
         content:
           application/json:
             schema:
