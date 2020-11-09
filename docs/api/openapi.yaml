@@ -100,7 +100,7 @@ paths:
       - $ref: '#/components/parameters/nbn_identifier'
     get:
       summary: 'Returns registered locations for this URN:NBN {identifier}.'
-      description: 'Returns all registed locations for this {identifier}.<br>The identifier must have a prefix that matches the authenticated user. HTTP 404 otherwise.'
+      description: 'Returns all registered locations for this {identifier}.<br>The identifier must have a prefix that matches the authenticated user. HTTP 404 otherwise.'
       operationId: 'getLocationsByNbn'
       responses:
         '200':
