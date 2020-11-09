@@ -16,7 +16,7 @@ info:
 externalDocs:
 
   description: NBN Resolver on GitHub
-  url: 'https://github.com/DANS-KNAW/gmh-meresco/tree/brigmh'
+  url: 'https://github.com/DANS-KNAW/gmh-meresco'
 
 paths:
 
@@ -64,9 +64,11 @@ paths:
         '400':
           description: Invalid URN:NBN identifier pattern supplied
         '401':
-            $ref: '#/components/responses/UnauthorizedError'      
+            $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          description: URN:NBN-prefix is not registered to this user
         '404':
-          description: Supplied URN:NBN identifier not found, or URN:NBN-prefix is not registered to this user.
+          description: Supplied URN:NBN identifier not found
       tags:
         - URN:NBN identifier
 
@@ -76,7 +78,7 @@ paths:
       operationId: 'updateNbnRecord'
       requestBody:
         required: true
-        description: A json object that contains the associated locations for the {identifier}.
+        description: A json object that contains the associated locations for the {identifier}
         content:
           application/json:
             schema:
@@ -92,6 +94,8 @@ paths:
           description: Invalid URN:NBN identifier or location(s) supplied
         '401':
             $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          description: URN:NBN-prefix is not registered to this user
       tags:
         - URN:NBN identifier
         
@@ -153,9 +157,9 @@ servers:
     description: (prod)    
 
 tags:
-  - description: The URN:NBN persistent identifier
+  - description: The URN:NBN persistent identifier.
     name: URN:NBN identifier
-  - description: The URI to which the URN:NBN identifier should resolve
+  - description: The URI to which the URN:NBN identifier should resolve.
     name: Location
 
 
