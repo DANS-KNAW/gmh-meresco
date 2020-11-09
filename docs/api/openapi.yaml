@@ -155,7 +155,7 @@ servers:
 tags:
   - description: The URN:NBN persistent identifier
     name: URN:NBN identifier
-  - description: The URI to which the URN:NBN identifier should resolve to
+  - description: The URI to which the URN:NBN identifier should resolve
     name: Location
 
 
