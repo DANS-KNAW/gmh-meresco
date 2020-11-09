@@ -27,7 +27,7 @@ paths:
       operationId: 'createNbnLocations'
       requestBody:
         required: true
-        description: A json object that contains the URN:NBN and assosiated locations.
+        description: A json object that contains the URN:NBN and associated locations.
         content:
           application/json:
             schema:
