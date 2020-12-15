@@ -1,5 +1,7 @@
 [Unit]
-Description=Meresco BRIGMH NBN Resolver Server
+Description=Meresco NBN Resolver Server
+After=mariadb.service
+Requires=mariadb.service
 
 [Service]
 User=meresco
