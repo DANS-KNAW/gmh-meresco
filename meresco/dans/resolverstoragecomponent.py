@@ -78,8 +78,7 @@ class ResolverStorageComponent(object):
             self._insertIdentifierLocations_pl(identifier_id, location_ids, isfailover)
 
         except mysql.connector.Error as e:
-            print("Error from SQL-db: ", e)
-
+            print "Error from SQL-db: {}".format(e)
         return
 
 
