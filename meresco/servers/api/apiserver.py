@@ -155,7 +155,7 @@ def createDownloadHelix(reactor, periodicDownload, oaiDownload, storageComponent
                                     (NL_DIDL_COMBINED_PREFIX, '', NAMESPACEMAP.gmhcombined)]), #[(partname, schema, namespace)]
                             # (LogComponent("OaiAddRecord:"),),
                             (storageComponent,),
-                            (oaiJazz,) # Assert partNames header and meta are available from storage!
+                            (oaiJazz,) # Assert partNames header and meta are available from storage, used for OAI-Provenance!
                         ),
 
                         (ResurrectTombstone(),

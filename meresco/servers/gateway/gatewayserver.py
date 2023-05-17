@@ -122,7 +122,7 @@ def main(reactor, port, statePath, **ignored):
                         ),
                         (FilterMessages(allowed=['add']),
                             # (LogComponent("LXML:"),),
-                            (Validate([('DIDL container','//didl:DIDL', 'didl.xsd'), ('MODS metadata', '//mods:mods', 'mods-3-6.xsd')]),
+                            (Validate([('OAI-PMH header','//oai:header', 'OAI-PMH-header.xsd'), ('DIDL container','//didl:DIDL', 'didl.xsd'), ('MODS metadata', '//mods:mods', 'mods-3-6.xsd')]),
                                 # (LogComponent("VALIDATED:"),),
                                 (AddMetadataDocumentPart(partName='normdoc', fromKwarg='lxmlNode'),
                                     (NormaliseDIDL(nsMap=namespacesMap, fromKwarg='lxmlNode'), # Normalise DIDL in partname=normdoc metadata

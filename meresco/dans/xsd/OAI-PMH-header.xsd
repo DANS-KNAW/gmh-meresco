@@ -1,0 +1,61 @@
+<schema targetNamespace="http://www.openarchives.org/OAI/2.0/"
+        xmlns="http://www.w3.org/2001/XMLSchema" xmlns:oai="http://www.openarchives.org/OAI/2.0/"
+        elementFormDefault="qualified" attributeFormDefault="unqualified">
+
+  <annotation>
+    <documentation>
+      XML Schema derived from: http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd.
+      This XML Schema can be used to validate the oai:header only and not the complete OAI-PMH v2.0 response.
+      W. Steinhoff, 2022-11-30: Validated with XML Editor 19.1, build 2018051511 on 2022-11-30.
+      W. Steinhoff, 2022-11-30: Changed identifierType restriction from 'anyURI' to 'string'. This loosens the restriction that was never here before (anyURI).
+      $Date: 2022/11/30 09:31:21 $
+    </documentation>
+  </annotation>
+
+  <element name="header" type="oai:headerType"/>
+
+  <complexType name="headerType">
+    <annotation>
+      <documentation>A header has a unique identifier, a datestamp, and setSpec(s) in case the item
+        from which the record is disseminated belongs to set(s). the header can carry a deleted
+        status indicating that the record is deleted.</documentation>
+    </annotation>
+    <sequence>
+      <element name="identifier" type="oai:identifierType"/>
+      <element name="datestamp" type="oai:UTCdatetimeType"/>
+      <element name="setSpec" type="oai:setSpecType" minOccurs="0" maxOccurs="unbounded"/>
+    </sequence>
+    <attribute name="status" type="oai:statusType" use="optional"/>
+  </complexType>
+
+  <simpleType name="identifierType">
+    <restriction base="string"/>
+  </simpleType>
+
+  <simpleType name="statusType">
+    <restriction base="string">
+      <enumeration value="deleted"/>
+    </restriction>
+  </simpleType>
+
+  <simpleType name="UTCdatetimeType">
+    <annotation>
+      <documentation>Datestamps are to either day (type date) or to seconds granularity (type
+        oai:UTCdateTimeZType)</documentation>
+    </annotation>
+    <union memberTypes="date oai:UTCdateTimeZType"/>
+  </simpleType>
+
+  <simpleType name="UTCdateTimeZType">
+    <restriction base="dateTime">
+      <pattern value=".*Z"/>
+    </restriction>
+  </simpleType>
+
+  <simpleType name="setSpecType">
+    <restriction base="string">
+      <pattern value="([A-Za-z0-9\-_\.!~\*'\(\)])+(:[A-Za-z0-9\-_\.!~\*'\(\)]+)*"/>
+    </restriction>
+  </simpleType>
+
+</schema>
