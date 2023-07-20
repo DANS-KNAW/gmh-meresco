@@ -101,7 +101,7 @@ class NormaliseDIDL(UiaConverter):
         metadata_tree = fromstring(lxmlNode.xpath("//document:document/document:part[@name='normdoc']/text()", namespaces=self._nsMap)[0]) #TODO: import 'normdoc" string.
 
         ## Remove all XML-comments from the DIDL/MODS tree: XML-Comments will also be read by iterchildren().
-        comments = metadata_tree.xpath('//comment()')
+        comments = metadata_tree.xpath('//comment()')    
         for c in comments:
             p = c.getparent()
             p.remove(c)
@@ -132,7 +132,7 @@ class NormaliseDIDL(UiaConverter):
         try:
             e_didl = parse(StringIO(str_didl), parser)
             item_to_focus = e_didl.xpath('//didl:Item/didl:Item', namespaces=self._nsMap)
-
+          
             for item in item_to_focus:
                 resource_to_focus = item.xpath('self::didl:Item/didl:Component/didl:Resource', namespaces=self._nsMap)
 
@@ -141,7 +141,7 @@ class NormaliseDIDL(UiaConverter):
                     comp = resource_to_focus[0].getparent()  #<component>
                     item.remove(comp) ## Item without component tag
                     parent_item = item.getparent()
-
+                    
                     for r in resource_to_focus:
                         comp.remove(r) ## Remove all children from the component tag
 
@@ -185,7 +185,7 @@ class NormaliseDIDL(UiaConverter):
         ## Wrappers:
         pid, modified, mimetype, pidlocation = '', '', "application/xml", ''
 
-        #1:     Get persistentIdentifier:
+#1:     Get persistentIdentifier:
         pidlist = lxmlNode.xpath('//didl:DIDL/didl:Item/didl:Descriptor/didl:Statement/dii:Identifier/text()', namespaces=self._nsMap)
         if len(pidlist) > 0:
             pid = pidlist[0].strip()
@@ -194,7 +194,7 @@ class NormaliseDIDL(UiaConverter):
         else:
             raise ValidateException(formatExceptionLine(EXCEPTION1, prefix=STR_DIDL))
 
-        #2:     Get toplevel modificationDate: comm.isISO8601()
+#2:     Get toplevel modificationDate: comm.isISO8601()
         tl_modified = lxmlNode.xpath('//didl:DIDL/didl:Item/didl:Descriptor/didl:Statement/dcterms:modified/text()', namespaces=self._nsMap)
         ## Check op geldig/aanwezigheid tlModified, anders exception:
         if len(tl_modified) > 0 and not comm.isISO8601(tl_modified[0]):
@@ -221,24 +221,24 @@ class NormaliseDIDL(UiaConverter):
         if not tl_modified[0].strip() == modified:
             self.do.logMsg(self._uploadid, LOGGER1, prefix=STR_DIDL)
 
-        #3:     Get PidResourceMimetype
+#3:     Get PidResourceMimetype
         mimetypelist = lxmlNode.xpath('//didl:DIDL/didl:Item/didl:Component/didl:Resource/@mimeType', namespaces=self._nsMap)
         if len(mimetypelist) > 0:
             mimetype = mimetypelist[0].strip()
             if not comm.isMimeType(mimetype):
                 self.do.logMsg(self._uploadid, LOGGER2 + mimetype , prefix=STR_DIDL)
 
-        #4:     Get PidResourceLocation:
+#4:     Get PidResourceLocation:
         pidlocation = self._findAndBindFirst(lxmlNode, '%s',
-                                             '//didl:DIDL/didl:Item/didl:Component/didl:Resource/@ref',
-                                             '//didl:DIDL/didl:Item/didl:Component/didl:Resource/text()'
-                                             '//didl:Item/didl:Item[didl:Descriptor/didl:Statement/rdf:type/@rdf:resource="info:eu-repo/semantics/humanStartPage"]/didl:Component/didl:Resource/@ref', #DIDL 3.0
-                                             '//didl:Item/didl:Item[didl:Descriptor/didl:Statement/rdf:type/@resource="info:eu-repo/semantics/humanStartPage"]/didl:Component/didl:Resource/@ref', #DIDL 3.0, without @rdf:resource
-                                             '//didl:Item/didl:Item[didl:Descriptor/didl:Statement/dip:ObjectType/text()="info:eu-repo/semantics/humanStartPage"]/didl:Component/didl:Resource/@ref', #fallback DIDL 2.3.1
-                                             '//didl:Item/didl:Item[didl:Descriptor/didl:Statement/rdf:type/@rdf:resource="info:eu-repo/semantics/objectFile"]/didl:Component/didl:Resource/@ref', #fallback DIDL 3.0
-                                             '//didl:Item/didl:Item[didl:Descriptor/didl:Statement/rdf:type/@resource="info:eu-repo/semantics/objectFile"]/didl:Component/didl:Resource/@ref', #fallback DIDL 3.0, without @rdf:resource
-                                             '//didl:Item/didl:Item[didl:Descriptor/didl:Statement/dip:ObjectType/text()="info:eu-repo/semantics/objectFile"]/didl:Component/didl:Resource/@ref' #fallback DIDL 2.3.1
-                                             ).strip()
+        '//didl:DIDL/didl:Item/didl:Component/didl:Resource/@ref',
+        '//didl:DIDL/didl:Item/didl:Component/didl:Resource/text()'
+        '//didl:Item/didl:Item[didl:Descriptor/didl:Statement/rdf:type/@rdf:resource="info:eu-repo/semantics/humanStartPage"]/didl:Component/didl:Resource/@ref', #DIDL 3.0
+        '//didl:Item/didl:Item[didl:Descriptor/didl:Statement/rdf:type/@resource="info:eu-repo/semantics/humanStartPage"]/didl:Component/didl:Resource/@ref', #DIDL 3.0, without @rdf:resource
+        '//didl:Item/didl:Item[didl:Descriptor/didl:Statement/dip:ObjectType/text()="info:eu-repo/semantics/humanStartPage"]/didl:Component/didl:Resource/@ref', #fallback DIDL 2.3.1
+        '//didl:Item/didl:Item[didl:Descriptor/didl:Statement/rdf:type/@rdf:resource="info:eu-repo/semantics/objectFile"]/didl:Component/didl:Resource/@ref', #fallback DIDL 3.0
+        '//didl:Item/didl:Item[didl:Descriptor/didl:Statement/rdf:type/@resource="info:eu-repo/semantics/objectFile"]/didl:Component/didl:Resource/@ref', #fallback DIDL 3.0, without @rdf:resource
+        '//didl:Item/didl:Item[didl:Descriptor/didl:Statement/dip:ObjectType/text()="info:eu-repo/semantics/objectFile"]/didl:Component/didl:Resource/@ref' #fallback DIDL 2.3.1
+        ).strip()
 
         if pidlocation == '':
             raise ValidateException(formatExceptionLine(EXCEPTION4, prefix=STR_DIDL))
@@ -251,7 +251,7 @@ class NormaliseDIDL(UiaConverter):
         <didl:Component><didl:Resource mimeType="%s" ref="%s"/></didl:Component>""" % (escapeXml(pid), modified, escapeXml(mimetype), comm.urlQuote(pidlocation))
 
     def _getDescriptiveMetadata(self, lxmlNode):
-        ## This always normalizes to rdf namespace, without warning/message
+    ## This always normalizes to rdf namespace, without warning/message
         descriptiveMetadataItem = lxmlNode.xpath('//didl:DIDL/didl:Item/didl:Item[didl:Descriptor/didl:Statement/rdf:type/@rdf:resource="info:eu-repo/semantics/descriptiveMetadata"]', namespaces=self._nsMap)
         if len(descriptiveMetadataItem) == 0: #Fallback to @resource (no rdf nmsp), if available...
             descriptiveMetadataItem = lxmlNode.xpath('//didl:DIDL/didl:Item/didl:Item[didl:Descriptor/didl:Statement/rdf:type/@resource="info:eu-repo/semantics/descriptiveMetadata"]', namespaces=self._nsMap)
@@ -315,15 +315,15 @@ class NormaliseDIDL(UiaConverter):
             objectfiles = lxmlNode.xpath('//didl:DIDL/didl:Item/didl:Item[didl:Descriptor/didl:Statement/dip:ObjectType/text()="info:eu-repo/semantics/objectFile"]', namespaces=self._nsMap)
             if len(objectfiles) > 0: self.do.logMsg(self._uploadid, LOGGER7, prefix=STR_DIDL)
         for objectfile in objectfiles:
-            #1:Define correct ObjectFile descriptor:
+        #1:Define correct ObjectFile descriptor:
             of_container += '<didl:Item><didl:Descriptor><didl:Statement mimeType="application/xml"><rdf:type rdf:resource="info:eu-repo/semantics/objectFile"/></didl:Statement></didl:Descriptor>'
 
-            #2: Check geldige Identifier (feitelijk verplicht, hoewel vaak niet geimplemeteerd...)
+        #2: Check geldige Identifier (feitelijk verplicht, hoewel vaak niet geimplemeteerd...)
             pi = objectfile.xpath('self::didl:Item/didl:Descriptor/didl:Statement/dii:Identifier/text()', namespaces=self._nsMap)
             if len(pi) > 0:
                 of_container += descr_templ % ('<dii:Identifier>'+escapeXml(pi[0].strip())+'</dii:Identifier>')
 
-            #3: Check op geldige AccessRights:
+        #3: Check op geldige AccessRights:
             arights = objectfile.xpath('self::didl:Item/didl:Descriptor/didl:Statement/dcterms:accessRights/text()', namespaces=self._nsMap)
             if len(arights) > 0:
                 for key, value in accessRights.iteritems():
@@ -335,39 +335,39 @@ class NormaliseDIDL(UiaConverter):
             else:
                 raise ValidateException(formatExceptionLine(EXCEPTION8, prefix=STR_DIDL))
 
-            #4: Check geldige datemodified (feitelijk verplicht, hoewel vaak niet geimplemeteerd...)
+        #4: Check geldige datemodified (feitelijk verplicht, hoewel vaak niet geimplemeteerd...)
             modified = objectfile.xpath('self::didl:Item/didl:Descriptor/didl:Statement/dcterms:modified/text()', namespaces=self._nsMap)
             if len(modified) > 0 and comm.isISO8601(modified[0]):
                 of_container += descr_templ % ('<dcterms:modified>'+modified[0].strip()+'</dcterms:modified>')
 
-            #5: Check for 'file' description:
+        #5: Check for 'file' description:
             descr = objectfile.xpath('self::didl:Item/didl:Descriptor/didl:Statement/dc:description/text()', namespaces=self._nsMap)
             if len(descr) > 0:
                 of_container += descr_templ % ('<dc:description>'+escapeXml(descr[0].strip())+'</dc:description>')
 
-            #6: Check bestandsnaam op objectniveau (WISH 13 april 2023, actiepunt 5, nummer 3: "Informatie op objectniveau"):
+        #6: Check bestandsnaam op objectniveau (WISH 13 april 2023, actiepunt 5, nummer 3: "Informatie op objectniveau"):
             toc = objectfile.xpath('self::didl:Item/didl:Descriptor/didl:Statement/dcterms:tableOfContents/text()', namespaces=self._nsMap)
             if len(toc) > 0 and toc[0].strip():
-                of_container += descr_templ % ('<dcterms:tableOfContents>'+toc[0].strip()+'</dcterms:tableOfContents>')
+                of_container += descr_templ % ('<dcterms:tableOfContents>'+escapeXml(toc[0].strip())+'</dcterms:tableOfContents>')
 
-            ## SKIPPING: Not in EduStandaard.
-            #6.0: Check for embargo:
-            #    embargo = objectfile.xpath('self::didl:Item/didl:Descriptor/didl:Statement/dcterms:available/text()', namespaces=self._nsMap)
-            #    if len(embargo) > 0 and comm.isISO8601(embargo[0]):
-            #        of_container += descr_templ % ('<dcterms:available>'+embargo[0].strip()+'</dcterms:available>')
+        ## SKIPPING: Not in EduStandaard.            
+        #6.0: Check for embargo:
+        #    embargo = objectfile.xpath('self::didl:Item/didl:Descriptor/didl:Statement/dcterms:available/text()', namespaces=self._nsMap)
+        #    if len(embargo) > 0 and comm.isISO8601(embargo[0]):
+        #        of_container += descr_templ % ('<dcterms:available>'+embargo[0].strip()+'</dcterms:available>')
 
-            ## SKIPPING: Not in EduStandaard.
-            #6.1: Check for dateSubmitted:
-            #    dembargo = objectfile.xpath('self::didl:Item/didl:Descriptor/didl:Statement/dcterms:dateSubmitted/text()', namespaces=self._nsMap)
-            #    if len(dembargo) > 0 and comm.isISO8601(dembargo[0]):
-            #        of_container += descr_templ % ('<dcterms:dateSubmitted>'+dembargo[0].strip()+'</dcterms:dateSubmitted>')
-            #    else:
-            #        #6.2: Check for issued (depricated, normalize to dateSubmitted):
-            #        issued = objectfile.xpath('self::didl:Item/didl:Descriptor/didl:Statement/dcterms:issued/text()', namespaces=self._nsMap)
-            #        if len(issued) > 0 and comm.isISO8601(issued[0]):
-            #            of_container += descr_templ % ('<dcterms:dateSubmitted>'+issued[0].strip()+'</dcterms:dateSubmitted>')
+        ## SKIPPING: Not in EduStandaard.
+        #6.1: Check for dateSubmitted:        
+        #    dembargo = objectfile.xpath('self::didl:Item/didl:Descriptor/didl:Statement/dcterms:dateSubmitted/text()', namespaces=self._nsMap)
+        #    if len(dembargo) > 0 and comm.isISO8601(dembargo[0]):
+        #        of_container += descr_templ % ('<dcterms:dateSubmitted>'+dembargo[0].strip()+'</dcterms:dateSubmitted>')
+        #    else:
+        #        #6.2: Check for issued (depricated, normalize to dateSubmitted):
+        #        issued = objectfile.xpath('self::didl:Item/didl:Descriptor/didl:Statement/dcterms:issued/text()', namespaces=self._nsMap)
+        #        if len(issued) > 0 and comm.isISO8601(issued[0]):
+        #            of_container += descr_templ % ('<dcterms:dateSubmitted>'+issued[0].strip()+'</dcterms:dateSubmitted>')  
 
-            #7: Check for published version(author/publisher):
+        #7: Check for published version(author/publisher):
             pubVersion = objectfile.xpath('self::didl:Item/didl:Descriptor/didl:Statement/rdf:type/@rdf:resource', namespaces=self._nsMap)
             if len(pubVersion) > 0: ## Both (author/publisher) may be available: we'll take the first one...
                 for key, value in pubVersions.iteritems():
@@ -375,7 +375,7 @@ class NormaliseDIDL(UiaConverter):
                         of_container += descr_templ % ('<rdf:type rdf:resource="'+value+'"/>')
                         break
 
-            #8:Check for MANDATORY resources and mimetypes:
+        #8:Check for MANDATORY resources and mimetypes:
             didl_resources = objectfile.xpath('self::didl:Item/didl:Component/didl:Resource[@mimeType and @ref]', namespaces=self._nsMap)
             resources = ''
             _url_list = [ ]
@@ -391,7 +391,7 @@ class NormaliseDIDL(UiaConverter):
                         _url_list.append("""<didl:Resource mimeType="%s" ref="%s"/>""" % (escapeXml(mimeType[0].strip()), escapeXml(comm.urlQuote(uri[0].strip()))))
                     else:
                         raise ValidateException(formatExceptionLine(EXCEPTION9 + uri[0], prefix=STR_DIDL))
-
+                        
             if resources != '':
                 of_container += """<didl:Component>
                 %s
@@ -419,10 +419,10 @@ class NormaliseDIDL(UiaConverter):
 
         uriref  =  didl_hsp_item[0].xpath('self::didl:Item/didl:Component/didl:Resource/@ref', namespaces=self._nsMap)
         mimetype = didl_hsp_item[0].xpath('self::didl:Item/didl:Component/didl:Resource/@mimeType', namespaces=self._nsMap)
-
+                
         if len(mimetype) == 0:
             self.do.logMsg(self._uploadid, LOGGER13, prefix=STR_DIDL)
-
+        
         if len(mimetype) > 0 and not comm.isMimeType(mimetype[0]):
             self.do.logMsg(self._uploadid, LOGGER12 + mimetype[0], prefix=STR_DIDL)
 
