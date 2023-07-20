@@ -68,6 +68,7 @@ MARC_ROLES=['abr','acp','act','adi','adp','aft','anl','anm','ann','ant','ape','a
 LOGGER1 = " is not a valid RFC3066 language code."
 LOGGER2 = "Found unknown extension (no EDUstandaard)."
 LOGGER3 = "Unknown identifier authority: %s in /mods:extension/dai:daiList; Identifier for this authority will not be processed."
+LOGGER4 = "Complete <m:name> element was removed: Could not find valid <m:roleTerm> and/or <m:namePart> element(s)"
 
 EXCEPTION1 = "Mandatory MODS metadata not found in DIDL Item."
 EXCEPTION2 = "Mandatory MODS titleInfo not found."
@@ -280,6 +281,7 @@ class NormaliseMODS(UiaConverter):
                     name.remove(namepart)
             if not role or len(role) < 1 or name.find(('{%s}namePart') % self._nsMap['mods']) is None: ## Geen roleterm gevonden, of lege string voor type code en authority marcrelator, of geen nameParts: Verwijder dit name element:
                 modsNode.remove(name)
+                self.do.logMsg(self._uploadid, LOGGER4, prefix=STR_MODS)
             elif len(role) > 0 and not self.__isValidRoleTerm(role[0]):
                 raise ValidateException(formatExceptionLine( EXCEPTION4 + role[0], prefix=STR_MODS))
         if len(modsNode.xpath("//mods:mods/mods:name", namespaces=self._nsMap)) <= 0:
@@ -413,14 +415,14 @@ class NormaliseMODS(UiaConverter):
 
     ## RelatedItem:
     def _tlRelateditem(self, childNode):
-        #1: Remove all non-Edustandaard 'types' (only type=host):
+        #1: Remove all non-Edustandaard 'types' (only @type=host):
         type_attr = childNode.get('type')
         if type_attr is None or (type_attr is not None and not type_attr.strip() in ['host']): #['preceding', 'host', 'succeeding', 'series', 'otherVersion']
             return None
 
         #2: Remove all NON-eduStandaard top-level elements:
         allowedlist = list(mods_edu_tlelements)
-        allowedlist.append("part")
+        allowedlist.append("part") # preserve <part> elements.
         for relitem_child in childNode.iterchildren():
             if not self._removeNamespace(relitem_child.tag) in allowedlist:
                 childNode.remove(relitem_child)
@@ -452,6 +454,7 @@ class NormaliseMODS(UiaConverter):
                 else:
                     child.getparent().remove(child)
 
+        #6: Clean some empty elements
         for child in childNode.xpath("self::mods:relatedItem/mods:originInfo/mods:publisher", namespaces=self._nsMap):
             if not child.text or not child.text.strip():
                 child.getparent().remove(child)
@@ -476,9 +479,18 @@ class NormaliseMODS(UiaConverter):
 
     ## TypeOfResource:
     def _tlTypeofresource(self, childNode):
-        terug = childNode if not self._bln_hasTypOfResource else None
-        self._bln_hasTypOfResource = True
-        return terug
+        # KB/Gijs 16-juni'23: de (KB) validatie loopt vast op een leeg element: <mods:TypeOfResource/>:
+
+        # Returns (xml-validated) term (other than 'text' allowed), skips empty elements:
+        # if not self._bln_hasTypOfResource:
+        #     if not childNode.text or not childNode.text.strip():
+        #         return None
+        #     else:
+        #         self._bln_hasTypOfResource = True
+        #         return childNode
+
+        # However, for now, we will never return a node, so it will be added later (Top level TypeOfResource only) with fixed value 'text' (LN#220)
+        return None
 
     def _addTypeOfResource(self, modsNode):
         ## Adds exactly one typeOfResource element to the mods node.
