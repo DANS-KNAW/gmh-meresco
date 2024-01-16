@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  **** EduStandaard additions ****
+  	2024-01-16:
+  	Added '3.7' and '3.8' to the @"version" attribute of the modsDefinition.
+  	This allows for MODS '3.7' and '3.8' validation with MODS '3.6' models.
+-->
+
 <!--  Editor:  Ray Denenberg, Library of Congress; rden@loc.gov -->
 <xs:schema xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.loc.gov/mods/v3" targetNamespace="http://www.loc.gov/mods/v3" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<!-- -->
@@ -80,6 +88,8 @@ The schema has three parts:
 		<xs:attribute name="version">
 			<xs:simpleType>
 				<xs:restriction base="xs:string">
+					<xs:enumeration value="3.8"/>
+					<xs:enumeration value="3.7"/>
 					<xs:enumeration value="3.6"/>
 					<xs:enumeration value="3.5"/>
 					<xs:enumeration value="3.4"/>
